@@ -3,7 +3,7 @@ from flask import Flask
 app = Flask("Map")
 app.debug = True
 
-@app.route("/start.html")
+@app.route("/")
 def main():
     return "<p> Hello World </p>"
 
