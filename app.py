@@ -1,11 +1,13 @@
 from flask import Flask
+from flask import render_template
 
-app = Flask("Map")
+app = Flask("Air Quality Map")
 app.debug = True
 
 @app.route("/")
 def main():
-    return "<p> Hello World </p>"
+    message = "Air Quality Map"
+    return render_template('start.html', message=message)
 
 
 if __name__ == "__main__":

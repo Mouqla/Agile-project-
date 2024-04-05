@@ -1,0 +1,14 @@
+#map { 
+    height: calc(100vh - 50px); 
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    height: 30px;
+    margin: 10px;
+}
+body {
+    margin: 0;
+}
