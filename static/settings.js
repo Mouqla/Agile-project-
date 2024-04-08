@@ -4,22 +4,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5a5fe835829ffc9ebc2748af9a10ee9fbc5ea9a9
 // Popup when clicking on map, displays latitude & longitude of click location
-function onMapClick(e) {
+async function onMapClick(e) {
+    const lat = e.latlng["lat"];
+    const lng = e.latlng["lng"];
+
+    const response = await fetch(`/api/get_air?lat=${lat.toFixed(3)}&lng=${lng.toFixed(3)}&radius=1000`);
+
+    const retJson = await response.json(); 
+
+    console.log(retJson);
+    
     var popup = L.popup()
-    .setLatLng(e.latlng)
-    .setContent("You clicked at: " + e.latlng)
-    .openOn(map);
+        .setLatLng(e.latlng)
+        .setContent("You clicked at: " + retJson)
+        .openOn(map);
 }
-<<<<<<< HEAD
 
 map.on('click', onMapClick);
-
-
-=======
-map.on('click', onMapClick);
->>>>>>> 5a5fe835829ffc9ebc2748af9a10ee9fbc5ea9a9
