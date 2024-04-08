@@ -27,7 +27,15 @@ async function onMapClick(e) {
             displayStr += apiResult.measurements[i].value + " ";
             displayStr += apiResult.measurements[i].unit;
             displayStr += "\n";}
-    } catch (error) {displayStr = `No results within ${radius} meters`;}
+    } catch (error) {
+        console.log(error);
+        if (error instanceof TypeError) {
+            displayStr = `No results within ${radius} meters`;
+        }
+        else {
+            displayStr = `Unknown error fetching API data`;
+        }
+    }
 
     var popup = L.popup()
         .setLatLng(e.latlng)
