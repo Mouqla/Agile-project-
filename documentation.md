@@ -15,4 +15,8 @@ https://docs.openaq.org/reference/latest_get_v2_latest_get
 https://wiki.openstreetmap.org/wiki/Develop
 
 # Useful tutorials
+Plotting results from API on a map
 https://mateuszwiza.medium.com/plotting-api-results-on-a-map-using-flask-and-leafletjs-2cf2d3cc660b
+
+Heatmap different ways (one using Leaflet)
+https://www.youtube.com/watch?v=rfq6SuQcDmE
