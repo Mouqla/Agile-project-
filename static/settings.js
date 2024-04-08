@@ -4,7 +4,10 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5a5fe835829ffc9ebc2748af9a10ee9fbc5ea9a9
 // Popup when clicking on map, displays latitude & longitude of click location
 function onMapClick(e) {
     var popup = L.popup()
@@ -12,7 +15,11 @@ function onMapClick(e) {
     .setContent("You clicked at: " + e.latlng)
     .openOn(map);
 }
+<<<<<<< HEAD
 
 map.on('click', onMapClick);
 
 
+=======
+map.on('click', onMapClick);
+>>>>>>> 5a5fe835829ffc9ebc2748af9a10ee9fbc5ea9a9
