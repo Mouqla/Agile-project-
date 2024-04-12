@@ -43,7 +43,9 @@ async function onMapClick(e) {
         }
     
         const locationData = new LocationData(apiResult);
-        console.log(locationData);
+        var parameterData = locationData.city;
+        console.log(parameterData);
+        createAndAppendFrame(locationData);
     } catch (error) {
         console.log(error);
         if (error instanceof TypeError) {
@@ -53,7 +55,7 @@ async function onMapClick(e) {
             console.log(`Unknown error fetching API data`);
         }
     }
-    createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
+    /* Lägger resultatet i en ny "frame" i sidebar*/
 }
 
 
@@ -84,14 +86,15 @@ function createAndAppendFrame(content) {
             newFrame.innerHTML = html;
 
             const infoBox = newFrame.querySelector('#infoBox');
-            infoBox.innerHTML = content;
+            console.log(content);
+            infoBox.innerHTML = content.city;
+            infoBox.innerHTML += content.location;
+
 
             const sidebar = document.getElementById('offcanvas');
             sidebar.appendChild(newFrame);
 
-
             
-
             const closeButton = newFrame.querySelector('.closebtn');
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
