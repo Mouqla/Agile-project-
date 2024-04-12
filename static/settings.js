@@ -79,16 +79,13 @@ function createAndAppendFrame(content) {
             const sidebar = document.getElementById('offcanvas');
             sidebar.appendChild(newFrame);
 
-
-            
-
             const closeButton = newFrame.querySelector('.closebtn');
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
-            
-        
-        
+
+            document.getElementById("location").innerHTML = "City name";
+
         })
         
 }
