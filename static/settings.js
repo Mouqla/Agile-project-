@@ -14,22 +14,25 @@ async function onMapClick(e) {
     const response = await fetch(`/api/get_air?lat=${lat.toFixed(3)}&lng=${lng.toFixed(3)}&radius=${radius}`);
 
     const retJson = await response.json(); 
-
-    console.log(retJson);
-
-    const locationData = "";
+    //console.log(retJson);
 
     try {
         var apiResult = Object.values(retJson)[1][0];
+        console.log(apiResult);
     
+        // Creates an Object
         function LocationData(apiResult){
             this.city = apiResult.city;
             this.location = apiResult.location;
+            var timeStr = apiResult.measurements[0].lastUpdated.toString();
+            var strLen = timeStr.length;
+            this.time = apiResult.measurements[0].lastUpdated.substring(0,strLen-6);
             this.closestLatitude = apiResult.coordinates.latitude;
             this.closestLongitude = apiResult.coordinates.longitude;
             this.pollution = new Pollution(apiResult);
         }
     
+        //Creates an Object, which is held by the LocationData Object 
         function Pollution(apiResult){
             const pollutionMap = new Map();
             var measurements = apiResult.measurements;
@@ -43,25 +46,30 @@ async function onMapClick(e) {
         }
     
         const locationData = new LocationData(apiResult);
-        var parameterData = locationData.city;
-        console.log(parameterData);
+        console.log(locationData);
+        /* Lägger resultatet i en ny "frame" i sidebar*/
         createAndAppendFrame(locationData);
     } catch (error) {
         console.log(error);
         if (error instanceof TypeError) {
-            console.log(`No results within ${radius} meters`);
+            var popup = L.popup()
+            .setLatLng(e.latlng)
+            .setContent(`No results within ${radius} meters`)
+            .openOn(map);
         }
         else {
-            console.log(`Unknown error fetching API data`);
+            var popup = L.popup()
+            .setLatLng(e.latlng)
+            .setContent(`Unknown error fetching API data`)
+            .openOn(map);
         }
     }
-    /* Lägger resultatet i en ny "frame" i sidebar*/
 }
 
 
 /* Öppnar sidebaren (initialt utanför skärmen) */ /* TODO */
 function openNav() {
-    document.getElementById("offcanvas").style.width = "382";
+    document.getElementById("offcanvas").style.width = "380";
     document.getElementById("main").style.marginRight = "-200px";
 }
 
@@ -86,26 +94,32 @@ function createAndAppendFrame(content) {
             newFrame.innerHTML = html;
 
             const infoBox = newFrame.querySelector('#infoBox');
-            console.log(content);
-            infoBox.innerHTML = content.city;
-            infoBox.innerHTML += content.location;
-
 
             const sidebar = document.getElementById('offcanvas');
             sidebar.appendChild(newFrame);
 
-            
+            // TODO - closebutton borta?
             const closeButton = newFrame.querySelector('.closebtn');
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
-            
-        
-        
-        })
-        
-}
 
+            //Lägger till mätvärden för luftföroreningar i sidebar 
+            var pollutionMap = content.pollution.pollution;
+            var mapIterator = pollutionMap[Symbol.iterator]();
+            for (const item of mapIterator) {
+                infoBox.innerHTML += item[0].toString() + ' ' // parameter aka type of pollution
+                infoBox.innerHTML += item[1][0]; //value
+                infoBox.innerHTML += item[1][1]; //unit
+                infoBox.innerHTML += '<br>'; //linebreak
+              }
+
+            //Header med stad, mätstation och tid
+            var headerBox = newFrame.querySelector('#header');
+            headerBox.innerHTML = `<h1>${content.city}</h1>`;
+            headerBox.innerHTML += `<h2>${content.location + '. Last updated: ' + content.time}</h2>`;            
+        })
+}
 
 map.on('click', onMapClick);
 

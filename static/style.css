@@ -11,8 +11,9 @@
     margin: 10px;
 }
 
-.body {
-    margin: 0;
+body{
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sidenav { /* Själva sidebar (osynlig) */
@@ -37,20 +38,43 @@
 
 /* Nedanför är css för info-frame.html*/
 .headRec  { 
-  height: 50px;
-  width: 382px;
+  min-height: 50px;
+  width: 380px;
   border-top-left-radius: 15px;
-  background-color: #bd1d1d;
+  background-color: #64B5F6;
+  padding: .5rem;
 }
 .infoBox {
-  height: 300px;
-  max-height: 800px;
-  width: 382px;
+  min-height: 150px;
+  width: 380px;
   background-color: white;
   z-index: 12;
+  padding: .5rem;
 }
 .frame{
   right: -100%; 
   transition: right 0.5s ease-out;
+}
+.closeButton{
+  color: black;
+}
+
+h1{
+  font-size: 2rem;
+}
+h2{
+  font-size: 1.8rem;
+}
+h3{
+  font-size: 1.6rem;
+}
+h4{
+  font-size: 1.4rem;
+}
+p{
+  font-size: 1rem;
+}
+small{
+  font-size: 0.9rem;
 }
 
