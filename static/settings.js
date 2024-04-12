@@ -6,6 +6,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Popup when clicking on map, displays latitude & longitude as well as closest measurement
 async function onMapClick(e) {
+    openNav();
     const lat = e.latlng["lat"];
     const lng = e.latlng["lng"];
     const radius = 5000;
@@ -23,9 +24,9 @@ async function onMapClick(e) {
         var closestLong = apiResult.coordinates.longitude;
         displayStr = `Air Pollution at closest station (${closestLat}, ${closestLong}) is `     
         for(let i = 0; i < apiResult.measurements.length; i++){
-            displayStr += apiResult.measurements[i].parameter + ": ";
-            displayStr += apiResult.measurements[i].value + " ";
-            displayStr += apiResult.measurements[i].unit;
+            displayStr += "\n" + apiResult.measurements[i].parameter + ": ";
+            displayStr += "\n" + apiResult.measurements[i].value + " ";
+            displayStr += "\n" + apiResult.measurements[i].unit;
             displayStr += "\n";}
     } catch (error) {
         console.log(error);
@@ -36,11 +37,55 @@ async function onMapClick(e) {
             displayStr = `Unknown error fetching API data`;
         }
     }
-
-    var popup = L.popup()
-        .setLatLng(e.latlng)
-        .setContent(displayStr)
-        .openOn(map);
+    createAndAppendFrame(displayStr) /* Lägger resultatet i en ny "frame" i sidebar*/
 }
+
+
+/* Öppnar sidebaren (initialt utanför skärmen) */ /* TODO */
+function openNav() {
+    document.getElementById("offcanvas").style.width = "382";
+    document.getElementById("main").style.marginRight = "-200px";
+}
+
+/* Raderar en frame från sidebar */
+function closeFrame(frameId) {
+    const frame = document.getElementById(frameId);
+    if (frame) {
+        frame.remove();
+    }
+}
+
+        
+/* Skapar en ny "frame" (info-frame.html) i html, lägger info i infoBox rutan och appendar till sidebar*/
+function createAndAppendFrame(content) {
+    fetch('info-frame.html')
+        .then(response => response.text())
+        .then(html => {
+            const newFrame = document.createElement('div');
+            newFrame.classList.add('frame');
+            newFrame.id = 'frame-' + Date.now(); 
+
+            newFrame.innerHTML = html;
+
+            const infoBox = newFrame.querySelector('#infoBox');
+            infoBox.innerHTML = content;
+
+            const sidebar = document.getElementById('offcanvas');
+            sidebar.appendChild(newFrame);
+
+
+            
+
+            const closeButton = newFrame.querySelector('.closebtn');
+            closeButton.addEventListener('click', function() {
+                    closeFrame(newFrame.id);
+                });
+            
+        
+        
+        })
+        
+}
+
 
 map.on('click', onMapClick);

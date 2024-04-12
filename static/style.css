@@ -1,5 +1,6 @@
 #map { 
-    height: calc(100vh - 50px); 
+    height: calc(100vh - 50px);
+    z-index: 1;
 }
 .header {
     display: flex;
@@ -9,6 +10,47 @@
     height: 25px;
     margin: 10px;
 }
-body {
+
+.body {
     margin: 0;
 }
+
+.sidenav { /* Själva sidebar (osynlig) */
+  height: 85%;
+  width: 0; 
+  position: fixed; 
+  z-index: 10; 
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0);
+  overflow-x: hidden;
+  padding-top: 60px; 
+  transition: 0.5s; 
+}
+#main { /* endast för debugging */
+  transition: margin-left .5s;
+  padding: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+
+/* Nedanför är css för info-frame.html*/
+.headRec  { 
+  height: 50px;
+  width: 382px;
+  border-top-left-radius: 15px;
+  background-color: #bd1d1d;
+}
+.infoBox {
+  height: 300px;
+  max-height: 800px;
+  width: 382px;
+  background-color: white;
+  z-index: 12;
+}
+.frame{
+  right: -100%; 
+  transition: right 0.5s ease-out;
+}
+

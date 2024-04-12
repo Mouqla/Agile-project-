@@ -21,5 +21,10 @@ def get_air():
     res = requests.get(url_string, headers={"X-API-Key": "e7293123084782b1bdf106b40b2d7ab678beca16d2667568b649d72d86c9a053"})
     return res.json()
 
+@app.route('/info-frame.html')
+def info_frame():
+    return render_template('info-frame.html')
+
 if __name__ == "__main__":
     app.run()
+
