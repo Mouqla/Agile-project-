@@ -17,33 +17,43 @@ async function onMapClick(e) {
 
     console.log(retJson);
 
-    //console.log(retJson);
+    const locationData = "";
 
-    var displayStr = ""
-    var apiResult = Object.values(retJson)[1][0];
     try {
-        var closestLat = apiResult.coordinates.latitude;
-        var closestLong = apiResult.coordinates.longitude;
-        displayStr = `Air Pollution at closest station (${closestLat}, ${closestLong}) is `
-        var city = apiResult.city;
-        var station = apiResult.location;
-        console.log(city)
-        console.log(station)
-        for(let i = 0; i < apiResult.measurements.length; i++){
-            displayStr += "\n" + apiResult.measurements[i].parameter + ": ";
-            displayStr += "\n" + apiResult.measurements[i].value + " ";
-            displayStr += "\n" + apiResult.measurements[i].unit;
-            displayStr += "\n";}
+        var apiResult = Object.values(retJson)[1][0];
+    
+        function LocationData(apiResult){
+            this.city = apiResult.city;
+            this.location = apiResult.location;
+            this.closestLatitude = apiResult.coordinates.latitude;
+            this.closestLongitude = apiResult.coordinates.longitude;
+            this.pollution = new Pollution(apiResult);
+        }
+    
+        function Pollution(apiResult){
+            const pollutionMap = new Map();
+            var measurements = apiResult.measurements;
+            for(let i = 0; i < measurements.length; i++){
+                parameter = measurements[i].parameter;
+                value = measurements[i].value;
+                unit = measurements[i].unit;
+                pollutionMap.set(parameter, [value, unit]);
+            }
+            this.pollution = pollutionMap;
+        }
+    
+        const locationData = new LocationData(apiResult);
+        console.log(locationData);
     } catch (error) {
         console.log(error);
         if (error instanceof TypeError) {
-            displayStr = `No results within ${radius} meters`;
+            console.log(`No results within ${radius} meters`);
         }
         else {
-            displayStr = `Unknown error fetching API data`;
+            console.log(`Unknown error fetching API data`);
         }
     }
-    createAndAppendFrame(displayStr) /* Lägger resultatet i en ny "frame" i sidebar*/
+    createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
 }
 
 
@@ -95,3 +105,4 @@ function createAndAppendFrame(content) {
 
 
 map.on('click', onMapClick);
+
