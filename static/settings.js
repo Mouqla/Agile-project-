@@ -15,14 +15,20 @@ async function onMapClick(e) {
 
     const retJson = await response.json(); 
 
+    console.log(retJson);
+
     //console.log(retJson);
 
     var displayStr = ""
-    var apiResult = Object.values(retJson)[1][0]
+    var apiResult = Object.values(retJson)[1][0];
     try {
         var closestLat = apiResult.coordinates.latitude;
         var closestLong = apiResult.coordinates.longitude;
-        displayStr = `Air Pollution at closest station (${closestLat}, ${closestLong}) is `     
+        displayStr = `Air Pollution at closest station (${closestLat}, ${closestLong}) is `
+        var city = apiResult.city;
+        var station = apiResult.location;
+        console.log(city)
+        console.log(station)
         for(let i = 0; i < apiResult.measurements.length; i++){
             displayStr += "\n" + apiResult.measurements[i].parameter + ": ";
             displayStr += "\n" + apiResult.measurements[i].value + " ";
