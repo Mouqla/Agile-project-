@@ -18,35 +18,43 @@ async function onMapClick(e) {
 
     try {
         var apiResult = Object.values(retJson)[1][0];
-        console.log(apiResult);
+        //console.log(apiResult);
     
-        // Creates an Object
+        // Creates an Object that holds all the information for a single location
         function LocationData(apiResult){
             this.city = apiResult.city;
             this.location = apiResult.location;
+            
+            //formats the time last updated
             var timeStr = apiResult.measurements[0].lastUpdated.toString();
             var strLen = timeStr.length;
-            this.time = apiResult.measurements[0].lastUpdated.substring(0,strLen-6);
+            var date = timeStr.substring(0,10);
+            var hour = timeStr.substring(strLen-14,strLen-12);
+            var min = timeStr.substring(strLen-5,strLen-3);
+            var sec = timeStr.substring(strLen-2,strLen);
+            this.time = `${date} ${hour}:${min}:${sec}`;
+            
             this.closestLatitude = apiResult.coordinates.latitude;
             this.closestLongitude = apiResult.coordinates.longitude;
-            this.pollution = new Pollution(apiResult);
-        }
-    
-        //Creates an Object, which is held by the LocationData Object 
-        function Pollution(apiResult){
-            const pollutionMap = new Map();
+            
+            //creates a map of the measured values
+            var pollutionMap = new Map();
             var measurements = apiResult.measurements;
             for(let i = 0; i < measurements.length; i++){
                 parameter = measurements[i].parameter;
+                //some sources supply temperature, humidity etc. filter out here?
                 value = measurements[i].value;
                 unit = measurements[i].unit;
-                pollutionMap.set(parameter, [value, unit]);
+                lastUpdated = measurements[i].lastUpdated;
+                pollutionMap.set(parameter, [value, unit, lastUpdated]);
             }
+            pollutionMap = new Map(Array.from(pollutionMap).sort()); //sort the map alphabetically 
+
             this.pollution = pollutionMap;
         }
     
         const locationData = new LocationData(apiResult);
-        console.log(locationData);
+
         /* Lägger resultatet i en ny "frame" i sidebar*/
         createAndAppendFrame(locationData);
     } catch (error) {
@@ -105,7 +113,7 @@ function createAndAppendFrame(content) {
                 });
 
             //Lägger till mätvärden för luftföroreningar i sidebar 
-            var pollutionMap = content.pollution.pollution;
+            var pollutionMap = content.pollution;
             var mapIterator = pollutionMap[Symbol.iterator]();
             for (const item of mapIterator) {
                 infoBox.innerHTML += item[0].toString() + ' ' // parameter aka type of pollution
@@ -117,7 +125,7 @@ function createAndAppendFrame(content) {
             //Header med stad, mätstation och tid
             var headerBox = newFrame.querySelector('#header');
             headerBox.innerHTML = `<h1>${content.city}</h1>`;
-            headerBox.innerHTML += `<h2>${content.location + '. Last updated: ' + content.time}</h2>`;            
+            headerBox.innerHTML += `<h2>${content.location + '. Last updated ' + content.time}</h2>`;            
         })
 }
 
