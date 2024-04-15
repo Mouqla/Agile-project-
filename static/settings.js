@@ -48,7 +48,7 @@ async function onMapClick(e) {
                 lastUpdated = measurements[i].lastUpdated;
                 pollutionMap.set(parameter, [value, unit, lastUpdated]);
             }
-            pollutionMap = new Map(Array.from(pollutionMap).sort()); //sort the map alphabetically 
+            pollutionMap = new Map(Array.from(pollutionMap).sort()); //sort the map alphabetically
 
             this.pollution = pollutionMap;
         }
@@ -125,7 +125,8 @@ function createAndAppendFrame(content) {
             //Header med stad, mätstation och tid
             var headerBox = newFrame.querySelector('#header');
             headerBox.innerHTML = `<h1>${content.city}</h1>`;
-            headerBox.innerHTML += `<h2>${content.location + '. Last updated ' + content.time}</h2>`;            
+            headerBox.innerHTML += `<h2>${content.location}</h2>`
+            headerBox.innerHTML += `<h3>Last updated ${content.time}</h3>`;            
         })
 }
 
