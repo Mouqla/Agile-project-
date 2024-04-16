@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/static/style.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="https://kit.fontawesome.com/4302a23631.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <nav class="header">
@@ -11,6 +12,12 @@
 
             </h2>
         </nav>
+        <div class="search-container">
+            <form class="form">
+                <input id="search" type="search" class="input" placeholder="Search location"/>
+                <button id="search-button" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
         <div id="map">
         </div>
         <script src="/static/settings.js" charset="utf-8"></script>
