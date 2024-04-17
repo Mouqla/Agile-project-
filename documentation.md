@@ -12,8 +12,11 @@ Helpful to structure queries:
 https://docs.openaq.org/reference/latest_get_v2_latest_get
 
 ## OpenWeather Air Pollution Api
-Dokumentation
+Dokumentation:
 https://openweathermap.org/api/air-pollution
+https://openweathermap.org/api/geocoding-api
+
+Vår key är 126480978d9a03b6333e2560bef1313d
 
 Air Pollution, exempel på sökning:
 http://pro.openweathermap.org/data/2.5/air_pollution?lat=79&lon=11&APPID=126480978d9a03b6333e2560bef1313d
