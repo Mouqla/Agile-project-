@@ -4,85 +4,43 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// DUMMY VALUES for openweather API
-const pollutionResult = {
-    "coord": [
-      50.0,
-      50.0
-    ],
-    "list": [
-      {
-        "dt": 1606147200,
-        "main": {
-          "aqi": 4.0
-        },
-        "components": {
-          "co": 203.609,
-          "no": 0.0,
-          "no2": 0.396,
-          "o3": 75.102,
-          "so2": 0.648,
-          "pm2_5": 23.253,
-          "pm10": 92.214,
-          "nh3": 0.117
-        }
-      }
-    ]
-  };
+// Class object that holds all the information for a single location
+class LocationData {
+    constructor(apiResult, lat, lon, city) {
+        this.city = city;
 
-// DUMMY VALUES for openweather API
-var geoCodingResult = [
-    {
-       "name":"London",
-       "local_names":{
-          "ms":"London",
-          "gu":"લંડન",
-          "is":"London",
-          "wa":"Londe",
-          "mg":"Lôndôna",
-          "gl":"Londres",
-          "om":"Landan",
-          "ku":"London",
-       },
-       "lat":51.5073219,
-       "lon":-0.1276474,
-       "country":"GB",
-       "state":"England"
+        //Coordinates
+        this.location = `${lat.toFixed(4)},${lon.toFixed(4)}`;
+
+        //Formats the time last updated
+        var unixTimeStamp = apiResult[0].dt; //UNIX time
+        this.time = formatTimeFromUnix(unixTimeStamp);
+
+        // Object containing measurements of air pollution
+        this.pollution = apiResult[0].components;
+
+        // Air Quality Index -- Qualitative, e.g. 'Good', 'Poor'
+        this.airQualityIndex = getQualitativeValue(apiResult[0].main.aqi);
     }
- ];
-
-// Creates an Object that holds all the information for a single location
-function LocationData(apiResult){
-            
-    //Fetch Geocoding response (city from coordinates)
-    this.city = reverseGeocode(geoCodingResult[0].lat,geoCodingResult[0].lon);
-
-    //Coordinates
-    this.location = `${geoCodingResult[0].lat.toFixed(8)},${geoCodingResult[0].lon.toFixed(8)}`;
-    
-    //Formats the time last updated
-    var unixTimeStamp = pollutionResult.list[0].dt; //UNIX time
-    this.time = formatTimeFromUnix(unixTimeStamp);
-
-    // Object containing measurements of air pollution
-    this.pollution = pollutionResult.list[0].components;
-    // Air Quality Index Qualitative, e.g. 'Good', 'Poor'
-    this.airQualityIndex = getQualitativeValue(pollutionResult.list[0].main.aqi);
 }
 
-// Adds detailed information about pollution in a html-element
+////// User Interaction: Click on map
 async function onMapClick(e) {
     openNav();
     const lat = e.latlng["lat"];
-    const lng = e.latlng["lng"];
-    const radius = 5000;
+    const long = e.latlng["lng"];
+    const radius = 5000; //if using OpenAQ
 
-    var apiResult = await getPollution(lat, lng, radius);
+    //fetch for air pollution
+    var apiResult = await getPollutionOpenWeather(lat,long);
+    //fetch city name
+    var cityName = await reverseGeocode(lat,long);
 
     try {
-        const locationData = new LocationData(apiResult);
-        /* Lägger resultatet i en ny "frame" i sidebar*/
-        createAndAppendFrame(locationData);
+        //create an object which holds all the location information
+        const locationData = new LocationData(apiResult, lat, long, cityName);
+        // Lägger resultatet i en ny "frame" i sidebar
+        createAndAppendFrame(locationData); //TODO
     } catch (error) {
         console.log(error);
         if (error instanceof TypeError) {
@@ -99,20 +57,62 @@ async function onMapClick(e) {
         }
     }
 }
+map.on('click', onMapClick);
 
-async function getPollution(lat, lng, radius) {
+/////// User Interaction: Search from search bar
+const searchInput = document.querySelector('.input')
+searchInput.addEventListener("input", async (e) => {
+    // input from search bar
+    let searchTerm = e.target.value;
+    query = regexSearchTerm(searchTerm);
+
+    const location = await geocode(query).catch((err) => {
+        console.error(err);
+        return "default response";
+      });
+
+    var lat = location[0];
+    var long = location[1];
+
+    //move to location
+    map.panTo([lat, long]);
+
+    //Optional functionality: add results to sidebar. Would work similar to above. 
+    //Best if there is a search dropdown, so that not all results before the final show
+})
+
+function regexSearchTerm(searchTerm){
+    //find city, state and country names, separated by e.g. commas, but not blank spaces
+    //searchTerm = 'Paris, Texas, USA' //Example user input
+    const regex = /(\w+\s*\w*)/g; 
+    const matches = searchTerm.match(regex);
+
+    let query = '';
+    for(match in matches){
+        query += `${matches[match]},`;
+    }
+
+    query = query.substring(0, query.length-1);
+    return query
+}
+
+async function getPollutionOpenAQ(lat, lng, radius) {
     const response = await fetch(`/api/get_air?lat=${lat.toFixed(3)}&lng=${lng.toFixed(3)}&radius=${radius}`); // OpenAQ
-
-    //const response = await fetch(`/api/air_pollution?lat=${lat.toFixed(3)}&lon=${long.toFixed(3)}`); // OpenWeather
     const retJson = await response.json();
     return Object.values(retJson)[1][0];
+}
+
+async function getPollutionOpenWeather(lat,lon) {
+    const response = await fetch(`/api/get_air?lat=${lat}&lon=${lon}`);
+    const retJson = await response.json();
+    return Object.values(retJson)[1];
 }
 
 function formatTimeFromUnix(unixTimeStamp) {
     var date = new Date(unixTimeStamp * 1000);
     var year = date.getFullYear();
-    var month = date.getMonth();
-    var day = date.getDay();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
@@ -134,6 +134,45 @@ function formatTimeFromUnix(unixTimeStamp) {
     var formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     return formattedTime;
 }
+
+async function geocode(q){
+    // returns array with the coordinates of a location based on the name
+    // accepts the format: city,state,country OR city,state OR city
+    const response = await fetch(`/api/get_location?q=${q}&limit=1`);
+    const retJson = await response.json();
+    return [retJson[0].lat,retJson[0].lon]
+}
+
+async function reverseGeocode(lat,lon){
+    //get the name of a city from coordinates
+    lat = lat.toFixed(4);
+    lon = lon.toFixed(4);
+    const response = await fetch(`/api/get_city?lat=${lat}&lon=${lon}&limit=1`);
+    const retJson = await response.json();
+    return retJson[0].name;
+}
+
+function getQualitativeValue(input){
+    // parameter: API response numeric air quality index value 1-5
+    // returns: qualitative value based on the openWeatherAPI air quality index
+
+    switch(input){
+        case 1:
+            return 'Good';
+        case 2:
+            return  'Fair';
+        case 3:
+            return  'Moderate';
+        case 4:
+            return  'Poor';
+        case 5:
+            return  'Very Poor';
+        default:
+            return 'Unknown';
+    }
+}
+
+//////// ADDING AND REMOVING USER INTERFACE ELEMENTS
 
 /* Öppnar sidebaren (initialt utanför skärmen) */ /* TODO */
 function openNav() {
@@ -182,97 +221,10 @@ function createAndAppendFrame(content) {
                 infoBox.innerHTML += '<br>';
             }
 
-            //Header med stad, mätstation och tid
+            //Header med stad, koordinater och tid
             var headerBox = newFrame.querySelector('#header');
             headerBox.innerHTML = `<h1>${content.city}</h1>`;
             headerBox.innerHTML += `<h2>${content.location}</h2>`
             headerBox.innerHTML += `<h3>Last updated ${content.time}</h3>`;            
         })
 }
-
-map.on('click', onMapClick);
-
-//Add Search functionality
-const searchInput = document.querySelector('.input')
-searchInput.addEventListener("input", async (e) => {
-    // input from search bar
-    let searchTerm = e.target.value;
-   
-    query = regexSearchTerm(searchTerm);
-
-    try{
-        var lat = geocode(query)[0];
-        var long = geocode(query)[1];
-
-        //zoom to location
-        map.panTo([lat, long]);
-
-        //search for air pollution, call the API
-        const apiResult = await getPollution(lat, long, radius); 
-        const locationData = new LocationData(apiResult);
-
-        /* Lägger resultatet i en ny "frame" i sidebar*/
-        createAndAppendFrame(locationData);
-    }
-    catch{
-        //how to handle? it is okay if the user hasn't inputed the full name of the city yet
-    }
-})
-
-function regexSearchTerm(searchTerm){
-    //find city, state and country names, separated by e.g. commas, but not blank spaces
-    //searchTerm = 'New York, New York, USA' //Dummy value
-    
-    const regex = /(\w+\s*\w*)/g; 
-    const matches = searchTerm.match(regex);
-
-    let query = '';
-    for(match in matches){
-        query += `${matches[match]},`;
-    }
-
-    query = query.substring(0, query.length-1);
-
-    console.log(query);
-
-}
-
-async function geocode(query){
-    // returns the coordinates of a location based on the name
-    // accepts the format: city,state,country OR city,state OR city
-    const response = await fetch(`/api/geo/1.0/direct?q=${query}&limit=1`);
-    const retJson = await response.json(); 
-    console.log(Object.values(retJson)[0].lat, Object.values(retJson)[0].lon);
-    //return [Object.values(retJson)[0].lat, Object.values(retJson)[0].lon] //TODO check against API
-    return [57.7, 11.972] //TODO Dummy value remove when API works
-    
-}
-
-function reverseGeocode(lat,long){
-    //find the name of a city from coordinates
-    //const response = await fetch(`/api/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=1`);
-    //const retJson = await response.json();
-    //return Object.values(retJson)[0].name; //TODO check against real API
-    return 'Gothenburg'; //TODO Dummy Value remove when API works
-}
-
-function getQualitativeValue(input){
-    // parameter: API response numeric air quality index value 1-5
-    // returns: qualitative value based on the openWeatherAPI air quality index
-
-    switch(input){
-        case 1:
-            return 'Good';
-        case 2:
-            return  'Fair';
-        case 3:
-            return  'Moderate';
-        case 4:
-            return  'Poor';
-        case 5:
-            return  'Very Poor';
-        default:
-            return 'Unknown';
-    }
-}
-
