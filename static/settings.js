@@ -223,7 +223,7 @@ function createAndAppendFrame(content) {
 
             //Header med stad, koordinater och tid
             var headerBox = newFrame.querySelector('#header');
-            headerBox.innerHTML = `<h1>${content.city}</h1>`;
+            headerBox.innerHTML += `<h1>${content.city}</h1>`;
             headerBox.innerHTML += `<h2>${content.location}</h2>`
             headerBox.innerHTML += `<h3>Last updated ${content.time}</h3>`;            
         })
