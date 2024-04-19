@@ -1,5 +1,5 @@
 let frameList = [];
-var compareMode = false; //Ska tas bort senare
+var compareMode = false;
 
 let map = L.map('map').setView([57.7, 11.972], 12.5);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -60,7 +60,6 @@ async function onMapClick(e) {
         }
     }
 
-    
     prepareNextFrame(compareMode);
     createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
 
@@ -236,27 +235,27 @@ function createAndAppendFrame(content) {
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
+
+            const compareButton = document.getElementById("compareSwitch");
+            compareButton.addEventListener("change", toggleCompare);
             
             frameList.push(newFrame.id)
         })
 }
 
-
-/* Stänger tidigare frame inför skapandet av nästa frame, med undantag för om användaren klickat i Compare Mode */
+/* Stänger tidigare frame inför skapandet av nästa frame, om Compare Mode inte är aktiverat */
 function prepareNextFrame(compareMode) {
     if (!compareMode) {
         if (frameList.length > 0) {
-            closeFrame(frameList[0]);
+            for (var i = 0; i < frameList.length; i++) {
+                closeFrame(frameList[i]);
+            }
             frameList = [];
         }
         return;
     }
-    if (frameList.length != 1) {
-        closeFrame(frameList[0]);
-        frameList = [];
-        return;
-    }
 }
 
-
-
+function toggleCompare() {
+    compareMode = !compareMode;
+}
