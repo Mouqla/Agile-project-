@@ -1,3 +1,6 @@
+let frameList = [];
+var compareMode = false; //Ska tas bort senare
+
 let map = L.map('map').setView([57.7, 11.972], 12.5);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -56,6 +59,12 @@ async function onMapClick(e) {
             .openOn(map);
         }
     }
+
+    
+    prepareNextFrame(compareMode);
+    createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
+
+
 }
 map.on('click', onMapClick);
 
@@ -94,6 +103,7 @@ function regexSearchTerm(searchTerm){
 
     query = query.substring(0, query.length-1);
     return query
+
 }
 
 async function getPollutionOpenAQ(lat, lng, radius) {
@@ -226,5 +236,32 @@ function createAndAppendFrame(content) {
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
+
+
+            document.getElementById("location").innerHTML = content.city;
+            
+            frameList.push(newFrame.id)
+
+
         })
 }
+
+
+/* Stänger tidigare frame inför skapandet av nästa frame, med undantag för om användaren klickat i Compare Mode */
+function prepareNextFrame(compareMode) {
+    if (!compareMode) {
+        if (frameList.length > 0) {
+            closeFrame(frameList[0]);
+            frameList = [];
+        }
+        return;
+    }
+    if (frameList.length != 1) {
+        closeFrame(frameList[0]);
+        frameList = [];
+        return;
+    }
+}
+
+
+
