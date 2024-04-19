@@ -236,13 +236,8 @@ function createAndAppendFrame(content) {
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
-
-
-            document.getElementById("location").innerHTML = content.city;
             
             frameList.push(newFrame.id)
-
-
         })
 }
 
