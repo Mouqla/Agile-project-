@@ -68,27 +68,54 @@ async function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-/////// User Interaction: Search from search bar
+/////// User Interaction: Input text in search bar, give choice of five cities
 const searchInput = document.querySelector('.input')
 searchInput.addEventListener("input", async (e) => {
+    const searchDatalist = document.getElementById("search-results");
+
     // input from search bar
     let searchTerm = e.target.value;
     query = regexSearchTerm(searchTerm);
 
-    const location = await geocode(query).catch((err) => {
+    const locations = await geocodeMulti(query).catch((err) => {
         console.error(err);
         return "default response";
       });
 
-    var lat = location[0];
-    var long = location[1];
-
-    //move to location
-    map.panTo([lat, long]);
-
-    //Optional functionality: add results to sidebar. Would work similar to above. 
-    //Best if there is a search dropdown, so that not all results before the final show
+    searchDatalist.innerHTML += '';
+    //create dropdown with several choices matching search query
+    function appendSearchResult(value, key){
+        searchDatalist.innerHTML += `<option value="${value[0]}, ${value[1]}, ${value[2]}"></option>`; //city, state, country
+    }
+    
+    locations.forEach(appendSearchResult);
 })
+
+//Search by clicking enter in search bar
+async function clickPress(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+        // input from search bar
+        let searchTerm = event.target.value;
+        
+        //fetch coords
+        var coords = await geocode(searchTerm);
+        //fetch for air pollution
+        var apiResult = await getPollutionOpenWeather(coords[0], coords[1]);
+        //fetch city name
+        var cityName = await reverseGeocode(coords[0], coords[1]);
+
+        map.panTo(coords);
+
+        try {
+            //create an object which holds all the location information
+            const locationData = new LocationData(apiResult, coords[0], coords[1], cityName);
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+}
 
 function regexSearchTerm(searchTerm){
     //find city, state and country names, separated by e.g. commas, but not blank spaces
@@ -103,7 +130,6 @@ function regexSearchTerm(searchTerm){
 
     query = query.substring(0, query.length-1);
     return query
-
 }
 
 async function getPollutionOpenAQ(lat, lng, radius) {
@@ -151,6 +177,19 @@ async function geocode(q){
     const response = await fetch(`/api/get_location?q=${q}&limit=1`);
     const retJson = await response.json();
     return [retJson[0].lat,retJson[0].lon]
+}
+
+async function geocodeMulti(q){
+    // returns multiple results
+    // accepts the format: city,state,country OR city,state OR city
+    const limit = 5;
+    const response = await fetch(`/api/get_location_multi?q=${q}&limit=${limit}`);
+    const retJson = await response.json();
+    let cityMap = new Map();
+    for(item in retJson){
+        cityMap.set([retJson[item].lat, retJson[item].lon], [retJson[item].name, retJson[item].state, retJson[item].country])
+    }
+    return cityMap;
 }
 
 async function reverseGeocode(lat,lon){
@@ -236,13 +275,8 @@ function createAndAppendFrame(content) {
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
-
-
-            document.getElementById("location").innerHTML = content.city;
             
             frameList.push(newFrame.id)
-
-
         })
 }
 
@@ -264,4 +298,9 @@ function prepareNextFrame(compareMode) {
 }
 
 
-
+function createSearchDropdown(locations){
+    const searchDropdown = document.getElementById("searchDropdown");
+    for(location in locations){
+        searchDropdown.innerHTML += `<div>Hello!</div>`;
+    }
+}
