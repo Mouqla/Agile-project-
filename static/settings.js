@@ -204,6 +204,7 @@ function createAndAppendFrame(content) {
             const sidebar = document.getElementById('offcanvas');
             sidebar.appendChild(newFrame);
 
+
             //Lägger till mätvärden för luftföroreningar i sidebar 
             infoBox.innerHTML += 'Air Quality Index: ' + content.airQualityIndex;
             infoBox.innerHTML += '<br>';
@@ -220,7 +221,7 @@ function createAndAppendFrame(content) {
             headerBox.innerHTML += `<h1>${content.city}</h1>`;
             headerBox.innerHTML += `<h2>${content.location}</h2>`
             headerBox.innerHTML += `<h3>Last updated ${content.time}</h3>`; 
-            
+
             const closeButton = newFrame.querySelector('.closebtn');
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
