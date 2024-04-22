@@ -1,5 +1,7 @@
 let frameList = [];
+let heatMap;
 var compareMode = false;
+
 
 let map = L.map('map').setView([57.7, 11.972], 12.5);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -45,6 +47,7 @@ async function onMapClick(e) {
         // Lägger resultatet i en ny "frame" i sidebar
         prepareNextFrame(compareMode);
         createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
+
     } catch (error) {
         console.log(error);
         if (error instanceof TypeError) {
@@ -60,8 +63,8 @@ async function onMapClick(e) {
             .openOn(map);
         }
     }
-
 }
+
 map.on('click', onMapClick);
 
 /////// User Interaction: Input text in search bar, give choice of five cities
@@ -303,4 +306,54 @@ function prepareNextFrame(compareMode) {
 
 function toggleCompare() {
     compareMode = !compareMode;
+}
+
+async function fetchAirQualityData() {
+    const dataSet = [];
+    for (let i = 1; i< 19; i++){
+        if (i == 17){
+            continue
+        }else{
+            const url = `/api/get_points?page=${i}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            dataSet.push(...data.results);
+        }
+    }
+    return dataSet;
+}
+
+
+
+async function addHeatMap(type){
+    const data = await fetchAirQualityData();
+    const heatPoints =[];
+    
+    data.forEach(item => {
+        if (item.coordinates && item.measurements) {
+            for (const measurement of item.measurements) {
+                if (measurement.parameter == type){
+                    heatPoints.push([
+                        item.coordinates.latitude,
+                        item.coordinates.longitude,
+                        measurement.value
+                    ]);
+                }
+            }
+        }
+    });
+
+    if (heatMap) {
+        map.removeLayer(heat);
+    }
+
+    heatMap = L.heatLayer(heatPoints, {max:3, blur:0, radius: 15, gradient: {
+        '0': 'Navy', '0.25': 'Navy',
+        '0.26': 'Green',
+        '0.5': 'Green',
+        '0.51': 'Yellow',
+        '0.75': 'Yellow',
+        '0.76': 'Red',
+        '1': 'Red'
+      },}).addTo(map);
 }

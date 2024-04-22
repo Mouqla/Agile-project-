@@ -60,6 +60,15 @@ def get_location_multi():
     res = requests.get(url_string, headers={"X-API-Key": "126480978d9a03b6333e2560bef1313d"})
     return res.json()
 
+@app.route("/api/get_points")
+def get_points():
+    page = request.args.get('page')
+
+    url_string = f"https://api.openaq.org/v2/latest?limit=1000&page={page}&sort=desc&order_by=distance&dump_raw=false"
+
+    res = requests.get(url_string, headers={"X-API-Key": "e7293123084782b1bdf106b40b2d7ab678beca16d2667568b649d72d86c9a053"})
+    return res.json()
+
 @app.route('/info-frame.html')
 def info_frame():
     return render_template('info-frame.html')
