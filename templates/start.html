@@ -22,6 +22,16 @@
             </div>
         </div>
 
+        <div class="filter-area">
+            <div class="filter-options" id="filter-options">
+                <button class="filter-option" onclick="removeHeatMap()">none</button>
+                <button class="filter-option" onclick="addHeatMap('pm25')">pm25</button>
+                <button class="filter-option" onclick="addHeatMap('pm10')">pm10</button>
+                <button class="filter-option" onclick="addHeatMap('no2')">no2</button>
+            </div> 
+            <button class="filter-button" onclick="triggerFilterList()">Filters</button>
+        </div>
+
         <div class="switch-container">
             <label class="switch">
             <input id="compareSwitch" type="checkbox">
