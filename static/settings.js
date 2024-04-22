@@ -152,6 +152,22 @@ async function getPollutionOpenWeather(lat,lon) {
     return Object.values(retJson)[1];
 }
 
+async function getForecast24hours(lat,lon) {
+    const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
+    const retJson = await response.json();
+    return Object.values(retJson)[1][23]; // forecast in exactly 24 hours, returns a single object
+}
+
+async function getForecastAll96hours(lat,lon) {
+    const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
+    const retJson = await response.json();
+    return Object.values(retJson)[1]; // returns array with 96 objects, forecast for the next 96 hours
+}
+
+console.log(getPollutionOpenWeather(57,11));
+console.log(getForecast24hours(57, 11));
+console.log(getForecastAll96hours(57, 11));
+
 function formatTimeFromUnix(unixTimeStamp) {
     var date = new Date(unixTimeStamp * 1000);
     var year = date.getFullYear();
