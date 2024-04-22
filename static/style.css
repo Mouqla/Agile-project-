@@ -184,8 +184,12 @@ input:checked + .slider:before {
   display: flex;
   align-items: center; /* Align items vertically in the center */
   position: absolute;
-  bottom: 10px; /* Distance from the bottom of the screen */
-  left: 10px; /* Distance from the left of the screen */
+  bottom: 7px; /* Distance from the bottom of the screen */
+  left: 50px; /* Distance from the left of the screen */
+  z-index: 10;
+  background-color: white;
+  border-radius: 5px;
+  padding: 4px 8px 4px 6px;
 }  
 
 .switch {
