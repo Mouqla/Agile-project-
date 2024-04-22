@@ -51,6 +51,15 @@ def get_location():
     res = requests.get(url_string, headers={"X-API-Key": "126480978d9a03b6333e2560bef1313d"})
     return res.json()
 
+@app.route("/api/get_location_multi")
+def get_location_multi():
+    q = request.args.get('q')
+    limit = request.args.get('limit')
+    url_string = f"http://pro.openweathermap.org/geo/1.0/direct?q={q}&limit={limit}&appid="
+
+    res = requests.get(url_string, headers={"X-API-Key": "126480978d9a03b6333e2560bef1313d"})
+    return res.json()
+
 @app.route('/info-frame.html')
 def info_frame():
     return render_template('info-frame.html')
