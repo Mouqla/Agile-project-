@@ -43,6 +43,7 @@ async function onMapClick(e) {
         //create an object which holds all the location information
         const locationData = new LocationData(apiResult, lat, long, cityName);
         // Lägger resultatet i en ny "frame" i sidebar
+        prepareNextFrame(compareMode);
         createAndAppendFrame(locationData); //TODO
     } catch (error) {
         console.log(error);
@@ -59,10 +60,6 @@ async function onMapClick(e) {
             .openOn(map);
         }
     }
-
-    prepareNextFrame(compareMode);
-    createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
-
 
 }
 map.on('click', onMapClick);

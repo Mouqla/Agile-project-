@@ -147,7 +147,10 @@ input:checked + .slider:before {
 .switch-container {
   display: flex;
   align-items: center; /* Align items vertically in the center */
-}
+  position: absolute;
+  bottom: 10px; /* Distance from the bottom of the screen */
+  left: 10px; /* Distance from the left of the screen */
+}  
 
 .switch {
   margin-right: 8px; /* Add some space between the switch and the paragraph */

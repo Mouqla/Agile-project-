@@ -12,15 +12,24 @@
 
             </h2>
         </nav>
+        
         <div class="search-container">
             <form class="form">
                 <input id="search" type="search" class="input" list="search-results" placeholder="Search location"/>
             </form>
             <datalist id="search-results"></datalist>
             <div id="searchDropdown">
-
             </div>
         </div>
+
+        <div class="switch-container">
+            <label class="switch">
+            <input id="compareSwitch" type="checkbox">
+            <span class="slider round"></span>
+            </label>
+            <p>Compare several locations</p>
+        </div>
+
         <div id="map">
         </div>
         <script src="/static/settings.js" charset="utf-8"></script>
