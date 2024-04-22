@@ -1,5 +1,5 @@
 #map { 
-    height: calc(100vh - 50px);
+    height: 100%;
     z-index: 1;
 }
 .header {
@@ -8,7 +8,37 @@
     align-items: center;
     justify-content: left;
     height: 25px;
+    background-color: transparent;
+    position: absolute;
     margin: 10px;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+}
+
+#header-message{
+  background-color: rgba(255, 255, 255, 0.85);
+  color: darkslategray;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.search-container {
+  background-color: transparent;
+  position: absolute;
+  margin: 10px;
+  top: 60px;
+  left: 10px;
+  z-index: 2;
+}
+
+#search{
+  width: 240px;
+  padding: 10px;
+}
+
+datalist{
+  padding: 30px;
 }
 
 body{
@@ -82,3 +112,9 @@ small{
   font-size: 0.9rem;
 }
 
+/*zoom comtrols*/
+.leaflet-control-container { 
+  position: absolute;
+  bottom: 80px; 
+  left: 0px 
+} 
