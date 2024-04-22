@@ -1,7 +1,7 @@
 let frameList = [];
 let heatMap;
+let filterListShowing = false;
 var compareMode = false;
-
 
 let map = L.map('map').setView([57.7, 11.972], 12.5);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -343,9 +343,7 @@ async function addHeatMap(type){
         }
     });
 
-    if (heatMap) {
-        map.removeLayer(heat);
-    }
+    removeHeatMap();
 
     heatMap = L.heatLayer(heatPoints, {max:3, blur:0, radius: 15, gradient: {
         '0': 'Navy', '0.25': 'Navy',
@@ -356,4 +354,22 @@ async function addHeatMap(type){
         '0.76': 'Red',
         '1': 'Red'
       },}).addTo(map);
+}
+
+function removeHeatMap() {
+    if (heatMap) {
+        map.removeLayer(heatMap);
+    }
+}
+
+function triggerFilterList() {
+    const filterOptions = document.getElementById("filter-options");
+
+    if (!filterListShowing) {
+        filterOptions.style.display = "flex";
+    } else {
+        filterOptions.style.display = "none";
+    }
+
+    filterListShowing = !filterListShowing;
 }
