@@ -2,15 +2,12 @@ let frameList = [];
 let heatMap;
 let filterListShowing = false;
 var compareMode = false;
-let userPosition = getUserPosition();
 
 let map = L.map('map').setView([57.7, 11.972], 12.5);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
-panIfPossible();
 
 // Class object that holds all the information for a single location
 class LocationData {
@@ -32,57 +29,25 @@ class LocationData {
     }
 }
 
-function panIfPossible() {
-    if (userPosition.length === 2) {
-        L.map('map').setView([userPosition[0], userPosition[1], 13])
-        //map.panTo(userPosition);
-    }
+// Function to handle geolocation success
+function onGeolocationSuccess(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    map.setView([lat, lon], 13); // Update the existing map
 }
 
-/*
-function getUserPosition(){
-    if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                const location = [lat, lon]
-                return location;
-            }
-        );
-    } else {
-        console.error('Geolocation is not supported by this browser');
-        return;
-    }
-    
-}*/
+// Function to handle geolocation error
+function onGeolocationError(error) {
+    console.error('Error getting location:', error.message);
+    // Keep the default location if there's an error
+}
 
-
-function getUserPosition(){
-            if ('geolocation' in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        // Get latitude and longitude
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-        
-                        // Initialize the map with the user's location
-                        const map = L.map('map').setView([lat, lon], 13); // 13 is the zoom level
-        
-                        // Add a tile layer to the map
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '© OpenStreetMap contributors',
-                        }).addTo(map);
-                    },
-                    function(error) {
-                        console.error('Error getting location:', error.message);
-                    }
-                );
-            } else {
-                console.error('Geolocation is not supported by this browser');
-                return;
-            }
-            return position;
+// Get user's location if possible
+if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+} else {
+    console.error('Geolocation is not supported by this browser');
 }
 
 
