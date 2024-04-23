@@ -43,3 +43,14 @@ https://openweathermap.org/api/geocoding-api
 # Testing
 https://jestjs.io/docs/getting-started
 https://www.freecodecamp.org/news/how-to-start-unit-testing-javascript/
+
+# Plot
+https://plotly.com/javascript/getting-started/
+
+https://plotly.com/javascript/bar-charts/
+Example of desired plot 'relative' mode. Will need to render the small values as negative and scaled?
+https://codepen.io/etpinard/pen/mPGLrY
+https://plotly.com/javascript/range-slider/
+https://plotly.com/javascript/dropdowns/
+https://plotly.com/javascript/hover-events/
+https://plotly.com/javascript/click-events/
