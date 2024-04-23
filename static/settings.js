@@ -2,12 +2,28 @@ let frameList = [];
 let heatMap;
 let filterListShowing = false;
 var compareMode = false;
+const minLatitude = -85;  // Minimum latitude limit
+const maxLatitude = 85;   // Maximum latitude limit
 
 let map = L.map('map').setView([57.7, 11.972], 12.5);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    minZoom: 2,
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    
 }).addTo(map);
+
+// Event listener to restrict panning if it goes beyond the defined boundaries
+map.on('moveend', () => {
+    const center = map.getCenter();  // Current map center
+
+    // Ensure latitude is within limits
+    if (center.lat < minLatitude) {
+        map.panTo([minLatitude, center.lng]);  // Correct if pan too far south
+    } else if (center.lat > maxLatitude) {
+        map.panTo([maxLatitude, center.lng]);  // Correct if pan too far north
+    }
+});
 
 // Class object that holds all the information for a single location
 class LocationData {
