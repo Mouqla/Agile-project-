@@ -50,6 +50,24 @@ body{
   
 }
 
+#forecast-window{
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  z-index: 10;
+  background-color: white;
+}
+
+#tester{
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  z-index: 10;
+  background-color: white;
+  width:700px;
+  height: 400px;
+}
+
 .sidenav { /* Själva sidebar (osynlig) */
   height: 85%;
   width: 0; 
