@@ -72,15 +72,10 @@ async function tryHistory(){
     console.log(history);
 }
 
-function forecastWindow(){
-    const forecastWindow = document.getElementById('forecast-window');
-
-}
-
 async function getComponentForecast(){
     const forecastArray = await getForecastAll96hours(57,11); 
     var componentsMap = new Map();
-    forecastArray.forEach((element) => componentsMap.set(Object.values(element)[1], Object.values(element)[0]));
+    forecastArray.forEach((element) => componentsMap.set(formatTimeFromUnix(Object.values(element)[1]), Object.values(element)[0]));
 
     let keys = Array.from(componentsMap.keys());
     let allValues = Array.from(componentsMap.values());
@@ -109,7 +104,6 @@ async function getComponentForecast(){
     let valuesSO2 = [];
     allValues.forEach((element) => valuesSO2.push(Object.values(element)[7]));
     
-  
     var traceCO = {
     x: keys,
     y: valuesCO,
@@ -173,19 +167,3 @@ async function getComponentForecast(){
 } 
 
 getComponentForecast();
-
-function getComponentsKeys(componentsMap){
-    let keys = Array.from(componentsMap);
-    return keys;
-}
-
-function getComponentsValues(componentsMap){
-    let keys = Array.from(componentsMap);
-    let values = [];
-    keys.forEach((element)  => values.push(Object.values(element[1])))
-    return values;
-}
-
-
-
-//tryHistory();
