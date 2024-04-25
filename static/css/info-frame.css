@@ -1,0 +1,49 @@
+/* CSS for infobox */
+
+.sidenav { /* Själva sidebar (osynlig) */
+    height: 85%;
+    width: 0; 
+    position: fixed; 
+    z-index: 10; 
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    overflow-x: hidden;
+    padding-top: 60px; 
+    transition: 0.5s; 
+  }
+
+.headRec { 
+    min-height: 50px;
+    width: 380px;
+    border-top-left-radius: 15px;
+    background-color: #64B5F6;
+    padding: .5rem;
+  }
+
+.infoBox {
+    min-height: 150px;
+    width: 380px;
+    background-color: white;
+    z-index: 12;
+    padding: .5rem;
+  }
+
+.frame {
+    right: -100%; 
+    transition: right 0.5s ease-out;
+}
+
+.closeButton {
+    color: black;
+}
+
+.h1 {
+    font-size: 1.8rem;
+}
+
+.h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-style: normal;
+}
