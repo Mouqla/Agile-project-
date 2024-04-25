@@ -257,3 +257,37 @@ input:checked + .slider:before {
   gap: 5px;
   align-items: center;
 }
+
+.user-location-container {
+  display: flex;
+  position: absolute;
+  bottom: 7px; /* Distance from the bottom of the screen */
+  left: 325px; /* Distance from the left of the screen */
+  z-index: 10;
+  background-color: white;
+  border-radius: 5px;
+  padding: 4px 8px 4px 6px;
+}
+
+.user-location-button {
+  display: flex;
+  flex-direction: column; /* Image on top, text underneath */
+  align-items: center; /* Center align image and text */
+  justify-content: center; /* Center content vertically */
+  height: 53px; /* Set a specific height for the square button */
+  width: 30px;  /* Set a specific width for the square button */
+  background-color: white;
+  border: none; /* No border */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer; /* Cursor changes to pointer on hover */
+  padding: 5px; /* Padding for proper spacing */
+}
+
+.button-image {
+  height: 100%; /* Image takes half the button's height */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.user-location-button:hover {
+  background-color: #e3e3e3; /* Change color on hover */
+}
