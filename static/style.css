@@ -9,29 +9,22 @@
     flex-direction: row;
     align-items: center;
     justify-content: left;
-    height: 25px;
-    background-color: transparent;
+    background-color: white;
     position: absolute;
-    margin: 10px;
-    top: 10px;
-    left: 10px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
     z-index: 2;
 }
 
 #header-message{
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: transparent;
   color: darkslategray;
-  padding: 10px;
-  border-radius: 30px;
+  padding: 5px;
 }
 
 .search-container {
   background-color: transparent;
-  position: absolute;
-  margin: 10px;
-  top: 60px;
-  left: 10px;
-  z-index: 2;
 }
 
 #search{
@@ -48,24 +41,6 @@ body{
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   
-}
-
-#forecast-window{
-  position: absolute;
-  top: 200px;
-  left: 100px;
-  z-index: 10;
-  background-color: white;
-}
-
-#tester{
-  position: absolute;
-  top: 200px;
-  left: 100px;
-  z-index: 10;
-  background-color: white;
-  width:700px;
-  height: 400px;
 }
 
 .sidenav { /* Själva sidebar (osynlig) */
@@ -274,4 +249,26 @@ input:checked + .slider:before {
   flex-direction: column;
   gap: 5px;
   align-items: center;
+}
+
+#forecast-window{
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  z-index: 10;
+  background-color: transparent;
+}
+
+#graph-container{
+  background-color: white;
+  width:700px;
+  height: 400px;
+}
+
+#choose-graph-mode{
+  background-color: white;
+}
+
+fieldset{
+  border-style: none;
 }

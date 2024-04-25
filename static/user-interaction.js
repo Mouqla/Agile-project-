@@ -45,7 +45,7 @@ searchInput.addEventListener("input", async (e) => {
     const searchDatalist = document.getElementById("search-results");
 
     // input from search bar
-    let searchTerm = e.target.value;
+    var searchTerm = e.target.value;
     query = regexSearchTerm(searchTerm);
 
     const locations = await geocodeMulti(query).catch((err) => {
@@ -66,3 +66,68 @@ searchInput.addEventListener("input", async (e) => {
     }
     locations.forEach(appendSearchResult);
 })
+
+
+////// User Interaction: Click the Forecast & History Button
+var newFrame = '';
+var forecastWindow = '';
+var countForecastHistoryButton = 0;
+const forecastHistoryButton = document.querySelector(".forecast-history-button")
+function clickForecastHistory(){
+    //if the window is not open, open it
+    if(countForecastHistoryButton == 0){
+        countForecastHistoryButton = 1;
+        fetch('forecast-history.html')
+        .then(response => response.text())
+        .then(html => {
+            newFrame = document.createElement('div');
+            newFrame.classList.add('frame');
+            newFrame.id = 'graph-container'; 
+
+            forecastWindow = document.getElementById('forecast-window');
+            forecastWindow.appendChild(newFrame);
+            
+            coords = map.getCenter();
+            drawForecastGraph(coords.lat, coords.lng);
+
+            chooseGraphMode = document.createElement('div');
+            chooseGraphMode.id = 'choose-graph-mode';
+
+            forecastWindow.appendChild(chooseGraphMode);
+            chooseGraphMode.innerHTML += `
+            <form>
+                <fieldset>
+                <legend></legend>
+                    <div>
+                        <input type="radio" id="history" name="graph-mode" value="history" onChange="changeGraphMode(event)" />
+                        <label for="history">History</label>
+
+                        <input type="radio" id="forecast" name="graph-mode" value="forecast" onChange="changeGraphMode(event)" checked/>
+                        <label for="forecast">Forecast</label>
+                    </div>
+                </fieldset>
+            </form>
+            `
+        })
+    }
+    // else close it by removing the graph-container
+    else {
+        forecastWindow.removeChild(newFrame);
+        countForecastHistoryButton = 0;
+    }
+}
+
+function changeGraphMode(e){
+    //triggered when the radio buttons for history/forecast are changed
+    var graphModeValue = e.target.value;
+    coords = map.getCenter();
+    var graphContainer = document.querySelector('.js-plotly-plot');
+    if(graphModeValue == 'history'){
+        graphContainer.innerHTML = '';
+        drawHistoryGraph(coords.lat, coords.lng, getDate1WeekAgo(), getNow());
+    }
+    else{
+        graphContainer.innerHTML = '';
+        drawForecastGraph(coords.lat, coords.lng);
+    }
+}

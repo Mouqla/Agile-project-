@@ -97,6 +97,10 @@ def get_points():
 def info_frame():
     return render_template('info-frame.html')
 
+@app.route('/forecast-history.html')
+def forecast_history():
+    return render_template('forecast-history.html')
+
 if __name__ == "__main__":
     app.run()
 

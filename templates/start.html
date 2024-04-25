@@ -9,20 +9,21 @@
     </head>
     <body>
         <nav class="header">
-            <h2 id="header-message"><i class="fa-solid fa-smog"></i> {{message}}
+            <h2 id="header-message"><i class="fa-solid fa-smog"></i> {{message}}</h2>
 
-            </h2>
+            <div class="search-container">
+                <form class="form">
+                    <input id="search" type="search" class="input" list="search-results" onkeypress="clickPress(event)" placeholder="Search location"/>
+                </form>
+                <datalist id="search-results"></datalist>
+                <div id="searchDropdown">
+                </div>
+            </div>
+
+            <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> History & Forecast</button>
+
         </nav>
         
-        <div class="search-container">
-            <form class="form">
-                <input id="search" type="search" class="input" list="search-results" onkeypress="clickPress(event)" placeholder="Search location"/>
-            </form>
-            <datalist id="search-results"></datalist>
-            <div id="searchDropdown">
-            </div>
-        </div>
-
         <div class="filter-area">
             <div class="filter-options" id="filter-options">
                 <button class="filter-option" onclick="removeHeatMap()">none</button>
@@ -34,8 +35,6 @@
         </div>
 
         <div id="forecast-window"></div>
-
-        <div id="tester" ></div>
 
         <div class="switch-container">
             <label class="switch">
@@ -56,6 +55,7 @@
         <script src="/static/heat-map.js"></script>
         <script src="/static/search.js"></script>
         <script src="/static/user-interaction.js"></script>
+        <script src="/static/forecast-history.js"></script>
         <script type="module" src="/static/forecast-history.js"></script>
 
 
