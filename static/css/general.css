@@ -1,0 +1,47 @@
+#map { 
+  width: 100%;  /* Ensure the map doesn't exceed the width of its parent container */
+  height: 100vh;  /* Ensure the map takes up the full viewport height */
+  position: relative;  /* Prevent it from affecting other elements' layout */
+  z-index: 1;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    height: 25px;
+    background-color: transparent;
+    position: absolute;
+    margin: 10px;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+}
+
+#header-message{
+  background-color: rgba(255, 255, 255, 0.85);
+  color: darkslategray;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+body{
+  overflow: hidden;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+#main { /* endast för debugging */
+  transition: margin-left .5s;
+  padding: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Zoom control buttons */
+.leaflet-control-container { 
+  position: absolute;
+  bottom: 80px; 
+  left: 0px 
+} 
