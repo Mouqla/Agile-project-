@@ -6,27 +6,32 @@
         <link rel="stylesheet" href="/static/css/search.css" />
         <link rel="stylesheet" href="/static/css/location-button.css" />
         <link rel="stylesheet" href="/static/css/info-frame.css" />
+        <link rel="stylesheet" href="/static/css/forecast-history.css" />
+        <link rel="stylesheet" href="/static/css/filter.css" />
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://kit.fontawesome.com/4302a23631.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
-        <nav class="header">
-            <h2 id="header-message"><i class="fa-solid fa-smog"></i> {{message}}
+        <nav class="site-header">
+            <div class="logo-search-container">
+                <h2 id="header-message"><i class="fa-solid fa-smog"></i> {{message}}</h2>
+                <div class="search-container">
+                    <form class="form">
+                        <input id="search" type="search" class="input" list="search-results" onkeypress="eventInSearchBar(event)" placeholder="Search location"/>
+                    </form>
+                    <datalist id="search-results"></datalist>
+                    <div id="searchDropdown">
+                    </div>
+                </div>    
+            </div>
+            
+            <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> History & Forecast</button>
 
-            </h2>
         </nav>
         
-        <div class="search-container">
-            <form class="form">
-                <input id="search" type="search" class="input" list="search-results" onkeypress="clickPress(event)" placeholder="Search location"/>
-            </form>
-            <datalist id="search-results"></datalist>
-            <div id="searchDropdown">
-            </div>
-        </div>
-
         <div class="filter-area">
             <div class="filter-options" id="filter-options">
                 <button class="filter-option" onclick="removeHeatMap()">none</button>
@@ -36,6 +41,8 @@
             </div> 
             <button class="filter-button" onclick="triggerFilterList()">Filters</button>
         </div>
+
+        <div id="forecast-window"></div>
 
         <div class="switch-container">
             <label class="switch">
@@ -62,6 +69,8 @@
         <script src="/static/heat-map.js"></script>
         <script src="/static/search.js"></script>
         <script src="/static/user-interaction.js"></script>
+        <script src="/static/forecast-history.js"></script>
+        <script type="module" src="/static/forecast-history.js"></script>
 
 
         <div id="offcanvas" class="sidenav">

@@ -4,25 +4,29 @@
   position: relative;  /* Prevent it from affecting other elements' layout */
   z-index: 1;
 }
-.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
-    height: 25px;
-    background-color: transparent;
-    position: absolute;
-    margin: 10px;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
+.site-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 2;
+}
+
+.logo-search-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }
 
 #header-message{
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: transparent;
   color: darkslategray;
-  padding: 10px;
-  border-radius: 30px;
+  padding: 5px;
 }
 
 body{
@@ -45,3 +49,31 @@ body{
   bottom: 80px; 
   left: 0px 
 } 
+
+h1{
+  font-size: 1.8rem;
+}
+
+h2{
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-style: normal;
+}
+
+h3{
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+h4{
+  font-size: 1.2rem;
+}
+
+p{
+  font-size: 1rem;
+}
+
+small{
+  font-size: 0.9rem;
+}

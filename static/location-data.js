@@ -1,8 +1,10 @@
 
 // Class object that holds all the information for a single location
 class LocationData {
-    constructor(apiResult, lat, lon, city) {
+    constructor(apiResult, lat, lon, city, stateCountry, forecast) {
         this.city = city;
+        this.state = stateCountry[0];
+        this.country = stateCountry[1];
 
         //Coordinates
         this.location = `${lat.toFixed(4)},${lon.toFixed(4)}`;
@@ -16,6 +18,9 @@ class LocationData {
 
         // Air Quality Index -- Qualitative, e.g. 'Good', 'Poor'
         this.airQualityIndex = getQualitativeValue(apiResult[0].main.aqi);
+
+        // Forecast
+        this.forecast = forecast;
     }
 }
 
@@ -30,22 +35,6 @@ async function getPollutionOpenWeather(lat,lon) {
     const retJson = await response.json();
     return Object.values(retJson)[1];
 }
-
-async function getForecast24hours(lat,lon) {
-    const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
-    const retJson = await response.json();
-    return Object.values(retJson)[1][23]; // forecast in exactly 24 hours, returns a single object
-}
-
-async function getForecastAll96hours(lat,lon) {
-    const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
-    const retJson = await response.json();
-    return Object.values(retJson)[1]; // returns array with 96 objects, forecast for the next 96 hours
-}
-
-console.log(getPollutionOpenWeather(57,11));
-console.log(getForecast24hours(57, 11));
-console.log(getForecastAll96hours(57, 11));
 
 function formatTimeFromUnix(unixTimeStamp) {
     var date = new Date(unixTimeStamp * 1000);
@@ -102,6 +91,15 @@ async function reverseGeocode(lat,lon){
     const response = await fetch(`/api/get_city?lat=${lat}&lon=${lon}&limit=1`);
     const retJson = await response.json();
     return retJson[0].name;
+}
+
+async function reverseGeocodeStateCountry(lat,lon){
+    //get the name of a city from coordinates
+    lat = lat.toFixed(4);
+    lon = lon.toFixed(4);
+    const response = await fetch(`/api/get_city?lat=${lat}&lon=${lon}&limit=1`);
+    const retJson = await response.json();
+    return [retJson[0].state, retJson[0].country];
 }
 
 function getQualitativeValue(input){
