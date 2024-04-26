@@ -1,10 +1,10 @@
 
 // Class object that holds all the information for a single location
 class LocationData {
-    constructor(apiResult, lat, lon, city, state, country, forecast) {
+    constructor(apiResult, lat, lon, city, stateCountry, forecast) {
         this.city = city;
-        this.state = state;
-        this.country = country;
+        this.state = stateCountry[0];
+        this.country = stateCountry[1];
 
         //Coordinates
         this.location = `${lat.toFixed(4)},${lon.toFixed(4)}`;
@@ -93,22 +93,13 @@ async function reverseGeocode(lat,lon){
     return retJson[0].name;
 }
 
-async function reverseGeocodeState(lat,lon){
+async function reverseGeocodeStateCountry(lat,lon){
     //get the name of a city from coordinates
     lat = lat.toFixed(4);
     lon = lon.toFixed(4);
     const response = await fetch(`/api/get_city?lat=${lat}&lon=${lon}&limit=1`);
     const retJson = await response.json();
-    return retJson[0].state;
-}
-
-async function reverseGeocodeCountry(lat,lon){
-    //get the name of a city from coordinates
-    lat = lat.toFixed(4);
-    lon = lon.toFixed(4);
-    const response = await fetch(`/api/get_city?lat=${lat}&lon=${lon}&limit=1`);
-    const retJson = await response.json();
-    return retJson[0].country;
+    return [retJson[0].state, retJson[0].country];
 }
 
 function getQualitativeValue(input){

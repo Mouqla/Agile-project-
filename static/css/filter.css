@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    height: calc(100% - 20px);
+    height: 80px;
     width: 80px;
     padding: 0px;
     gap: 5px;

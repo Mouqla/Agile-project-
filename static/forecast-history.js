@@ -179,3 +179,59 @@ function getTimeAndPollutionForGraph(timePollutionArray) {
     };
     return { traceCO, traceNH3, traceNO, traceNO2, traceO3, tracePM10, tracePM2_5, traceSO2 };
 }
+
+
+let closeForecastButtonFrame;
+function openForecastHistoryWindow(){
+    countForecastHistoryButton = 1;
+    fetch('forecast-history.html')
+    .then(response => response.text())
+    .then(html => {
+        forecastHistoryFrame = document.createElement('div');
+        forecastHistoryFrame.classList.add('forecast-history-frame');
+        forecastHistoryFrame.id = 'graph-container'; 
+
+        closeForecastButtonFrame = document.createElement('div');
+        closeForecastButtonFrame.classList.add('close-forecast-button-frame');
+        closeForecastButtonFrame.id = 'close-forecast-button-frame'; 
+        
+        forecastWindow = document.getElementById('forecast-window');
+        forecastWindow.appendChild(closeForecastButtonFrame);
+        forecastWindow.appendChild(forecastHistoryFrame);
+
+        closeForecastButtonFrame.innerHTML = `
+        <button id="closeForecastButton" class="closeForecastButton" onClick="closeforeCastHistoryWindow()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        `
+
+        coords = map.getCenter();
+        drawForecastGraph(coords.lat, coords.lng);
+        
+        chooseGraphMode = document.createElement('div');
+        chooseGraphMode.id = 'choose-graph-mode';
+        
+        forecastWindow.appendChild(chooseGraphMode);
+        chooseGraphMode.innerHTML += `
+        <form>
+        <fieldset>
+        <legend></legend>
+        <div>
+        <input type="radio" id="history" name="graph-mode" value="history" onChange="changeGraphMode(event)" />
+        <label for="history">History</label>
+        
+        <input type="radio" id="forecast" name="graph-mode" value="forecast" onChange="changeGraphMode(event)" checked/>
+        <label for="forecast">Forecast</label>
+        </div>
+        </fieldset>
+        </form>
+        `
+    })
+}
+
+function closeforeCastHistoryWindow() {
+    forecastWindow.removeChild(forecastHistoryFrame);
+    forecastWindow.removeChild(closeForecastButtonFrame);
+    forecastWindow.removeChild(chooseGraphMode);
+    countForecastHistoryButton = 0;
+}

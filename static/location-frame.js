@@ -4,7 +4,7 @@ let frameList = [];
 let compareMode = false;
 
 /* Skapar en ny "frame" (info-frame.html) i html, lägger info i infoBox rutan och appendar till sidebar*/
-function createAndAppendFrameNewFormatting(content) {
+function createAndAppendFrame(content) {
     fetch('info-frame.html')
         .then(response => response.text())
         .then(html => {

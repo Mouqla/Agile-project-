@@ -12,18 +12,17 @@ async function onMapClick(e) {
     let apiResult = await getPollutionOpenWeather(lat,long);
     //fetch city name
     let cityName = await reverseGeocode(lat,long);
-    let state = await reverseGeocodeState(lat,long);
-    let country = await reverseGeocodeCountry(lat,long);
+    let stateCountry = await reverseGeocodeStateCountry(lat,long);
 
     let forecast = await getForecast24hours(lat, long);
     forecast = getQualitativeValue(forecast.main.aqi);
 
     try {
         //create an object which holds all the location information
-        const locationData = new LocationData(apiResult, lat, long, cityName, state, country, forecast);
+        const locationData = new LocationData(apiResult, lat, long, cityName, stateCountry, forecast);
         // Lägger resultatet i en ny "frame" i sidebar
         prepareNextFrame(compareMode);
-        createAndAppendFrameNewFormatting(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
+        createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
 
     } catch (error) {
         console.log(error);
@@ -58,61 +57,6 @@ function clickForecastHistory(){
     else {
         closeforeCastHistoryWindow();
     }
-}
-
-let closeForecastButtonFrame;
-function openForecastHistoryWindow(){
-    countForecastHistoryButton = 1;
-    fetch('forecast-history.html')
-    .then(response => response.text())
-    .then(html => {
-        forecastHistoryFrame = document.createElement('div');
-        forecastHistoryFrame.classList.add('forecast-history-frame');
-        forecastHistoryFrame.id = 'graph-container'; 
-
-        closeForecastButtonFrame = document.createElement('div');
-        closeForecastButtonFrame.classList.add('close-forecast-button-frame');
-        closeForecastButtonFrame.id = 'close-forecast-button-frame'; 
-        
-        forecastWindow = document.getElementById('forecast-window');
-        forecastWindow.appendChild(closeForecastButtonFrame);
-        forecastWindow.appendChild(forecastHistoryFrame);
-
-        closeForecastButtonFrame.innerHTML = `
-        <button id="closeForecastButton" class="closeForecastButton" onClick="closeforeCastHistoryWindow()">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        `
-
-        coords = map.getCenter();
-        drawForecastGraph(coords.lat, coords.lng);
-        
-        chooseGraphMode = document.createElement('div');
-        chooseGraphMode.id = 'choose-graph-mode';
-        
-        forecastWindow.appendChild(chooseGraphMode);
-        chooseGraphMode.innerHTML += `
-        <form>
-        <fieldset>
-        <legend></legend>
-        <div>
-        <input type="radio" id="history" name="graph-mode" value="history" onChange="changeGraphMode(event)" />
-        <label for="history">History</label>
-        
-        <input type="radio" id="forecast" name="graph-mode" value="forecast" onChange="changeGraphMode(event)" checked/>
-        <label for="forecast">Forecast</label>
-        </div>
-        </fieldset>
-        </form>
-        `
-    })
-}
-
-function closeforeCastHistoryWindow() {
-    forecastWindow.removeChild(forecastHistoryFrame);
-    forecastWindow.removeChild(closeForecastButtonFrame);
-    forecastWindow.removeChild(chooseGraphMode);
-    countForecastHistoryButton = 0;
 }
 
 function changeGraphMode(e){
