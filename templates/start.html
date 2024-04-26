@@ -8,18 +8,19 @@
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
-        <nav class="header">
-            <h2 id="header-message"><i class="fa-solid fa-smog"></i> {{message}}</h2>
-
-            <div class="search-container">
-                <form class="form">
-                    <input id="search" type="search" class="input" list="search-results" onkeypress="clickPress(event)" placeholder="Search location"/>
-                </form>
-                <datalist id="search-results"></datalist>
-                <div id="searchDropdown">
-                </div>
+        <nav class="site-header">
+            <div class="logo-search-container">
+                <h2 id="header-message"><i class="fa-solid fa-smog"></i> {{message}}</h2>
+                <div class="search-container">
+                    <form class="form">
+                        <input id="search" type="search" class="input" list="search-results" onkeypress="eventInSearchBar(event)" placeholder="Search location"/>
+                    </form>
+                    <datalist id="search-results"></datalist>
+                    <div id="searchDropdown">
+                    </div>
+                </div>    
             </div>
-
+            
             <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> History & Forecast</button>
 
         </nav>

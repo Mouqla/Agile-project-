@@ -4,17 +4,23 @@
   position: relative;  /* Prevent it from affecting other elements' layout */
   z-index: 1;
 }
-.header {
+.site-header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: left;
+    justify-content: space-between;
     background-color: white;
     position: absolute;
     width: 100%;
     margin: 0px;
     padding: 0px;
     z-index: 2;
+}
+
+.logo-search-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }
 
 #header-message{
@@ -30,6 +36,8 @@
 #search{
   width: 240px;
   padding: 10px;
+  margin-top: 25px;
+  margin-left: 25px;
 }
 
 datalist{
@@ -64,23 +72,23 @@ body{
 
 
 /* Nedanför är css för info-frame.html*/
-.headRec  { 
+.detailed-view-header  { 
   min-height: 50px;
-  width: 380px;
-  border-top-left-radius: 15px;
-  background-color: #64B5F6;
+  background-color: #eef0f5;
   padding: .5rem;
+  border-radius: 15px 15px 0px 0px;
 }
 .infoBox {
   min-height: 150px;
-  width: 380px;
-  background-color: white;
   z-index: 12;
   padding: .5rem;
+  margin: 10px;
 }
-.frame{
+.detailed-view-frame{
   right: -100%; 
   transition: right 0.5s ease-out;
+  background-color: white;
+  border-radius: 15px;
 }
 .closeButton{
   color: black;
@@ -271,4 +279,54 @@ input:checked + .slider:before {
 
 fieldset{
   border-style: none;
+}
+
+#AQI-box{
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#pollution-components{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 5px 0px 5px;
+  padding: 0px 5px 0px 5px;
+}
+
+#forecast{
+  margin: 5px;
+  padding: 5px;
+}
+
+#info-box-header-city-country{
+  margin: 5px;
+  padding: 5px;
+}
+
+#info-box-header-location{
+  margin: 5px;
+  padding: 5px;
+}
+
+#info-box-header-time{
+  margin: 5px;
+  padding: 5px;
+}
+
+.forecast-history-button{
+  margin: 5px;
+}
+
+.close-forecast-button-frame{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.closeForecastButton{
+  margin: 5px;
 }
