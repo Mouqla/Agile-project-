@@ -1,0 +1,33 @@
+.forecast-history-button{
+    margin: 5px;
+  }
+  
+  .close-forecast-button-frame{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 10;
+  }
+  
+  .closeForecastButton{
+    margin: 5px;
+  }
+
+  #forecast-window{
+    position: absolute;
+    top: 150px;
+    left: 100px;
+    z-index: 10;
+    background-color: transparent;
+  }
+  
+  #graph-container{
+    background-color: white;
+    width:700px;
+    height: 400px;
+  }
+  
+  #choose-graph-mode{
+    background-color: white;
+  }

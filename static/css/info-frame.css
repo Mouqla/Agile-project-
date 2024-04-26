@@ -1,0 +1,73 @@
+/* CSS for infobox */
+
+.sidenav { /* Själva sidebar (osynlig) */
+    height: 85%;
+    width: 0; 
+    position: fixed; 
+    z-index: 10; 
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    overflow-x: hidden;
+    padding-top: 60px; 
+    transition: 0.5s; 
+  }
+
+.detailed-view-header  { 
+    min-height: 50px;
+    background-color: #eef0f5;
+    padding: .5rem;
+    border-radius: 15px 15px 0px 0px;
+  }
+
+.infoBox {
+    min-height: 150px;
+    z-index: 12;
+    padding: .5rem;
+    margin: 10px;
+  }
+
+.detailed-view-frame{
+    right: -100%; 
+    transition: right 0.5s ease-out;
+    background-color: white;
+    border-radius: 15px;
+  }
+
+.closeButton{
+    color: black;
+  }
+
+#AQI-box{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+#pollution-components{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+  }
+  
+#forecast{
+    margin: 5px;
+    padding: 5px;
+  }
+  
+#info-box-header-city-country{
+    margin: 5px;
+    padding: 5px;
+  }
+  
+#info-box-header-location{
+    margin: 5px;
+    padding: 5px;
+  }
+  
+#info-box-header-time{
+    margin: 5px;
+    padding: 5px;
+  }
