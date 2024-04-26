@@ -257,3 +257,62 @@ input:checked + .slider:before {
   gap: 5px;
   align-items: center;
 }
+
+.select-menu{
+  width: 150px;
+  margin: 20px auto;
+}
+.select-menu .select-btn{
+  display: flex;
+  height: 15px;
+  background: #fff;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 2px;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.select-btn i{
+  font-size: 25px;
+  transition: 0.3s;
+}
+.select-menu.active .select-btn i{
+  transform: rotate(-180deg);
+}
+.select-menu .options{
+  z-index: 2;
+  position: absolute;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  display: none;
+}
+.select-menu.active .options{
+  display: block;
+}
+.options .option{
+  display: flex;
+  height: 55px;
+  cursor: pointer;
+  padding: 0 16px;
+  border-radius: 8px;
+  align-items: center;
+  background: #fff;
+}
+.options .option:hover{
+  background: #F2F2F2;
+}
+.option i{
+  font-size: 25px;
+  margin-right: 12px;
+}
+.option .option-text{
+  font-size: 18px;
+  color: #333;
+}
+
