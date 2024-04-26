@@ -27,13 +27,7 @@ async function addHeatMap(type, threshold) {
         if (item.coordinates && item.measurements) {
             for (const measurement of item.measurements) {
                 if (measurement.parameter == type) {
-                    if (measurement.value > threshold) {
-                        heatPoints.push([
-                            item.coordinates.latitude,
-                            item.coordinates.longitude,
-                            measurement.value
-                        ]);
-                    } else if (threshold == 0) {
+                    if (measurement.value >= threshold) {
                         heatPoints.push([
                             item.coordinates.latitude,
                             item.coordinates.longitude,
