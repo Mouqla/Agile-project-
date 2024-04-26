@@ -1,0 +1,3 @@
+1. I’m a little curious about what’s happening in a real agile team if someone in the team gets sick or for some reason can’t attend and work in a sprint. Otherwise I haven’t that much to mention here this week.
+2. I have been sick with fever and very down all week so haven’t been able to contribute to the team’s deliveries, more than attending to the discord-meetings. Next sprint I count on being back to contribute to the project, both in code and for our agile work in the team.
+3. This week hasn’t included any changes for me, but for the team I can see some progress of what I mentioned last week. I can see the group is working better together due to some changes we implemented in our way of working.
