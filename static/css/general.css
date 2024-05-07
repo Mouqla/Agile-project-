@@ -17,10 +17,16 @@
   z-index: 2;
 }
 
-.logo-search-container{
+.logo-search-compare-container{
   display: flex;
   flex-direction: row;
   justify-content: left;
+}
+
+.forecast-history-container{
+  display: flex;
+  flex-direction: row;
+  border-radius: 15px;
 }
 
 #header-message{
