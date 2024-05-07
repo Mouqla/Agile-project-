@@ -32,15 +32,15 @@
   }
   
   .filter-option {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-color: #efefef;
     border-radius: 10px;
     border: none;
     padding: 0;
     pointer-events: auto;
     cursor: pointer;
-    transition: 50ms ease-in-out;
+    transition: 500ms ease-in-out;
   }
   
   .filter-option:active {
@@ -48,7 +48,7 @@
   }
   
   .filter-option:hover {
-    width: 60px;
+    width: 65px;
   }
   
   .filter-options {
