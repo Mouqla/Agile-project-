@@ -11,9 +11,11 @@
   
 #search{
     width: 240px;
-    padding: 10px;
+    padding: 12px;
     margin-top: 25px;
     margin-left: 25px;
+    border-radius: 10px;
+    border-width: thin;
   }
 
 datalist{
