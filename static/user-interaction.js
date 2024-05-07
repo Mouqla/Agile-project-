@@ -24,6 +24,10 @@ async function onMapClick(e) {
         prepareNextFrame(compareMode);
         createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
 
+        removeMarker();
+        const markerCoordinates = [lat, long];
+        addMarker(markerCoordinates)
+
     } catch (error) {
         console.log(error);
         if (error instanceof TypeError) {

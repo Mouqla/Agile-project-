@@ -71,6 +71,7 @@ function closeFrame(frameId) {
     if (frame) {
         frame.remove();
     }
+    removeMarker();
 }
 
 function toggleCompare() {
