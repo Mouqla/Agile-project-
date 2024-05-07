@@ -17,7 +17,12 @@ function createAndAppendFrame(content) {
             const infoBox = newFrame.querySelector('#infoBox');
 
             const sidebar = document.getElementById('offcanvas');
-            sidebar.appendChild(newFrame);
+
+            // place new frame at the top of the page
+            const oldChild = sidebar.firstElementChild;
+            console.log(oldChild);
+            sidebar.insertBefore(newFrame, oldChild);
+
 
             //Lägger till mätvärden för luftföroreningar i sidebar 
             infoBox.innerHTML += `
