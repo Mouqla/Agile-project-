@@ -140,5 +140,9 @@ function getFormattedPollutionName(input){
             return 'PM2.5';
         case 'so2':
             return 'SO₂';
+        default:
+            return null;
     }
 }
+
+module.exports = {getFormattedPollutionName, getQualitativeValue};
