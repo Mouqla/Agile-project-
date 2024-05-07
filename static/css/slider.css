@@ -3,8 +3,8 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 42px;
+    height: 24px;
   }
   
   .switch input { 
@@ -28,8 +28,8 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 16px;
+    width: 16px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -46,9 +46,9 @@
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
   }
   
   /* Rounded sliders */
@@ -64,15 +64,19 @@
   .switch-container {
     display: flex;
     align-items: center; /* Align items vertically in the center */
+    align-self: center;
     position: absolute;
-    bottom: 7px; /* Distance from the bottom of the screen */
-    left: 50px; /* Distance from the left of the screen */
+    left: 500px; /* Distance from the left of the screen */
     z-index: 10;
-    background-color: white;
     border-radius: 5px;
     padding: 4px 8px 4px 6px;
+    margin-top: 5px;
   }  
   
   .switch {
     margin-right: 8px; /* Add some space between the switch and the paragraph */
+  }
+
+  #switch-label {
+    font-size: 16px;
   }

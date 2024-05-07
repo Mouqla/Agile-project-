@@ -20,9 +20,7 @@ function createAndAppendFrame(content) {
 
             // place new frame at the top of the page
             const oldChild = sidebar.firstElementChild;
-            console.log(oldChild);
             sidebar.insertBefore(newFrame, oldChild);
-
 
             //Lägger till mätvärden för luftföroreningar i sidebar 
             infoBox.innerHTML += `

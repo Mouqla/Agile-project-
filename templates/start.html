@@ -25,7 +25,16 @@
                     <datalist id="search-results"></datalist>
                     <div id="searchDropdown">
                     </div>
-                </div>    
+                </div>
+
+                <div class="switch-container">
+                    <label class="switch">
+                    <input id="compareSwitch" type="checkbox">
+                    <span class="slider round"></span>
+                    </label>
+                    <span id="switch-label">Compare several locations</span>
+                </div>
+
             </div>
             
             <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> History & Forecast</button>
@@ -44,13 +53,7 @@
 
         <div id="forecast-window"></div>
 
-        <div class="switch-container">
-            <label class="switch">
-            <input id="compareSwitch" type="checkbox">
-            <span class="slider round"></span>
-            </label>
-            <p>Compare several locations</p>
-        </div>
+        
 
         <div class="user-location-container">
             <button class="user-location-button">
