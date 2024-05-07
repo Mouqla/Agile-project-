@@ -5,8 +5,8 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    height: 80px;
-    width: 80px;
+    height: 65px;
+    width: 65px;
     padding: 0px;
     gap: 5px;
     z-index: 20;
@@ -15,9 +15,9 @@
   }
   
   .filter-button {
-    width: 75px;
-    height: 75px;
-    background-color: gray;
+    width:65px;
+    height: 65px;
+    background-color: white;
     border-radius: 10px;
     border: none;
     padding: 0;
@@ -34,7 +34,7 @@
   .filter-option {
     width: 50px;
     height: 50px;
-    background-color: rgb(157, 157, 157);
+    background-color: #efefef;
     border-radius: 10px;
     border: none;
     padding: 0;
