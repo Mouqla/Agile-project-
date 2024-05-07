@@ -23,11 +23,6 @@
   justify-content: left;
 }
 
-.forecast-history-container{
-  display: flex;
-  flex-direction: row;
-  border-radius: 15px;
-}
 
 #header-message{
   background-color: transparent;
