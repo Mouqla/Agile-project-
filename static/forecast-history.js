@@ -83,7 +83,6 @@ async function drawForecastGraph(lat, lon){
     var data = [traceCO, traceNH3, traceNO, traceNO2, traceO3, tracePM10, tracePM2_5, traceSO2];
     var layout = {
         title: {text: `Forecast ${await reverseGeocode(lat,lon)}`},
-        font: {size: 15}, 
         barmode: 'stack',
         yaxis: {
             title: 'µg/m3',}
