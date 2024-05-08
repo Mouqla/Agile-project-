@@ -3,12 +3,14 @@
     padding: 12px;
     border-radius: 10px;
     align-items: stretch;
-    background-color: #eeeeee;
+    background-color: white;
     border-width: thin;
+    font-size: medium;
   }
 
   .forecast-history-button:hover {
-    padding: 15px;
+    /* padding: 15px; */
+    background-color: #eeeeee;
   }
   
   .close-forecast-button-frame{
