@@ -29,7 +29,7 @@ class Location {
             );
 
             prepareNextFrame(compareMode);
-            createAndAppendFrame(locationData);
+            createAndAppendFrame(locationData, this);
 
         } catch (error) {
             console.error("Error during location initialization:", error);

@@ -2,9 +2,11 @@
 
 let frameList = [];
 let compareMode = false;
+const frameLocationMap = {};
+
 
 /* Skapar en ny "frame" (info-frame.html) i html, lägger info i infoBox rutan och appendar till sidebar*/
-function createAndAppendFrame(content) {
+function createAndAppendFrame(content, location) {
     fetch('info-frame.html')
         .then(response => response.text())
         .then(html => {
@@ -49,6 +51,8 @@ function createAndAppendFrame(content) {
             compareButton.addEventListener("change", toggleCompare);
             
             frameList.push(newFrame.id)
+
+            frameLocationMap[newFrame.id] = location;
         })
 }
 
@@ -56,25 +60,48 @@ function createAndAppendFrame(content) {
 /* Stänger tidigare frame inför skapandet av nästa frame, om Compare Mode inte är aktiverat */
 function prepareNextFrame(compareMode) {
     if (!compareMode) {
-        if (frameList.length > 0) {
-            for (var i = 0; i < frameList.length; i++) {
-                closeFrame(frameList[i]);
-            }
-            frameList = [];
+        // Close all existing frames if not in compare mode
+        while (frameList.length > 0) {
+            const frameId = frameList.pop();
+            closeFrame(frameId); // This removes the frame and marker
         }
-        return;
     }
 }
+
+/*
+function closeFrame(frameId) {
+    const frame = document.getElementById(frameId);
+    if (frame) {
+        frame.remove();
+    }
+}*/
 
 function closeFrame(frameId) {
     const frame = document.getElementById(frameId);
     if (frame) {
         frame.remove();
     }
+
+    // Find and remove the corresponding Location object
+    const location = frameLocationMap[frameId];
+    if (location) {
+        location.close(); // Call the method to remove the marker
+        delete frameLocationMap[frameId]; // Remove the mapping
+    }
+
+    // Also remove the frame ID from frameList
+    const index = frameList.indexOf(frameId);
+    if (index > -1) {
+        frameList.splice(index, 1);
+    }
 }
 
 function toggleCompare() {
     compareMode = !compareMode;
+
+    if (!compareMode) {
+        prepareNextFrame(compareMode); // Clear existing frames when exiting compare mode
+    }
 }
 
 /* Öppnar sidebaren (initialt utanför skärmen) */ /* TODO */
