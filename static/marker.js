@@ -1,5 +1,3 @@
-let marker;
-
 const customIcon = L.icon({
     iconUrl: '/static/images/location.png', // Path to your custom image
     iconSize: [64, 64], // Size of the icon
@@ -7,13 +5,25 @@ const customIcon = L.icon({
     popupAnchor: [0, -32], // Position where the popup is anchored relative to the icon
 });
 
-function addMarker(coordinates) {
-    marker = L.marker(coordinates, { icon: customIcon });
-    marker.addTo(map);
-}
+const alternateIcon = L.icon({
+    iconUrl: '/static/images/userlocation.png', // Different icon for older markers
+    iconSize: [64, 64],
+    iconAnchor: [32, 50],
+    popupAnchor: [0, -32],
+});
 
-function removeMarker() {
-    if (marker) {
-        marker.remove();
+class Marker {
+    constructor(coordinates) {
+        this.marker = L.marker(coordinates, { icon: customIcon });
+        
+        this.initialize();
+    }
+
+    initialize(){
+        this.marker.addTo(map)
+    }
+
+    removeMarker() {
+        this.marker.remove();
     }
 }

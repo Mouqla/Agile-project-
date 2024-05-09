@@ -3,6 +3,8 @@ class Location {
         this.lat = lat;
         this.long = long;
 
+        this.marker = new Marker([lat, long]);
+
         this.initialize();
     }
 
@@ -25,10 +27,16 @@ class Location {
                 stateCountry,
                 forecast
             );
+
             prepareNextFrame(compareMode);
             createAndAppendFrame(locationData);
+
         } catch (error) {
             console.error("Error during location initialization:", error);
         }
+    }
+
+    close() {
+        this.marker.removeMarker();
     }
 }
