@@ -117,7 +117,7 @@ function createAndAppendDetailFrame(pollutant, value, content) {
 function getPollutantDetails(pollutant, value) {
     let detailsText = '';
 
-    switch (pollutant.toLowerCase()) {
+    switch (pollutant) {
         case 'PM2.5':
             detailsText = `
             <ul>
