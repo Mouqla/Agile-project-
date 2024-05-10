@@ -108,16 +108,41 @@ function getQualitativeValue(input){
 
     switch(input){
         case 1:
-            return 'Good';
+            return ['Good', '#4CAF50'];
         case 2:
-            return  'Fair';
+            return  ['Fair', '#CDDC39' ];
         case 3:
-            return  'Moderate';
+            return  ['Moderate', '#FFEB3B'];
         case 4:
-            return  'Poor';
+            return  ['Poor', '#FF9800'];
         case 5:
-            return  'Very Poor';
+            return  ['Very Poor', '#FF5722'];
         default:
-            return 'Unknown';
+            return ['Unknown', '#9E9E9E'];
     }
 }
+
+function getFormattedPollutionName(input){
+    switch(input){
+        case 'co':
+            return 'CO';
+        case 'nh3':
+            return 'NHO<sub>3</sub>';
+        case 'no':
+            return 'NO';
+        case 'no2':
+            return 'NO<sub>2</sub>';
+        case 'o3':
+                return 'O<sub>3</sub>';
+        case 'pm10':
+                return 'PM10';
+        case 'pm2_5':
+            return 'PM2.5';
+        case 'so2':
+            return 'SOO<sub>2</sub>';
+        default:
+            return null;
+    }
+}
+
+module.exports = {getFormattedPollutionName, getQualitativeValue};
