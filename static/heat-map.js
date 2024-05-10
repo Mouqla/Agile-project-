@@ -129,12 +129,12 @@ function triggerFilterList() {
     if (!filterListShowing) {
         filterOptions.style.display = "flex";
         hideDisableHeatmapButton();
-        filterButton.textContent = "Close Meny"; // Ändra texten till "Close Meny" när menyn visas
+        /*filterButton.textContent = "Close Meny"; // Ändra texten till "Close Meny" när menyn visas */
         /* filterButton.textContent = <i class="fa-solid fa-caret-down"></i>; */
 
     } else {
         filterOptions.style.display = "none";
-        filterButton.textContent = "Heatmap Filters"; // Ändra tillbaka texten till "Heatmap Filters" när menyn döljs
+        /*filterButton.textContent = "Heatmap Filters"; */ // Ändra tillbaka texten till "Heatmap Filters" när menyn döljs
         
     }
 
