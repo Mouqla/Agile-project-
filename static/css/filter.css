@@ -29,12 +29,13 @@
   .filter-button:hover {
     width: 80px;
     height: 80px;
+    background-color: #eeeeee;
   }
   
   .filter-option {
     width: 60px;
     height: 60px;
-    background-color: #efefef;
+    background-color: white;
     border-radius: 10px;
     border: none;
     padding: 0;
@@ -49,6 +50,7 @@
   
   .filter-option:hover {
     width: 65px;
+    background-color: #eeeeee;
   }
   
   .filter-options {

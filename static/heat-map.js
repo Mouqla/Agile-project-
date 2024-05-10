@@ -107,9 +107,9 @@ function setActiveButtonColor(type) {
     }
 
 function resetButtons() {
-    document.getElementById('button-pm25').style.backgroundColor = '#efefef';
-    document.getElementById('button-pm10').style.backgroundColor = '#efefef';
-    document.getElementById('button-no2').style.backgroundColor = '#efefef';
+    document.getElementById('button-pm25').style.backgroundColor = '#ffffff';
+    document.getElementById('button-pm10').style.backgroundColor = '#ffffff';
+    document.getElementById('button-no2').style.backgroundColor = '#ffffff';
 }
 
 function displayDisableHeatmapButton(){

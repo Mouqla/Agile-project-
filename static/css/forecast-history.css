@@ -3,12 +3,14 @@
     padding: 12px;
     border-radius: 10px;
     align-items: stretch;
-    background-color: #eeeeee;
+    background-color: white;
     border-width: thin;
+    font-size: medium;
   }
 
   .forecast-history-button:hover {
-    padding: 15px;
+    /* padding: 15px; */
+    background-color: #eeeeee;
   }
   
   .close-forecast-button-frame{
@@ -35,8 +37,12 @@
     background-color: white;
     width:700px;
     height: 400px;
+    border-top-left-radius: 15px; /* dessa ligger bakom forecast-rutan atm*/
+    border-top-right-radius: 15px; /* dessa ligger bakom forecast-rutan atm*/
   }
   
   #choose-graph-mode{
     background-color: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }

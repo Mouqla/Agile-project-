@@ -31,5 +31,9 @@
   }
   
   .user-location-button:hover {
-    background-color: #e3e3e3; /* Change color on hover */
+    background-color: #eeeeee; /* Change color on hover */
+  }
+
+  .user-location-container:hover { /* A quick, pretty ugly fix on making the whole "button" grey when hovering */
+    background-color: #eeeeee; /* Change color on hover */
   }
