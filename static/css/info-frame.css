@@ -1,0 +1,115 @@
+/* CSS for infobox */
+
+.sidenav { /* Själva sidebar (osynlig) */
+    height: 85%;
+    width: 0; 
+    position: fixed; 
+    z-index: 10; 
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    overflow-x: hidden;
+    padding-top: 15px; 
+    transition: 0.5s; 
+  }
+
+.detailed-view-header  { 
+    min-height: 50px;
+    background-color: #f5f5f5;
+    padding: .5rem;
+    border-radius: 15px 15px 0px 0px;
+  }
+
+.infoBox {
+    min-height: 150px;
+    z-index: 12;
+    padding: .5rem;
+    margin: 10px;
+    margin-top: 5px;
+  }
+
+.detailed-view-frame{
+    right: -100%; 
+    transition: right 0.5s ease-out;
+    background-color: white;
+    border-radius: 15px;
+  }
+
+#AQI-box{
+    margin: 0 5px 0 5px;
+    padding: 0px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    height: 24px;
+    align-items: center;
+  }
+  
+#pollution-components{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+  }
+
+/* Give every other line of pollution values a grey background */
+#pollution-components-container > div:nth-child(2){
+  background: #f5f5f5;
+}
+#pollution-components-container > div:nth-child(4){
+  background: #f5f5f5;
+}
+#pollution-components-container > div:nth-child(6){
+  background: #f5f5f5;
+}
+#pollution-components-container > div:nth-child(8){
+  background: #f5f5f5;
+}
+  
+#forecast{
+    margin: 5px;
+    padding: 5px;
+  }
+  
+#info-box-header-city-country{
+    margin-right: 15px;
+    margin-left: 15px;
+    line-height: 1;
+  }
+  
+#info-box-header-location{
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+#info-box-header-time{
+    margin-right: 15px;
+    margin-left: 15px;
+    color:#616161
+  }
+
+#AQI-circle{
+  background-color: grey;
+  border-radius: 30px;
+  width: 18px;
+  height: 18px;
+}
+
+#AQI-text {
+  display: flex;
+  align-self: center;
+}
+
+.detailed-view-close-button{
+  position: absolute;
+  right: 8px;
+}
+
+#pollution-value {
+  font-weight: 600;
+}
+
+#pollution-unit {
+  color: #616161;
+}

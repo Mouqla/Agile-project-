@@ -17,27 +17,43 @@ function createAndAppendFrame(content) {
             const infoBox = newFrame.querySelector('#infoBox');
 
             const sidebar = document.getElementById('offcanvas');
-            sidebar.appendChild(newFrame);
 
+            // place new frame at the top of the page
+            const oldChild = sidebar.firstElementChild;
+            sidebar.insertBefore(newFrame, oldChild);
 
             //Lägger till mätvärden för luftföroreningar i sidebar 
-            infoBox.innerHTML += 'Air Quality Index: ' + content.airQualityIndex;
-            infoBox.innerHTML += '<br>';
+            infoBox.innerHTML += `
+            <div id="AQI-box"> 
+                <div id="AQI-circle"></div>
+                <span id="AQI-text">&nbsp Today's Air Quality Index: ${content.airQualityIndex[0]}</span>
+            </div>`;
 
+            document.getElementById("AQI-circle").style.background = content.airQualityIndex[1];
+
+            infoBox.innerHTML += `<div id="pollution-components-container"></div>`;
+            const pollutionCompsCont = document.getElementById("pollution-components-container");
             for(let key in content.pollution){
-                infoBox.innerHTML += key + ' ';
-                infoBox.innerHTML += content.pollution[key];
-                infoBox.innerHTML += ' μg/m<sup>3</sup>';
-                infoBox.innerHTML += '<br>';
+                pollutionCompsCont.innerHTML += `
+                <div id="pollution-components">
+                    <span id="pollution-key">${getFormattedPollutionName(key)}</span>
+                    <div>
+                        <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">μg/m<sup>3</sup></span>
+                    </div>
+                </div>`
             }
 
-            //Header med stad, koordinater och tid
-            var headerBox = newFrame.querySelector('#header');
-            headerBox.innerHTML += `<h1>${content.city}</h1>`;
-            headerBox.innerHTML += `<h2>${content.location}</h2>`
-            headerBox.innerHTML += `<h3>Last updated ${content.time}</h3>`; 
+            infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast: ${content.forecast[0]}</div>`;
 
-            const closeButton = newFrame.querySelector('.closebtn');
+            //Header med stad, koordinater och tid
+            var headerBox = newFrame.querySelector('#detailed-view-header');
+            headerBox.innerHTML += `
+            <h1 id="info-box-header-city-country">${content.city}, ${content.country}</h1>
+            <!--<h2 id="info-box-header-location">${content.location}</h2>-->
+            <span id="info-box-header-time">Last updated ${content.time}</span>
+            `
+
+            const closeButton = newFrame.querySelector('.detailed-view-close-button');
             closeButton.addEventListener('click', function() {
                     closeFrame(newFrame.id);
                 });
@@ -48,6 +64,7 @@ function createAndAppendFrame(content) {
             frameList.push(newFrame.id)
         })
 }
+
 
 /* Stänger tidigare frame inför skapandet av nästa frame, om Compare Mode inte är aktiverat */
 function prepareNextFrame(compareMode) {
@@ -76,5 +93,7 @@ function toggleCompare() {
 /* Öppnar sidebaren (initialt utanför skärmen) */ /* TODO */
 function openNav() {
     document.getElementById("offcanvas").style.width = "380";
+    document.getElementById("offcanvas").style.position = "absolute";
+    document.getElementById("offcanvas").style.right = "10px";
     document.getElementById("main").style.marginRight = "-200px";
 }

@@ -1,8 +1,10 @@
 
 // Class object that holds all the information for a single location
 class LocationData {
-    constructor(apiResult, lat, lon, city) {
+    constructor(apiResult, lat, lon, city, stateCountry, forecast) {
         this.city = city;
+        this.state = stateCountry[0];
+        this.country = stateCountry[1];
 
         //Coordinates
         this.location = `${lat.toFixed(4)},${lon.toFixed(4)}`;
@@ -16,6 +18,9 @@ class LocationData {
 
         // Air Quality Index -- Qualitative, e.g. 'Good', 'Poor'
         this.airQualityIndex = getQualitativeValue(apiResult[0].main.aqi);
+
+        // Forecast
+        this.forecast = forecast;
     }
 }
 
@@ -30,22 +35,6 @@ async function getPollutionOpenWeather(lat,lon) {
     const retJson = await response.json();
     return Object.values(retJson)[1];
 }
-
-async function getForecast24hours(lat,lon) {
-    const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
-    const retJson = await response.json();
-    return Object.values(retJson)[1][23]; // forecast in exactly 24 hours, returns a single object
-}
-
-async function getForecastAll96hours(lat,lon) {
-    const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
-    const retJson = await response.json();
-    return Object.values(retJson)[1]; // returns array with 96 objects, forecast for the next 96 hours
-}
-
-console.log(getPollutionOpenWeather(57,11));
-console.log(getForecast24hours(57, 11));
-console.log(getForecastAll96hours(57, 11));
 
 function formatTimeFromUnix(unixTimeStamp) {
     var date = new Date(unixTimeStamp * 1000);
@@ -104,22 +93,56 @@ async function reverseGeocode(lat,lon){
     return retJson[0].name;
 }
 
+async function reverseGeocodeStateCountry(lat,lon){
+    //get the name of a city from coordinates
+    lat = lat.toFixed(4);
+    lon = lon.toFixed(4);
+    const response = await fetch(`/api/get_city?lat=${lat}&lon=${lon}&limit=1`);
+    const retJson = await response.json();
+    return [retJson[0].state, retJson[0].country];
+}
+
 function getQualitativeValue(input){
     // parameter: API response numeric air quality index value 1-5
     // returns: qualitative value based on the openWeatherAPI air quality index
 
     switch(input){
         case 1:
-            return 'Good';
+            return ['Good', '#4CAF50'];
         case 2:
-            return  'Fair';
+            return  ['Fair', '#CDDC39' ];
         case 3:
-            return  'Moderate';
+            return  ['Moderate', '#FFEB3B'];
         case 4:
-            return  'Poor';
+            return  ['Poor', '#FF9800'];
         case 5:
-            return  'Very Poor';
+            return  ['Very Poor', '#FF5722'];
         default:
-            return 'Unknown';
+            return ['Unknown', '#9E9E9E'];
     }
 }
+
+function getFormattedPollutionName(input){
+    switch(input){
+        case 'co':
+            return 'CO';
+        case 'nh3':
+            return 'NH₃';
+        case 'no':
+            return 'NO';
+        case 'no2':
+            return 'NO₂';
+        case 'o3':
+                return 'O₃';
+        case 'pm10':
+                return 'PM10';
+        case 'pm2_5':
+            return 'PM2.5';
+        case 'so2':
+            return 'SO₂';
+        default:
+            return null;
+    }
+}
+
+module.exports = {getFormattedPollutionName, getQualitativeValue};

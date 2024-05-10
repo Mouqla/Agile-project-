@@ -44,6 +44,19 @@ def get_forecast():
     res = requests.get(url_string, headers={"X-API-Key": "126480978d9a03b6333e2560bef1313d"})
     return res.json()
 
+# Get history
+@app.route("/api/get_history")
+def get_history():
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
+    start = request.args.get('start')
+    end = request.args.get('end')
+
+    url_string = f"http://pro.openweathermap.org/data/2.5/air_pollution/history?lat={lat}&lon={lon}&start={start}&end={end}&appid="
+    
+    res = requests.get(url_string, headers={"X-API-Key": "126480978d9a03b6333e2560bef1313d"})
+    return res.json()
+
 @app.route("/api/get_city")
 def get_city():
     lat = request.args.get('lat')
@@ -83,6 +96,10 @@ def get_points():
 @app.route('/info-frame.html')
 def info_frame():
     return render_template('info-frame.html')
+
+@app.route('/forecast-history.html')
+def forecast_history():
+    return render_template('forecast-history.html')
 
 if __name__ == "__main__":
     app.run()

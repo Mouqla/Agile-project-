@@ -1,0 +1,59 @@
+
+.filter-area {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 65px;
+    width: 65px;
+    padding: 0px;
+    gap: 5px;
+    z-index: 20;
+    bottom: 5px;
+    left: 120px;
+  }
+  
+  .filter-button {
+    width:65px;
+    height: 65px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 0;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: 50ms ease-in-out;
+  }
+  
+  .filter-button:hover {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .filter-option {
+    width: 60px;
+    height: 60px;
+    background-color: #efefef;
+    border-radius: 10px;
+    border: none;
+    padding: 0;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: 500ms ease-in-out;
+  }
+  
+  .filter-option:active {
+    background-color: rgb(197, 197, 197);
+  }
+  
+  .filter-option:hover {
+    width: 65px;
+  }
+  
+  .filter-options {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }

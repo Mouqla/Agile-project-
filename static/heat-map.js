@@ -27,6 +27,12 @@ async function fetchAirQualityData() {
 }
 
 async function addHeatMap(type, threshold, layer=false) {
+    resetButtons();
+
+    setActiveButtonColor(type);
+
+    displayDisableHeatmapButton();
+
     const data = await fetchAirQualityData();
     const heatPoints =[];
 
@@ -80,11 +86,48 @@ function removeHeatMap() {
 }
 
 
+function removeHeatMapAndResetButtons() {
+    removeHeatMap();
+    resetButtons();
+    hideDisableHeatmapButton();
+    }
+
+function setActiveButtonColor(type) {
+    switch (type) {
+        case 'pm25':
+            document.getElementById('button-pm25').style.backgroundColor = '#B3E5FC';
+            return;
+        case 'pm10':
+            document.getElementById('button-pm10').style.backgroundColor = '#B3E5FC';
+            return;
+        case 'no2':
+            document.getElementById('button-no2').style.backgroundColor = '#B3E5FC';
+            return;
+        }
+    }
+
+function resetButtons() {
+    document.getElementById('button-pm25').style.backgroundColor = '#efefef';
+    document.getElementById('button-pm10').style.backgroundColor = '#efefef';
+    document.getElementById('button-no2').style.backgroundColor = '#efefef';
+}
+
+function displayDisableHeatmapButton(){
+    const filterOptionDisableHeatmap = document.getElementById("button-remove-heatmap");
+    filterOptionDisableHeatmap.style.display = "block";
+}
+
+function hideDisableHeatmapButton() {
+    const filterOptionDisableHeatmap = document.getElementById("button-remove-heatmap");
+    filterOptionDisableHeatmap.style.display = "none";
+}
+
 function triggerFilterList() {
     const filterOptions = document.getElementById("filter-options");
 
     if (!filterListShowing) {
         filterOptions.style.display = "flex";
+        hideDisableHeatmapButton();
     } else {
         filterOptions.style.display = "none";
     }
