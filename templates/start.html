@@ -25,7 +25,16 @@
                     <datalist id="search-results"></datalist>
                     <div id="searchDropdown">
                     </div>
-                </div>    
+                </div>
+
+                <div class="switch-container">
+                    <label class="switch">
+                    <input id="compareSwitch" type="checkbox">
+                    <span class="slider round"></span>
+                    </label>
+                    <span id="switch-label">Compare several locations</span>
+                </div>
+
             </div>
             
             <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> History & Forecast</button>
@@ -34,23 +43,17 @@
         
         <div class="filter-area">
             <div class="filter-options" id="filter-options">
-                <button class="filter-option" onclick="removeHeatMap()">none</button>
-                <button class="filter-option" onclick="addHeatMap('pm25')">pm25</button>
-                <button class="filter-option" onclick="addHeatMap('pm10')">pm10</button>
-                <button class="filter-option" onclick="addHeatMap('no2')">no2</button>
+                <button class="filter-option" id="button-remove-heatmap" onclick="removeHeatMapAndResetButtons()">Disable Heatmap</button>
+                <button class="filter-option" id="button-pm25" onclick="addHeatMap('pm25')">PM2.5</button>
+                <button class="filter-option" id="button-pm10" onclick="addHeatMap('pm10')">PM10</button>
+                <button class="filter-option" id="button-no2" onclick="addHeatMap('no2')">NO₂</button>
             </div> 
-            <button class="filter-button" onclick="triggerFilterList()">Filters</button>
+            <button class="filter-button" onclick="triggerFilterList()">Heatmap Filters</button>
         </div>
 
         <div id="forecast-window"></div>
 
-        <div class="switch-container">
-            <label class="switch">
-            <input id="compareSwitch" type="checkbox">
-            <span class="slider round"></span>
-            </label>
-            <p>Compare several locations</p>
-        </div>
+        
 
         <div class="user-location-container">
             <button class="user-location-button">

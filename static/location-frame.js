@@ -17,27 +17,40 @@ function createAndAppendFrame(content) {
             const infoBox = newFrame.querySelector('#infoBox');
 
             const sidebar = document.getElementById('offcanvas');
-            sidebar.appendChild(newFrame);
+
+            // place new frame at the top of the page
+            const oldChild = sidebar.firstElementChild;
+            sidebar.insertBefore(newFrame, oldChild);
 
             //Lägger till mätvärden för luftföroreningar i sidebar 
-            infoBox.innerHTML += `<div id="AQI-box">Today's Air Quality Index: ${content.airQualityIndex}</div>`;
+            infoBox.innerHTML += `
+            <div id="AQI-box"> 
+                <div id="AQI-circle"></div>
+                <span id="AQI-text">&nbsp Today's Air Quality Index: ${content.airQualityIndex[0]}</span>
+            </div>`;
 
+            document.getElementById("AQI-circle").style.background = content.airQualityIndex[1];
+
+            infoBox.innerHTML += `<div id="pollution-components-container"></div>`;
+            const pollutionCompsCont = document.getElementById("pollution-components-container");
             for(let key in content.pollution){
-                infoBox.innerHTML += `
+                pollutionCompsCont.innerHTML += `
                 <div id="pollution-components">
-                    <span id="pollution-key">${key}</span>
-                    <span id="pollution-value">${content.pollution[key]} μg/m<sup>3</sup></span>
+                    <span id="pollution-key">${getFormattedPollutionName(key)}</span>
+                    <div>
+                        <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">μg/m<sup>3</sup></span>
+                    </div>
                 </div>`
             }
 
-            infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast is ${content.forecast}</div>`;
+            infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast: ${content.forecast[0]}</div>`;
 
             //Header med stad, koordinater och tid
             var headerBox = newFrame.querySelector('#detailed-view-header');
             headerBox.innerHTML += `
             <h1 id="info-box-header-city-country">${content.city}, ${content.country}</h1>
             <!--<h2 id="info-box-header-location">${content.location}</h2>-->
-            <p id="info-box-header-time">Last updated ${content.time}</p>
+            <span id="info-box-header-time">Last updated ${content.time}</span>
             `
 
             const closeButton = newFrame.querySelector('.detailed-view-close-button');
