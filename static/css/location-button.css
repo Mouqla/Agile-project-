@@ -4,7 +4,7 @@
     display: flex;
     position: absolute;
     bottom: 7px; /* Distance from the bottom of the screen */
-    left: 325px; /* Distance from the left of the screen */
+    left: 60px; /* Distance from the left of the screen */
     z-index: 10;
     background-color: white;
     border-radius: 5px;

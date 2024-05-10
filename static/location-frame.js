@@ -17,19 +17,33 @@ function createAndAppendFrame(content) {
             const infoBox = newFrame.querySelector('#infoBox');
 
             const sidebar = document.getElementById('offcanvas');
-            sidebar.appendChild(newFrame);
 
-            infoBox.innerHTML += `<div id="AQI-box">Today's Air Quality Index: ${content.airQualityIndex}</div>`;
+            // place new frame at the top of the page
+            const oldChild = sidebar.firstElementChild;
+            sidebar.insertBefore(newFrame, oldChild);
 
-            for (let key in content.pollution) {
-                infoBox.innerHTML += `
+            //Lägger till mätvärden för luftföroreningar i sidebar 
+            infoBox.innerHTML += `
+            <div id="AQI-box"> 
+                <div id="AQI-circle"></div>
+                <span id="AQI-text">&nbsp Today's Air Quality Index: ${content.airQualityIndex[0]}</span>
+            </div>`;
+
+            document.getElementById("AQI-circle").style.background = content.airQualityIndex[1];
+
+            infoBox.innerHTML += `<div id="pollution-components-container"></div>`;
+            const pollutionCompsCont = document.getElementById("pollution-components-container");
+            for(let key in content.pollution){
+                pollutionCompsCont.innerHTML += `
                 <div id="pollution-components">
-                    <span id="pollution-key">${key}</span>
-                    <span id="pollution-value">${content.pollution[key]} μg/m<sup>3</sup></span>
-                </div>`;
+                    <span id="pollution-key">${getFormattedPollutionName(key)}</span>
+                    <div>
+                        <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">μg/m<sup>3</sup></span>
+                    </div>
+                </div>`
             }
 
-            infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast is ${content.forecast}</div>`;
+            infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast: ${content.forecast[0]}</div>`;
 
             var headerBox = newFrame.querySelector('#detailed-view-header');
             headerBox.innerHTML += `
@@ -100,7 +114,7 @@ function getPollutantDetails(pollutant, value) {
     let detailsText = '';
 
     switch (pollutant.toLowerCase()) {
-        case 'pm2_5':
+        case 'PM2.5':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -119,7 +133,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'pm10':
+        case 'PM10':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -135,7 +149,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'co':
+        case 'CO':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -152,7 +166,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'no2':
+        case 'NO₂':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -168,7 +182,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'so2':
+        case 'SO₂':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -184,7 +198,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'o3':
+        case 'O₃':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -200,7 +214,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'nh3':
+        case 'NH₃':
             detailsText = `
             <ul>
                 <li>Description:<br>
@@ -216,7 +230,7 @@ function getPollutantDetails(pollutant, value) {
             </ul>`;
             break;
 
-        case 'no':
+        case 'NO':
             detailsText = `
             <ul>
                 <li>Description:<br>
