@@ -19,7 +19,6 @@ function createAndAppendFrame(content) {
             const sidebar = document.getElementById('offcanvas');
             sidebar.appendChild(newFrame);
 
-            // Lägger till mätvärden för luftföroreningar i sidebar
             infoBox.innerHTML += `<div id="AQI-box">Today's Air Quality Index: ${content.airQualityIndex}</div>`;
 
             for (let key in content.pollution) {
@@ -32,7 +31,6 @@ function createAndAppendFrame(content) {
 
             infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast is ${content.forecast}</div>`;
 
-            // Header med stad, koordinater och tid
             var headerBox = newFrame.querySelector('#detailed-view-header');
             headerBox.innerHTML += `
             <h1 id="info-box-header-city-country">${content.city}, ${content.country}</h1>
