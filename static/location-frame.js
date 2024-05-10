@@ -37,12 +37,16 @@ function createAndAppendFrame(content, location) {
             const pollutionCompsCont = document.getElementById("pollution-components-container");
             for(let key in content.pollution){
                 pollutionCompsCont.innerHTML += `
-                <div id="pollution-components">
-                    <span id="pollution-key">${getFormattedPollutionName(key)}</span>
-                    <div>
-                        <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">μg/m<sup>3</sup></span>
+                <div id="test-cont">
+                    <div id="pollution-components">
+                        <span id="pollution-key">${getFormattedPollutionName(key)}</span>
                     </div>
-                </div>`
+                    <div id="pollution-measurements">
+                        <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">&nbsp μg/m<sup>3</sup> &nbsp </span>
+                        <button class="details-button" id="${key}" onClick="createAndAppendDetailFrame('${key}', '${content.pollution[key]}', '${content}')">?</button>
+                    </div>
+                </div>
+                `
             }
 
             infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast: ${content.forecast[0]}</div>`;
@@ -53,7 +57,8 @@ function createAndAppendFrame(content, location) {
             <!--<h2 id="info-box-header-location">${content.location}</h2>-->
             <p id="info-box-header-time">Last updated ${content.time}</p>`;
 
-            addButtonsToInfoBox(content);
+            //addButtonsToInfoBox(content);
+            //addInfoButton(content);
 
             const closeButton = newFrame.querySelector('.detailed-view-close-button');
             closeButton.addEventListener('click', function () {
@@ -69,6 +74,9 @@ function createAndAppendFrame(content, location) {
         });
 }
 
+function clickPollutionInfo(key, value, content){
+    console.log(key, value, content)
+}
 
 /* Skapar en ny frame för en enskild typ av luftförorening */
 function createAndAppendDetailFrame(pollutant, value, content) {
@@ -86,20 +94,18 @@ function createAndAppendDetailFrame(pollutant, value, content) {
             const sidebar = document.getElementById('offcanvas');
             sidebar.appendChild(newFrame);
 
+            const formattedPollutantName = getFormattedPollutionName(pollutant);
             // Get specific information based on pollutant type
-            let detailsText = getPollutantDetails(pollutant, value);
+            let detailsText = getPollutantDetails(formattedPollutantName, value);
 
             infoBox.innerHTML += `
             <div class="pollution-details">
-                <h2>${pollutant.toUpperCase()} Details</h2>
-                <p>${pollutant} concentration is ${value} μg/m<sup>3</sup>.</p>
+                <p>${formattedPollutantName} concentration is ${value} μg/m<sup>3</sup>.</p>
                 ${detailsText}
             </div>`;
 
             var headerBox = newFrame.querySelector('#detailed-view-header');
-            headerBox.innerHTML += `
-            <h1 id="info-box-header-city-country">${content.city}, ${content.country}</h1>
-            <p id="info-box-header-time">Last updated ${content.time}</p>`;
+            headerBox.innerHTML += `<h2>Information about ${formattedPollutantName}</h2>`;
 
             const closeButton = newFrame.querySelector('.detailed-view-close-button');
             closeButton.addEventListener('click', function () {
@@ -261,24 +267,6 @@ function getPollutantDetails(pollutant, value) {
 
     return detailsText;
 }
-
-/* Adds buttons next to pollution components */
-function addButtonsToInfoBox(content) {
-    const pollutionComponents = document.querySelectorAll('#infoBox div[id="pollution-components"]');
-    pollutionComponents.forEach(component => {
-        if (!component.querySelector('.details-button')) {
-            const button = document.createElement('button');
-            button.textContent = 'Learn more';
-            button.className = 'details-button';
-            const pollutant = component.querySelector('#pollution-key').textContent;
-            const value = component.querySelector('#pollution-value').textContent.split(' ')[0];
-            button.onclick = () => createAndAppendDetailFrame(pollutant, value, content);
-            component.appendChild(button);
-        }
-    });
-
-}
-
 
 /* Stänger tidigare frame inför skapandet av nästa frame, om Compare Mode inte är aktiverat */
 function prepareNextFrame(compareMode) {

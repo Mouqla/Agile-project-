@@ -48,10 +48,15 @@
 #pollution-components{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     margin: 0px 5px 0px 5px;
     padding: 0px 5px 0px 5px;
+
   }
+
+#pollution-components-left{
+  display: flex;
+  flex-direction: row;
+}
 
 /* Give every other line of pollution values a grey background */
 #pollution-components-container > div:nth-child(2){
@@ -126,4 +131,35 @@
 
 #pollution-unit {
   color: #616161;
+}
+
+.details-button{
+  display: flex;
+  background-color: white;
+  border-radius: 30px;
+  border: .5px solid #c1c1c1;
+  font-size: 10px;
+  box-shadow: none;
+  width: 16px;
+  height: 16px;
+  opacity: 70%;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+}
+
+.details-button:hover{
+  border: 1px solid #a1a1a1;
+  background-color: #B3E5FC;
+}
+
+#test-cont{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#pollution-measurements{
+  display: flex;
+  flex-direction: row;
 }
