@@ -68,14 +68,6 @@ function prepareNextFrame(compareMode) {
     }
 }
 
-/*
-function closeFrame(frameId) {
-    const frame = document.getElementById(frameId);
-    if (frame) {
-        frame.remove();
-    }
-}*/
-
 function closeFrame(frameId) {
     const frame = document.getElementById(frameId);
     if (frame) {
