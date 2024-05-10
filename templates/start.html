@@ -33,29 +33,34 @@
                     <span class="checkbox"></span>
                     <span class="option-text">All</span>
                 </li>
-                <li class="option" value="0.25">
+                <li class="option" value="1">
                     <span class="checkbox"></span>
                     <i class="bx bxs-happy"></i>
                     <span class="option-text">Good</span>
                 </li>
-                <li class="option" value="0.4">
+                <li class="option" value="2">
                     <i class="bx bxs-smile"></i>
                     <span class="option-text">Fair</span>
                     <span class="checkbox"></span>
                 </li>
-                <li class="option" value="0.55">
+                <li class="option" value="3">
                     <i class="bx bxs-meh"></i>
                     <span class="option-text">Moderate</span>
                     <span class="checkbox"></span>
                 </li>
-                <li class="option" value="0.7">
+                <li class="option" value="4">
                     <i class="bx bxs-sad"></i>
                     <span class="option-text">Poor</span>
                     <span class="checkbox"></span>
                 </li>
-                <li class="option" value="0.85">
+                <li class="option" value="5">
                     <i class="bx bxs-dizzy"></i>
                     <span class="option-text">Very Poor</span>
+                    <span class="checkbox"></span>
+                </li>
+                <li class="option" value="6">
+                    <i class="bx bxs-skull"></i>
+                    <span class="option-text">Hazardous</span>
                     <span class="checkbox"></span>
                 </li>
             </ul>
@@ -64,9 +69,9 @@
         <div class="filter-area">
             <div class="filter-options" id="filter-options">
                 <button class="filter-option" onclick="removeHeatMap()">none</button>
-                <button class="filter-option" onclick="addHeatMap('pm25')">pm25</button>
-                <button class="filter-option" onclick="addHeatMap('pm10')">pm10</button>
-                <button class="filter-option" onclick="addHeatMap('no2')">no2</button>
+                <button class="filter-option" onclick="addHeatMap('pm25', 0)">pm25</button>
+                <button class="filter-option" onclick="addHeatMap('pm10', 0)">pm10</button>
+                <button class="filter-option" onclick="addHeatMap('no2', 0)">no2</button>
             </div> 
             <button class="filter-button" onclick="triggerFilterList()">Filters</button>
         </div>
