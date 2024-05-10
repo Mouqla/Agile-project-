@@ -17,11 +17,12 @@
   z-index: 2;
 }
 
-.logo-search-container{
+.logo-search-compare-container{
   display: flex;
   flex-direction: row;
   justify-content: left;
 }
+
 
 #header-message{
   background-color: transparent;
