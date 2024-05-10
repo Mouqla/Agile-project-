@@ -3,26 +3,14 @@
 
 ////// User Interaction: Click on map
 async function onMapClick(e) {
-    openNav();
+    openNav(); 
     const lat = e.latlng["lat"];
     const long = e.latlng["lng"];
     const radius = 5000; //if using OpenAQ
 
-    //fetch air pollution
-    let apiResult = await getPollutionOpenWeather(lat,long);
-    //fetch city name
-    let cityName = await reverseGeocode(lat,long);
-    let stateCountry = await reverseGeocodeStateCountry(lat,long);
-
-    let forecast = await getForecast24hours(lat, long);
-    forecast = getQualitativeValue(forecast.main.aqi);
-
     try {
-        //create an object which holds all the location information
-        const locationData = new LocationData(apiResult, lat, long, cityName, stateCountry, forecast);
-        // Lägger resultatet i en ny "frame" i sidebar
-        prepareNextFrame(compareMode);
-        createAndAppendFrame(locationData) /* Lägger resultatet i en ny "frame" i sidebar*/
+
+        new Location(lat, long, compareMode);
 
     } catch (error) {
         console.log(error);
