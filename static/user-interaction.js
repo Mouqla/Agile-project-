@@ -73,3 +73,4 @@ function changeGraphMode(e){
         drawForecastGraph(coords.lat, coords.lng);
     }
 }
+
