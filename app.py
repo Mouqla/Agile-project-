@@ -1,9 +1,15 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask import render_template
+from apscheduler.schedulers.background import BackgroundScheduler
 import requests
+import json
+import os
+import atexit
 
 app = Flask("Air Quality Map")
 app.debug = True
+heat_data_path = './static/data/data.json'
+scheduler = BackgroundScheduler()
 
 @app.route("/")
 def main():
@@ -84,14 +90,35 @@ def get_location_multi():
     res = requests.get(url_string, headers={"X-API-Key": "126480978d9a03b6333e2560bef1313d"})
     return res.json()
 
-@app.route("/api/get_points")
+@app.route("/api/return_points")
+def return_points():
+    try:
+        with open(heat_data_path, 'r') as json_file:
+            data = json.load(json_file)
+        return jsonify(data)
+    except(FileNotFoundError, json.JSONDecodeError):
+        return jsonify({'error': 'Data file not found or corrupted'})
+
 def get_points():
-    page = request.args.get('page')
+    all_data = []
+    
+    for i in range(1, 18):
+        if i == 17:
+            continue
 
-    url_string = f"https://api.openaq.org/v2/latest?limit=1000&page={page}&sort=desc&order_by=distance&dump_raw=false"
+        url_string = f"https://api.openaq.org/v2/latest?limit=1000&page={i}&sort=desc&order_by=distance&dump_raw=false"
+        res = requests.get(url_string, headers={"X-API-Key": "e7293123084782b1bdf106b40b2d7ab678beca16d2667568b649d72d86c9a053"})
+        new_data = res.json()
+        all_data.append(new_data)
 
-    res = requests.get(url_string, headers={"X-API-Key": "e7293123084782b1bdf106b40b2d7ab678beca16d2667568b649d72d86c9a053"})
-    return res.json()
+    if os.path.exists(heat_data_path):
+        os.remove(heat_data_path)
+    else:
+        print('file does not exists!')
+
+    with open(heat_data_path, 'w') as json_file:
+        json.dump(all_data, json_file, indent=4)
+        print('Data.json created.')
 
 @app.route('/info-frame.html')
 def info_frame():
@@ -100,6 +127,11 @@ def info_frame():
 @app.route('/forecast-history.html')
 def forecast_history():
     return render_template('forecast-history.html')
+
+get_points()
+scheduler.add_job(func=get_points, trigger="interval", hours=1)
+scheduler.start()
+atexit.register(lambda: (print("Shutting down scheduler..."), scheduler.shutdown(wait=False)))
 
 if __name__ == "__main__":
     app.run()

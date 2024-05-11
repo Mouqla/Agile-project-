@@ -12,18 +12,15 @@ const threshold_so2 = [0, 35, 75, 185, 304, 604, 804];
 const threshold_co = [0, 4.4, 9.4, 12.4, 15.4, 30.4, 40.4];
 
 async function fetchAirQualityData() {
-    const dataSet = [];
-    for (let i = 1; i < 19; i++) {
-        if (i == 17) {
-            continue;
-        } else {
-            const url = `/api/get_points?page=${i}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            dataSet.push(...data.results);
-        }
+    try{
+        const url = '/api/return_points';
+        const response = await fetch(url);
+        const data = await response.json();
+        return data
+    }catch (error) {
+        console.error('Failed to fetch air quality data', error);
+        return [];
     }
-    return dataSet;
 }
 
 async function addHeatMap(type, threshold, layer=false) {
