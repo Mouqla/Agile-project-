@@ -25,6 +25,7 @@ async function fetchAirQualityData() {
 
 async function addHeatMap(type, threshold, layer=false) {
     resetButtons();
+    console.log(type)
 
     setActiveButtonColor(type);
 
@@ -34,11 +35,10 @@ async function addHeatMap(type, threshold, layer=false) {
     const heatPoints =[];
 
     data.forEach(item => {
-        
         if (item.coordinates && item.measurements) {
             for (const measurement of item.measurements) {
                 if (measurement.parameter == type) {
-                    if (measurement.value <= threshold) {
+                    if (measurement.value <= threshold || threshold == undefined) {
                         heatPoints.push([
                             item.coordinates.latitude,
                             item.coordinates.longitude,

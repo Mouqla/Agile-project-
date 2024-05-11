@@ -102,14 +102,17 @@ def return_points():
 def get_points():
     all_data = []
     
-    for i in range(1, 18):
+    for i in range(1, 19):
         if i == 17:
             continue
 
         url_string = f"https://api.openaq.org/v2/latest?limit=1000&page={i}&sort=desc&order_by=distance&dump_raw=false"
         res = requests.get(url_string, headers={"X-API-Key": "e7293123084782b1bdf106b40b2d7ab678beca16d2667568b649d72d86c9a053"})
         new_data = res.json()
-        all_data.append(new_data)
+        if 'results' in new_data:
+                all_data.extend(new_data['results'])
+        else:
+            print("No results found on page", i)
 
     if os.path.exists(heat_data_path):
         os.remove(heat_data_path)
