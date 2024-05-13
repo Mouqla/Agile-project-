@@ -216,12 +216,14 @@ function openForecastHistoryWindow(){
         <form>
         <fieldset>
         <legend></legend>
-        <div>
-        <input type="radio" id="history" name="graph-mode" value="history" onChange="changeGraphMode(event)" />
-        <label for="history">History</label>
-        
-        <input type="radio" id="forecast" name="graph-mode" value="forecast" onChange="changeGraphMode(event)" checked/>
-        <label for="forecast">Forecast</label>
+        <div id="input-forecast-history-container">
+            <input type="radio" id="forecast" name="graph-mode" value="forecast" onChange="changeGraphMode(event)" checked/>
+            <label for="forecast">Forecast</label>
+            
+            <input type="radio" id="history" name="graph-mode" value="history" onChange="changeGraphMode(event)" />
+            <label for="history">History</label>
+            <div id= "history-time-radio-buttons"><!--Filled w alternatives when History button clicked--></div>
+         
         </div>
         </fieldset>
         </form>

@@ -53,12 +53,60 @@ function changeGraphMode(e){
     coords = map.getCenter();
     let graphContainer = document.querySelector('.js-plotly-plot');
     if(graphModeValue == 'history'){
+        historyTimeButtonsContainer = document.getElementById('history-time-radio-buttons');
+        historyTimeButtonsContainer.innerHTML = `
+        <div id="history-time-radio-buttons">
+            <hr id="line-break-forecast-history" />
+            <input type="radio" id="history-time-begin" name="history-time-begin" value="1week" onChange="changeHistoryTimeSpan(event)" checked/>
+            <label for="history">1 Week</label>
+            <input type="radio" id="history-time-begin" name="history-time-begin" value="1month" onChange="changeHistoryTimeSpan(event)" />
+            <label for="history">1 Month</label>
+            <input type="radio" id="history-time-begin" name="history-time-begin" value="3months" onChange="changeHistoryTimeSpan(event)" />
+            <label for="history">3 Months</label>
+            <input type="radio" id="history-time-begin" name="history-time-begin" value="6months" onChange="changeHistoryTimeSpan(event)" />
+            <label for="history">6 Months</label>
+            <input type="radio" id="history-time-begin" name="history-time-begin" value="12months" onChange="changeHistoryTimeSpan(event)" />
+            <label for="history">1 Year</label>
+        </div>
+        `;
         graphContainer.innerHTML = '';
         drawHistoryGraph(coords.lat, coords.lng, getDate1WeekAgo(), getNow());
     }
     else{
+        historyTimeButtonsContainer = document.getElementById('history-time-radio-buttons');
+        historyTimeButtonsContainer.innerHTML = '';
         graphContainer.innerHTML = '';
         drawForecastGraph(coords.lat, coords.lng);
     }
 }
 
+function changeHistoryTimeSpan(e){
+    //triggered when radio buttons for history time span are changed
+    let historyBeginValue = e.target.value;
+    coords = map.getCenter();
+    let graphContainer = document.querySelector('.js-plotly-plot');
+    switch(historyBeginValue){
+        case '12months':
+            graphContainer.innerHTML = '';
+            drawHistoryGraph(coords.lat, coords.lng, getDate1YearAgo(), getNow());
+            break;
+        case '6months':
+            graphContainer.innerHTML = '';
+            drawHistoryGraph(coords.lat, coords.lng, getDateXMonthsAgo(6), getNow());
+            break;
+        case '3months':
+            graphContainer.innerHTML = '';
+            drawHistoryGraph(coords.lat, coords.lng, getDateXMonthsAgo(3), getNow());
+            break;
+        case '1month':
+            graphContainer.innerHTML = '';
+            drawHistoryGraph(coords.lat, coords.lng, getDateXMonthsAgo(1), getNow());
+            break;
+        case '1week':
+            graphContainer.innerHTML = '';
+            drawHistoryGraph(coords.lat, coords.lng, getDate1WeekAgo(), getNow());
+            break;
+    
+    }
+
+}
