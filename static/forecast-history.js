@@ -62,6 +62,8 @@ function getUnixDateTime(date){
 }
 
 async function drawHistoryGraph(lat, lon, startTime, endTime){
+    let graphContainer = document.querySelector('.js-plotly-plot');
+    graphContainer.innerHTML = `<div id="spinner"></div>`;
     let historyArray = await getHistory(lat, lon, startTime, endTime);
     var { traceCO, traceNH3, traceNO, traceNO2, traceO3, tracePM10, tracePM2_5, traceSO2 } = getTimeAndPollutionForGraph(historyArray);
   
@@ -72,7 +74,7 @@ async function drawHistoryGraph(lat, lon, startTime, endTime){
         yaxis: {
             title: 'µg/m3',}
     };
-
+    graphContainer.innerHTML = ``;
     Plotly.newPlot('graph-container', data, layout);
 }
 

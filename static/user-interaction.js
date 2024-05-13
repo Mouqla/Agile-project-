@@ -69,7 +69,6 @@ function changeGraphMode(e){
             <label for="history">1 Year</label>
         </div>
         `;
-        graphContainer.innerHTML = '';
         drawHistoryGraph(coords.lat, coords.lng, getDate1WeekAgo(), getNow());
     }
     else{

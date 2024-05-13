@@ -74,3 +74,25 @@
   label{
     font-size: 0.8rem;
   }
+
+  #spinner{
+    width: 20px;
+    height: 20px;
+    border: 5px solid;
+    border-color: #81D4FA transparent #81D4FA transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+    position: absolute;
+    top: 200px;
+    left: 325px;
+
+  }
+
+  @keyframes spin-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+  }
