@@ -79,7 +79,7 @@
     width: 20px;
     height: 20px;
     border: 5px solid;
-    border-color: #81D4FA transparent #81D4FA transparent;
+    border-color: transparent #E1F5FE #81D4FA #29B6F6 ;
     border-radius: 50%;
     animation: spin-anim 1.2s linear infinite;
     position: absolute;
