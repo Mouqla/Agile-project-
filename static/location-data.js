@@ -145,4 +145,4 @@ function getFormattedPollutionName(input){
     }
 }
 
-module.exports = {getFormattedPollutionName, getQualitativeValue};
+module.exports = {getFormattedPollutionName, getQualitativeValue, formatTimeFromUnix, geocode};
