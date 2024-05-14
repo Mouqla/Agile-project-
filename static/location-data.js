@@ -145,4 +145,14 @@ function getFormattedPollutionName(input){
     }
 }
 
-module.exports = {getFormattedPollutionName, getQualitativeValue, formatTimeFromUnix, geocode};
+/*
+async function test(){
+    const object = await geocodeMulti('Paris');
+    console.log(object);
+}
+
+test();
+*/
+
+
+module.exports = {getFormattedPollutionName, getQualitativeValue, formatTimeFromUnix, geocode, geocodeMulti, reverseGeocode, getPollutionOpenWeather};
