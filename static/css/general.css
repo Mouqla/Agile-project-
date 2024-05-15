@@ -15,6 +15,7 @@
   margin: 0px;
   padding: 0px;
   z-index: 2;
+  border-bottom: solid;
 }
 
 .logo-search-compare-container{
@@ -23,6 +24,11 @@
   justify-content: left;
 }
 
+.heatmap-quality-forecast-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
 
 #header-message{
   background-color: transparent;
