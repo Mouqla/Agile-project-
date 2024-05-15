@@ -9,4 +9,4 @@ function addButtonsToInfoBox() {
             detail.appendChild(button);
         }
     });
-}
+} module.exports= {addButtonsToInfoBox};

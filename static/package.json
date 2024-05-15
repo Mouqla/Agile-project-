@@ -1,15 +1,5 @@
 {
-  "name": "agile-project-",
-  "version": "1.0.0",
-  "description": "",
-  "main": "location-data.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+ 
 }
+  
+

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.57% </span>
+                <span class="strong">32.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/70</span>
+                <span class='fraction'>23/70</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.64% </span>
+                <span class="strong">23.52% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/17</span>
+                <span class='fraction'>4/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.18% </span>
+                <span class="strong">36.36% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/11</span>
+                <span class='fraction'>4/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.57% </span>
+                <span class="strong">32.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/70</span>
+                <span class='fraction'>23/70</span>
             </div>
         
             
@@ -249,30 +249,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -395,31 +395,31 @@ async function <span class="fstat-no" title="function not covered" >getPollution
 <span class="cstat-no" title="statement not covered" >    return Object.values(retJson)[1];</span>
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >formatTimeFromUnix(</span>unixTimeStamp) {
-    var date = <span class="cstat-no" title="statement not covered" >new Date(unixTimeStamp * 1000);</span>
-    var year = <span class="cstat-no" title="statement not covered" >date.getFullYear();</span>
-    var month = <span class="cstat-no" title="statement not covered" >date.getMonth()+1;</span>
-    var day = <span class="cstat-no" title="statement not covered" >date.getDate();</span>
-    var hours = <span class="cstat-no" title="statement not covered" >date.getHours();</span>
-    var minutes = <span class="cstat-no" title="statement not covered" >date.getMinutes();</span>
-    var seconds = <span class="cstat-no" title="statement not covered" >date.getSeconds();</span>
+function formatTimeFromUnix(unixTimeStamp) {
+    var date = new Date(unixTimeStamp * 1000);
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
 &nbsp;
-    function <span class="fstat-no" title="function not covered" >prependZero(</span>parameter){
-<span class="cstat-no" title="statement not covered" >        if(parameter &lt; 10){</span>
-<span class="cstat-no" title="statement not covered" >            parameter = '0' + parameter;</span>
+    function prependZero(parameter){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(parameter &lt; 10){
+            parameter = '0' + parameter;
         }
-<span class="cstat-no" title="statement not covered" >        return parameter;</span>
+        return parameter;
     }
 &nbsp;
     //Add a zero before number if less than 10
-<span class="cstat-no" title="statement not covered" >    month = prependZero(month);</span>
-<span class="cstat-no" title="statement not covered" >    day = prependZero(day);</span>
-<span class="cstat-no" title="statement not covered" >    hours = prependZero(hours);</span>
-<span class="cstat-no" title="statement not covered" >    minutes = prependZero(minutes);</span>
-<span class="cstat-no" title="statement not covered" >    seconds = prependZero(seconds);</span>
+    month = prependZero(month);
+    day = prependZero(day);
+    hours = prependZero(hours);
+    minutes = prependZero(minutes);
+    seconds = prependZero(seconds);
 &nbsp;
-    var formattedTime = <span class="cstat-no" title="statement not covered" >`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;</span>
-<span class="cstat-no" title="statement not covered" >    return formattedTime;</span>
+    var formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return formattedTime;
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >geocode(</span>q){
@@ -504,14 +504,14 @@ function getFormattedPollutionName(input){
     }
 }
 &nbsp;
-module.exports = {getFormattedPollutionName, getQualitativeValue};</pre></td></tr></table></pre>
+module.exports = {getFormattedPollutionName, getQualitativeValue, formatTimeFromUnix, geocode};</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-05-14T14:51:55.131Z
+                at 2024-05-14T17:00:15.305Z
             </div>
         <script src="prettify.js"></script>
         <script>

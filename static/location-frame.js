@@ -3,76 +3,86 @@
 let frameList = [];
 let compareMode = false;
 const frameLocationMap = {};
-
+require("./location-data")
 
 /* Skapar en ny "frame" (info-frame.html) i html, lägger info i infoBox rutan och appendar till sidebar*/
 function createAndAppendFrame(content, location) {
-    fetch('info-frame.html')
-        .then(response => response.text())
-        .then(html => {
-            const newFrame = document.createElement('div');
-            newFrame.classList.add('frame');
-            newFrame.id = 'frame-' + Date.now();
+    return new Promise((resolve, reject) => {
+        fetch('info-frame.html')
+            .then(response => response.text())
+            .then(html => {
+                const newFrame = document.createElement('div');
+                newFrame.classList.add('frame');
+                newFrame.id = 'frame-' + Date.now();
 
-            newFrame.innerHTML = html;
+                newFrame.innerHTML = html;
 
-            const infoBox = newFrame.querySelector('#infoBox');
+                const infoBox = newFrame.querySelector('#infoBox');
 
-            const sidebar = document.getElementById('offcanvas');
+                const sidebar = document.getElementById('offcanvas');
 
-            // place new frame at the top of the page
-            const oldChild = sidebar.firstElementChild;
-            sidebar.insertBefore(newFrame, oldChild);
+                // place new frame at the top of the page
+                const oldChild = sidebar.firstElementChild;
+                sidebar.insertBefore(newFrame, oldChild);
 
-            //Lägger till mätvärden för luftföroreningar i sidebar 
-            infoBox.innerHTML += `
-            <div id="AQI-box"> 
-                <div id="AQI-circle"></div>
-                <span id="AQI-text">&nbsp Today's Air Quality Index: ${content.airQualityIndex[0]}</span>
-            </div>`;
+                //Lägger till mätvärden för luftföroreningar i sidebar 
+                infoBox.innerHTML += `
+                    <div id="AQI-box"> 
+                        <div id="AQI-circle"></div>
+                        <span id="AQI-text">&nbsp Today's Air Quality Index: ${content.airQualityIndex[0]}</span>
+                    </div>`;
 
-            document.getElementById("AQI-circle").style.background = content.airQualityIndex[1];
+                document.getElementById("AQI-circle").style.background = content.airQualityIndex[1];
 
-            infoBox.innerHTML += `<div id="pollution-components-container"></div>`;
-            const pollutionCompsCont = document.getElementById("pollution-components-container");
-            for(let key in content.pollution){
-                pollutionCompsCont.innerHTML += `
-                <div id="test-cont">
-                    <div id="pollution-components">
-                        <span id="pollution-key">${getFormattedPollutionName(key)}</span>
-                    </div>
-                    <div id="pollution-measurements">
-                        <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">&nbsp μg/m<sup>3</sup> &nbsp </span>
-                        <button class="details-button" id="${key}" onClick="createAndAppendDetailFrame('${key}', '${content.pollution[key]}', '${content}')">?</button>
-                    </div>
-                </div>
-                `
-            }
+                infoBox.innerHTML += `<div id="pollution-components-container"></div>`;
+                const pollutionCompsCont = document.getElementById("pollution-components-container");
+                for(let key in content.pollution){
+                    pollutionCompsCont.innerHTML += `
+                        <div id="test-cont">
+                            <div id="pollution-components">
+                                <span id="pollution-key">${getFormattedPollutionName(key)}</span>
+                            </div>
+                            <div id="pollution-measurements">
+                                <span id="pollution-value">${content.pollution[key]}</span> <span id="pollution-unit">&nbsp μg/m<sup>3</sup> &nbsp </span>
+                                <button class="details-button" id="${key}" onClick="createAndAppendDetailFrame('${key}', '${content.pollution[key]}', '${content}')">?</button>
+                            </div>
+                        </div>
+                    `
+                }
 
-            infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast: ${content.forecast[0]}</div>`;
+                infoBox.innerHTML += `<div id="forecast">Tomorrow's Air Quality Index Forecast: ${content.forecast[0]}</div>`;
 
-            var headerBox = newFrame.querySelector('#detailed-view-header');
-            headerBox.innerHTML += `
-            <h1 id="info-box-header-city-country">${content.city}, ${content.country}</h1>
-            <!--<h2 id="info-box-header-location">${content.location}</h2>-->
-            <p id="info-box-header-time">Last updated ${content.time}</p>`;
+                var headerBox = newFrame.querySelector('#detailed-view-header');
+                headerBox.innerHTML += `
+                    <h1 id="info-box-header-city-country">${content.city}, ${content.country}</h1>
+                    <!--<h2 id="info-box-header-location">${content.location}</h2>-->
+                    <p id="info-box-header-time">Last updated ${content.time}</p>`;
 
-            //addButtonsToInfoBox(content);
-            //addInfoButton(content);
+                //addButtonsToInfoBox(content);
+                //addInfoButton(content);
 
-            const closeButton = newFrame.querySelector('.detailed-view-close-button');
-            closeButton.addEventListener('click', function () {
-                closeFrame(newFrame.id);
+                const closeButton = newFrame.querySelector('.detailed-view-close-button');
+                closeButton.addEventListener('click', function () {
+                    closeFrame(newFrame.id);
+                });
+
+                const compareButton = document.getElementById("compareSwitch");
+                compareButton.addEventListener("change", toggleCompare);
+
+                frameList.push(newFrame.id)
+
+                frameLocationMap[newFrame.id] = location;
+
+                // Once all operations are complete, resolve the Promise with the new frame
+                resolve(newFrame);
+            })
+            .catch(error => {
+                // If there's an error during the fetch or subsequent operations, reject the Promise
+                reject(error);
             });
-
-            const compareButton = document.getElementById("compareSwitch");
-            compareButton.addEventListener("change", toggleCompare);
-            
-            frameList.push(newFrame.id)
-
-            frameLocationMap[newFrame.id] = location;
-        });
+    });
 }
+
 
 function clickPollutionInfo(key, value, content){
     console.log(key, value, content)
@@ -313,3 +323,6 @@ function openNav() {
     document.getElementById("offcanvas").style.right = "10px";
     document.getElementById("main").style.marginRight = "-200px";
 }
+
+module.exports = {  createAndAppendFrame, clickPollutionInfo, createAndAppendDetailFrame,getPollutantDetails,prepareNextFrame,
+    closeFrame,  toggleCompare, openNav };
