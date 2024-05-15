@@ -1,10 +1,8 @@
 // Handles information frame of pop-up location
-
+const { getFormattedPollutionName } = require('./location-data');
 let frameList = [];
 let compareMode = false;
 const frameLocationMap = {};
-require("./location-data")
-
 /* Skapar en ny "frame" (info-frame.html) i html, lägger info i infoBox rutan och appendar till sidebar*/
 function createAndAppendFrame(content, location) {
     return new Promise((resolve, reject) => {

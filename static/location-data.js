@@ -144,7 +144,6 @@ function getFormattedPollutionName(input){
             return null;
     }
 }
-
 /*
 async function test(){
     const object = await geocodeMulti('Paris');
