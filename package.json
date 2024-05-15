@@ -10,7 +10,7 @@
     "author": "",
     "license": "ISC",
     "scripts": {
-        "test": "jest"
+        "test": "jest --coverage"
     },
     "devDependencies": {
         "jest": "^29.7.0",

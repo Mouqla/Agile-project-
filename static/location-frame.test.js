@@ -1,3 +1,6 @@
+test("I am so tired", () =>{
+  console.log("End my suffering")
+})
 /*
 const { createAndAppendFrame/*, clickPollutionInfo, createAndAppendDetailFrame,getPollutantDetails,prepareNextFrame,
 closeFrame,  toggleCompare, openNav } = require('./location-frame');
