@@ -1,6 +1,7 @@
 async function getForecast24hours(lat,lon) {
     const response = await fetch(`/api/get_forecast?lat=${lat}&lon=${lon}`);
     const retJson = await response.json();
+    console.log(Object.values(retJson)[1][23]);
     return Object.values(retJson)[1][23]; // forecast in exactly 24 hours, returns a single object
 }
 
@@ -235,3 +236,7 @@ function closeforeCastHistoryWindow() {
     forecastWindow.removeChild(chooseGraphMode);
     countForecastHistoryButton = 0;
 }
+
+module.exports = {
+    getForecast24hours, 
+};

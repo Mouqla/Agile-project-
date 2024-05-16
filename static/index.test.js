@@ -1,5 +1,9 @@
+/** @jest-environment jsdom */
+
 const { geocodeMulti } = require('./location-data.js');
 const { geocode } = require('./__mocks__/geocode.js');
+
+const locationDataModule = require('./location-data');
 
 ({getFormattedPollutionName, 
   getQualitativeValue,
@@ -72,5 +76,20 @@ test(`mock implementation geocodeMulti`, () => {
 
   expect(geocodeMulti('Paris')).toBe(cityMap);
   expect(geocodeMulti('Barcelona')).toBe(cityMap);
+})
+
+describe('geocode', () => {
+  let cityQuery = 'Gothenburg';
+  let locationResult = [57.7072326, 11.9670171];
+
+  test('Geocode: Should output an array with two coordinates', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        text: () => Promise.resolve(locationResult),
+      })
+    )
+
+    await locationDataModule.geocode(cityQuery);
+  })
 })
 

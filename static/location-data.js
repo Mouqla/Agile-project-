@@ -20,7 +20,7 @@ class LocationData {
         this.airQualityIndex = getQualitativeValue(apiResult[0].main.aqi);
 
         // Forecast
-        this.forecast = forecast;
+        this.forecast = forecast; 
     }
 }
 
@@ -144,14 +144,15 @@ function getFormattedPollutionName(input){
             return null;
     }
 }
-/*
-async function test(){
-    const object = await geocodeMulti('Paris');
-    console.log(object);
-}
 
-test();
-*/
-
-
-module.exports = {getFormattedPollutionName, getQualitativeValue, formatTimeFromUnix, geocode, geocodeMulti, reverseGeocode, getPollutionOpenWeather};
+module.exports = {
+    getFormattedPollutionName, 
+    getQualitativeValue, 
+    formatTimeFromUnix, 
+    geocode, 
+    geocodeMulti, 
+    reverseGeocode,
+    reverseGeocodeStateCountry,
+    getPollutionOpenWeather,
+    LocationData
+};
