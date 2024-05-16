@@ -20,7 +20,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color:  var(--accent);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -32,7 +32,7 @@
     width: 16px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--background);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -76,4 +76,5 @@
 
   #switch-label {
     font-size: 16px;
+    color: var(--text);
   }

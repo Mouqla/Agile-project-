@@ -92,21 +92,21 @@ function removeHeatMapAndResetButtons() {
 function setActiveButtonColor(type) {
     switch (type) {
         case 'pm25':
-            document.getElementById('button-pm25').style.backgroundColor = '#B3E5FC';
+            document.getElementById('button-pm25').style.backgroundColor = 'var(--secondary)';
             return;
         case 'pm10':
-            document.getElementById('button-pm10').style.backgroundColor = '#B3E5FC';
+            document.getElementById('button-pm10').style.backgroundColor = 'var(--secondary)';
             return;
         case 'no2':
-            document.getElementById('button-no2').style.backgroundColor = '#B3E5FC';
+            document.getElementById('button-no2').style.backgroundColor = 'var(--secondary)';
             return;
         }
     }
 
 function resetButtons() {
-    document.getElementById('button-pm25').style.backgroundColor = '#ffffff';
-    document.getElementById('button-pm10').style.backgroundColor = '#ffffff';
-    document.getElementById('button-no2').style.backgroundColor = '#ffffff';
+    document.getElementById('button-pm25').style.backgroundColor = 'var(--background)';
+    document.getElementById('button-pm10').style.backgroundColor = 'var(--background)';
+    document.getElementById('button-no2').style.backgroundColor = 'var(--background)';
 }
 
 function displayDisableHeatmapButton(){
