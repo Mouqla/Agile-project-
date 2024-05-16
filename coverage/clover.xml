@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1715816410311" clover="3.2.0">
-  <project timestamp="1715816410311" name="All files">
-    <metrics statements="79" coveredstatements="10" conditionals="19" coveredconditionals="1" methods="14" coveredmethods="3" elements="112" coveredelements="14" complexity="0" loc="79" ncloc="79" packages="1" files="2" classes="2"/>
+<coverage generated="1715854936438" clover="3.2.0">
+  <project timestamp="1715854936438" name="All files">
+    <metrics statements="176" coveredstatements="53" conditionals="38" coveredconditionals="10" methods="30" coveredmethods="9" elements="244" coveredelements="72" complexity="0" loc="176" ncloc="176" packages="1" files="3" classes="3"/>
     <file name="location-data.js" path="C:\Users\malin\Chalmers\DAT257\Agile-project-\static\location-data.js">
-      <metrics statements="70" coveredstatements="1" conditionals="17" coveredconditionals="0" methods="11" coveredmethods="0"/>
+      <metrics statements="70" coveredstatements="10" conditionals="17" coveredconditionals="8" methods="11" coveredmethods="1"/>
       <line num="5" count="0" type="stmt"/>
       <line num="6" count="0" type="stmt"/>
       <line num="7" count="0" type="stmt"/>
@@ -63,17 +63,117 @@
       <line num="117" count="0" type="stmt"/>
       <line num="119" count="0" type="stmt"/>
       <line num="121" count="0" type="stmt"/>
-      <line num="126" count="0" type="cond" truecount="0" falsecount="9"/>
-      <line num="128" count="0" type="stmt"/>
-      <line num="130" count="0" type="stmt"/>
-      <line num="132" count="0" type="stmt"/>
-      <line num="134" count="0" type="stmt"/>
-      <line num="136" count="0" type="stmt"/>
-      <line num="138" count="0" type="stmt"/>
-      <line num="140" count="0" type="stmt"/>
-      <line num="142" count="0" type="stmt"/>
+      <line num="126" count="8" type="cond" truecount="8" falsecount="1"/>
+      <line num="128" count="1" type="stmt"/>
+      <line num="130" count="1" type="stmt"/>
+      <line num="132" count="1" type="stmt"/>
+      <line num="134" count="1" type="stmt"/>
+      <line num="136" count="1" type="stmt"/>
+      <line num="138" count="1" type="stmt"/>
+      <line num="140" count="1" type="stmt"/>
+      <line num="142" count="1" type="stmt"/>
       <line num="144" count="0" type="stmt"/>
       <line num="157" count="1" type="stmt"/>
+    </file>
+    <file name="location-frame.js" path="C:\Users\malin\Chalmers\DAT257\Agile-project-\static\location-frame.js">
+      <metrics statements="97" coveredstatements="34" conditionals="19" coveredconditionals="1" methods="16" coveredmethods="5"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="33" count="1" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
+      <line num="37" count="1" type="stmt"/>
+      <line num="38" count="8" type="stmt"/>
+      <line num="51" count="1" type="stmt"/>
+      <line num="53" count="1" type="stmt"/>
+      <line num="54" count="1" type="stmt"/>
+      <line num="62" count="1" type="stmt"/>
+      <line num="63" count="1" type="stmt"/>
+      <line num="64" count="0" type="stmt"/>
+      <line num="67" count="1" type="stmt"/>
+      <line num="68" count="1" type="stmt"/>
+      <line num="70" count="1" type="stmt"/>
+      <line num="72" count="1" type="stmt"/>
+      <line num="75" count="1" type="stmt"/>
+      <line num="79" count="0" type="stmt"/>
+      <line num="86" count="0" type="stmt"/>
+      <line num="91" count="0" type="stmt"/>
+      <line num="92" count="0" type="stmt"/>
+      <line num="94" count="0" type="stmt"/>
+      <line num="95" count="0" type="stmt"/>
+      <line num="96" count="0" type="stmt"/>
+      <line num="98" count="0" type="stmt"/>
+      <line num="100" count="0" type="stmt"/>
+      <line num="102" count="0" type="stmt"/>
+      <line num="103" count="0" type="stmt"/>
+      <line num="105" count="0" type="stmt"/>
+      <line num="107" count="0" type="stmt"/>
+      <line num="109" count="0" type="stmt"/>
+      <line num="115" count="0" type="stmt"/>
+      <line num="116" count="0" type="stmt"/>
+      <line num="118" count="0" type="stmt"/>
+      <line num="119" count="0" type="stmt"/>
+      <line num="120" count="0" type="stmt"/>
+      <line num="123" count="0" type="stmt"/>
+      <line num="124" count="0" type="stmt"/>
+      <line num="126" count="0" type="stmt"/>
+      <line num="132" count="0" type="stmt"/>
+      <line num="134" count="0" type="cond" truecount="0" falsecount="9"/>
+      <line num="136" count="0" type="stmt"/>
+      <line num="152" count="0" type="stmt"/>
+      <line num="155" count="0" type="stmt"/>
+      <line num="168" count="0" type="stmt"/>
+      <line num="171" count="0" type="stmt"/>
+      <line num="185" count="0" type="stmt"/>
+      <line num="188" count="0" type="stmt"/>
+      <line num="201" count="0" type="stmt"/>
+      <line num="204" count="0" type="stmt"/>
+      <line num="217" count="0" type="stmt"/>
+      <line num="220" count="0" type="stmt"/>
+      <line num="233" count="0" type="stmt"/>
+      <line num="236" count="0" type="stmt"/>
+      <line num="249" count="0" type="stmt"/>
+      <line num="252" count="0" type="stmt"/>
+      <line num="265" count="0" type="stmt"/>
+      <line num="269" count="0" type="stmt"/>
+      <line num="273" count="0" type="stmt"/>
+      <line num="276" count="0" type="stmt"/>
+      <line num="281" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="283" count="0" type="stmt"/>
+      <line num="284" count="0" type="stmt"/>
+      <line num="285" count="0" type="stmt"/>
+      <line num="291" count="0" type="stmt"/>
+      <line num="292" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="293" count="0" type="stmt"/>
+      <line num="297" count="0" type="stmt"/>
+      <line num="298" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="299" count="0" type="stmt"/>
+      <line num="300" count="0" type="stmt"/>
+      <line num="304" count="0" type="stmt"/>
+      <line num="305" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="306" count="0" type="stmt"/>
+      <line num="311" count="1" type="stmt"/>
+      <line num="313" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="314" count="0" type="stmt"/>
+      <line num="319" count="0" type="stmt"/>
+      <line num="320" count="0" type="stmt"/>
+      <line num="321" count="0" type="stmt"/>
+      <line num="322" count="0" type="stmt"/>
+      <line num="325" count="1" type="stmt"/>
     </file>
     <file name="pollution-buttons.js" path="C:\Users\malin\Chalmers\DAT257\Agile-project-\static\pollution-buttons.js">
       <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
