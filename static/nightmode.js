@@ -1,7 +1,11 @@
 const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
 const systemSettinglight = window.matchMedia("(prefers-color-scheme: light)");
 
-document.documentElement.setAttribute('data-theme', localStorage.getItem("data-theme"));
+const theme = localStorage.getItem("data-theme");
+if (theme) {
+    document.documentElement.setAttribute('data-theme', theme);  
+}
+
 const currentTheme = document.documentElement.getAttribute('data-theme');
 const themeText = currentTheme === 'dark' ? 'Switch to light' : 'Switch to dark';
 document.getElementById("nightswitch").textContent = themeText;
