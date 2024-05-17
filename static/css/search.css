@@ -18,13 +18,14 @@
   }
 
 #search:hover{ 
-    background-color: var(--secondary);
-}
+  background-color: var(--secondary);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
 
 #search:focus{
   outline: none;
   border: 2px solid #2196F3;
-}
+  }
 
 datalist{
     padding: 30px;

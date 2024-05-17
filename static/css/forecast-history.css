@@ -1,8 +1,7 @@
 .forecast-history-button{
-    margin: 10px 10px 0px 0px;
-    padding: 12px;
+    margin: 29px 10px 20px 0px;
     border-radius: 10px;
-    align-items: stretch;
+    align-items: center;
     background-color: var(--background);
     border: 2px solid var(--accent);
     font-size: medium;
@@ -12,6 +11,9 @@
   .forecast-history-button:hover {
     /* padding: 15px; */
     background-color: var(--secondary);
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
   }
   
   .close-forecast-button-frame{
@@ -24,6 +26,7 @@
   
   .closeForecastButton{
     margin: 5px;
+    cursor: pointer;
   }
 
   #forecast-window{

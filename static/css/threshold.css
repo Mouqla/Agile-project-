@@ -1,20 +1,31 @@
 .select-menu{
     width: 150px;
     margin: 20px auto;
+    border-width: medium;
+    margin-right: 0px;
     color: var(--text);
   }
+
   .select-menu .select-btn{
+    margin: 10px 10px 0px 0px;
     display: flex;
     height: 15px;
+    z-index: 12;
     background: var(--background);
     padding: 10px;
-    font-size: 1rem;
-    font-weight: 400;
-    border-radius: 2px;
+    /* font-size: 1rem;
+    font-weight: 400; */
+    border-radius: 10px;
+    border-width: thin;
     align-items: center;
     cursor: pointer;
     justify-content: space-between;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    background: #eeeeee;
+    border: solid black thin; 
+  }
+  .select-menu .select-btn:hover{
+    background: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   }
   .select-btn i{
     font-size: 25px;
@@ -24,15 +35,16 @@
     transform: rotate(-180deg);
   }
   .select-menu .options{
-    z-index: 2;
+    z-index: 12;
     position: absolute;
     padding: 10px;
     margin-top: 10px;
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--background);
     box-shadow: 0 0 3px rgba(0,0,0,0.1);
     display: none;
   }
+
   .select-menu.active .options{
     display: block;
   }
@@ -41,7 +53,8 @@
     height: 55px;
     cursor: pointer;
     padding: 0 16px;
-    border-radius: 8px;
+    border-radius: 10px;
+    border-width: thin;
     align-items: center;
     background: var(--background);
   }
@@ -56,4 +69,3 @@
     font-size: 18px;
     color: var(--text);
   }
-  
