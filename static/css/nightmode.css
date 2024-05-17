@@ -1,0 +1,15 @@
+.nightButton {
+    background-color: var(--background);
+    border: 2px solid var(--accent);
+    height: 40px;
+    width: 120px;
+    color: var(--text);
+    border-radius: 20px;
+    margin-right: 10px;
+    
+}
+
+.nightButton:hover {
+    background-color: var(--secondary);
+    cursor: pointer;
+}

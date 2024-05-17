@@ -3,14 +3,16 @@
     margin: 20px auto;
     border-width: medium;
     margin-right: 0px;
+    color: var(--text);
   }
+
   .select-menu .select-btn{
     margin: 10px 10px 0px 0px;
     display: flex;
-    height: 18px;
+    height: 15px;
     z-index: 12;
-    background: #fff;
-    padding: 12px;
+    background: var(--background);
+    padding: 10px;
     /* font-size: 1rem;
     font-weight: 400; */
     border-radius: 10px;
@@ -38,7 +40,7 @@
     padding: 10px;
     margin-top: 10px;
     border-radius: 10px;
-    background: #fff;
+    background: var(--background);
     box-shadow: 0 0 3px rgba(0,0,0,0.1);
     display: none;
   }
@@ -54,10 +56,10 @@
     border-radius: 10px;
     border-width: thin;
     align-items: center;
-    background: #fff;
+    background: var(--background);
   }
   .options .option:hover{
-    background: #eeeeee;
+    background: var(--secondary);
   }
   .option i{
     font-size: 25px;
@@ -65,5 +67,5 @@
   }
   .option .option-text{
     font-size: 18px;
-    color: #333;
+    color: var(--text);
   }

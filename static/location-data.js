@@ -127,19 +127,19 @@ function getFormattedPollutionName(input){
         case 'co':
             return 'CO';
         case 'nh3':
-            return 'NHO<sub>3</sub>';
+            return 'NH₃';
         case 'no':
             return 'NO';
         case 'no2':
-            return 'NO<sub>2</sub>';
+            return 'NO₂';
         case 'o3':
-                return 'O<sub>3</sub>';
+                return 'O₃';
         case 'pm10':
                 return 'PM10';
         case 'pm2_5':
             return 'PM2.5';
         case 'so2':
-            return 'SOO<sub>2</sub>';
+            return 'SO₂';
         default:
             return null;
     }

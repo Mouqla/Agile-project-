@@ -12,22 +12,20 @@ const threshold_so2 = [0, 35, 75, 185, 304, 604, 804];
 const threshold_co = [0, 4.4, 9.4, 12.4, 15.4, 30.4, 40.4];
 
 async function fetchAirQualityData() {
-    const dataSet = [];
-    for (let i = 1; i < 19; i++) {
-        if (i == 17) {
-            continue;
-        } else {
-            const url = `/api/get_points?page=${i}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            dataSet.push(...data.results);
-        }
+    try{
+        const url = '/api/return_points';
+        const response = await fetch(url);
+        const data = await response.json();
+        return data
+    }catch (error) {
+        console.error('Failed to fetch air quality data', error);
+        return [];
     }
-    return dataSet;
 }
 
 async function addHeatMap(type, threshold, layer=false) {
     resetButtons();
+    console.log(type)
 
     setActiveButtonColor(type);
 
@@ -37,11 +35,10 @@ async function addHeatMap(type, threshold, layer=false) {
     const heatPoints =[];
 
     data.forEach(item => {
-        
         if (item.coordinates && item.measurements) {
             for (const measurement of item.measurements) {
                 if (measurement.parameter == type) {
-                    if (measurement.value <= threshold) {
+                    if (measurement.value <= threshold || threshold == undefined) {
                         heatPoints.push([
                             item.coordinates.latitude,
                             item.coordinates.longitude,
@@ -95,21 +92,21 @@ function removeHeatMapAndResetButtons() {
 function setActiveButtonColor(type) {
     switch (type) {
         case 'pm25':
-            document.getElementById('button-pm25').style.backgroundColor = '#B3E5FC';
+            document.getElementById('button-pm25').style.backgroundColor = 'var(--secondary)';
             return;
         case 'pm10':
-            document.getElementById('button-pm10').style.backgroundColor = '#B3E5FC';
+            document.getElementById('button-pm10').style.backgroundColor = 'var(--secondary)';
             return;
         case 'no2':
-            document.getElementById('button-no2').style.backgroundColor = '#B3E5FC';
+            document.getElementById('button-no2').style.backgroundColor = 'var(--secondary)';
             return;
         }
     }
 
 function resetButtons() {
-    document.getElementById('button-pm25').style.backgroundColor = '#ffffff';
-    document.getElementById('button-pm10').style.backgroundColor = '#ffffff';
-    document.getElementById('button-no2').style.backgroundColor = '#ffffff';
+    document.getElementById('button-pm25').style.backgroundColor = 'var(--background)';
+    document.getElementById('button-pm10').style.backgroundColor = 'var(--background)';
+    document.getElementById('button-no2').style.backgroundColor = 'var(--background)';
 }
 
 function displayDisableHeatmapButton(){
