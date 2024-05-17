@@ -60,3 +60,7 @@ function onLocationButtonClick() {
 
 // Add an event listener to the button to trigger the above function on click
 document.querySelector('.user-location-button').addEventListener('click', onLocationButtonClick);
+
+module.exports = {
+    onLocationButtonClick
+};

@@ -88,6 +88,7 @@ function clickPollutionInfo(key, value, content){
 
 /* Skapar en ny frame för en enskild typ av luftförorening */
 function createAndAppendDetailFrame(pollutant, value, content) {
+    return new Promise((resolve, reject) => {
     fetch('info-frame.html')
         .then(response => response.text())
         .then(html => {
@@ -124,7 +125,12 @@ function createAndAppendDetailFrame(pollutant, value, content) {
             compareButton.addEventListener("change", toggleCompare);
 
             frameList.push(newFrame.id);
+        })
+        .catch(error => {
+            // If there's an error during the fetch or subsequent operations, reject the Promise
+            reject(error);
         });
+    });
 }
 
 /* Get pollutant details based on the type */
@@ -322,5 +328,5 @@ function openNav() {
     document.getElementById("main").style.marginRight = "-200px";
 }
 
-module.exports = {  createAndAppendFrame, clickPollutionInfo, createAndAppendDetailFrame,getPollutantDetails,prepareNextFrame,
-    closeFrame,  toggleCompare, openNav };
+module.exports = { createAndAppendFrame, clickPollutionInfo, createAndAppendDetailFrame,getPollutantDetails,prepareNextFrame,
+    closeFrame,  toggleCompare, openNav, frameList, compareMode, frameLocationMap};
