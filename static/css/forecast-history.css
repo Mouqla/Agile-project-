@@ -3,14 +3,15 @@
     padding: 12px;
     border-radius: 10px;
     align-items: stretch;
-    background-color: white;
-    border-width: thin;
+    background-color: var(--background);
+    border: 2px solid var(--accent);
     font-size: medium;
+    color: var(--text);
   }
 
   .forecast-history-button:hover {
     /* padding: 15px; */
-    background-color: #eeeeee;
+    background-color: var(--secondary);
   }
   
   .close-forecast-button-frame{
@@ -40,7 +41,7 @@
   }
   
   #graph-container{
-    background-color: white;
+    background-color: var(--background);
     padding: 4px;
     width:700px;
     height: 400px;
@@ -49,14 +50,14 @@
   }
   
   #choose-graph-mode{
-    background-color: white;
+    background-color: var(--background);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 0px;
   }
 
   hr{
-    color: #efefef;
+    color: var(--secondary);
     border-width: 0.5px
   }
 

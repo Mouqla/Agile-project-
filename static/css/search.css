@@ -5,22 +5,25 @@
     padding: 10px;
   }
 
-.search-container {
-    background-color: transparent;
-  }
-  
 #search{
     width: 240px;
     padding: 12px;
     margin-top: 25px;
     margin-left: 25px;
     border-radius: 10px;
-    border-width: thin;
+    border: 2px solid var(--accent);
     font-size: small;
+    background-color: transparent;
+    color: var(--text);
   }
 
 #search:hover{ 
-    background-color: #eeeeee;
+    background-color: var(--secondary);
+}
+
+#search:focus{
+  outline: none;
+  border: 2px solid #2196F3;
 }
 
 datalist{
