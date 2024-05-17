@@ -120,13 +120,19 @@ function hideDisableHeatmapButton() {
 }
 
 function triggerFilterList() {
+    const filterButton = document.querySelector(".filter-button"); // Hitta knappen för klassen "filter-button"
     const filterOptions = document.getElementById("filter-options");
 
     if (!filterListShowing) {
         filterOptions.style.display = "flex";
         hideDisableHeatmapButton();
+        /*filterButton.textContent = "Close Meny"; // Ändra texten till "Close Meny" när menyn visas */
+        /* filterButton.textContent = <i class="fa-solid fa-caret-down"></i>; */
+
     } else {
         filterOptions.style.display = "none";
+        /*filterButton.textContent = "Heatmap Filters"; */ // Ändra tillbaka texten till "Heatmap Filters" när menyn döljs
+        
     }
 
     filterListShowing = !filterListShowing;
