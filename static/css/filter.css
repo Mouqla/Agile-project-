@@ -5,19 +5,19 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    height: 80px;
-    width: 80px;
+    height: 65px;
+    width: 65px;
     padding: 0px;
     gap: 5px;
     z-index: 20;
     bottom: 5px;
-    left: 380px;
+    left: 120px;
   }
   
   .filter-button {
-    width: 75px;
-    height: 75px;
-    background-color: gray;
+    width:65px;
+    height: 65px;
+    background-color: white;
     border-radius: 10px;
     border: none;
     padding: 0;
@@ -29,18 +29,19 @@
   .filter-button:hover {
     width: 80px;
     height: 80px;
+    background-color: #eeeeee;
   }
   
   .filter-option {
-    width: 50px;
-    height: 50px;
-    background-color: rgb(157, 157, 157);
+    width: 60px;
+    height: 60px;
+    background-color: white;
     border-radius: 10px;
     border: none;
     padding: 0;
     pointer-events: auto;
     cursor: pointer;
-    transition: 50ms ease-in-out;
+    transition: 500ms ease-in-out;
   }
   
   .filter-option:active {
@@ -48,7 +49,8 @@
   }
   
   .filter-option:hover {
-    width: 60px;
+    width: 65px;
+    background-color: #eeeeee;
   }
   
   .filter-options {

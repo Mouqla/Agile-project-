@@ -132,7 +132,7 @@ function getTimeAndPollutionForGraph(timePollutionArray) {
     var traceNH3 = {
         x: keys,
         y: valuesNH3,
-        name: 'NH3',
+        name: 'NH<sub>3</sub>',
         type: 'bar'
     };
 
@@ -146,14 +146,14 @@ function getTimeAndPollutionForGraph(timePollutionArray) {
     var traceNO2 = {
         x: keys,
         y: valuesNO2,
-        name: 'NO2',
+        name: 'NO<sub>2</sub>',
         type: 'bar'
     };
 
     var traceO3 = {
         x: keys,
         y: valuesO3,
-        name: 'O3',
+        name: 'O<sub>3</sub>',
         type: 'bar'
     };
 
@@ -174,7 +174,7 @@ function getTimeAndPollutionForGraph(timePollutionArray) {
     var traceSO2 = {
         x: keys,
         y: valuesSO2,
-        name: 'SO2',
+        name: 'SO<sub>2</sub>',
         type: 'bar'
     };
     return { traceCO, traceNH3, traceNO, traceNO2, traceO3, tracePM10, tracePM2_5, traceSO2 };

@@ -4,7 +4,7 @@
     display: flex;
     position: absolute;
     bottom: 7px; /* Distance from the bottom of the screen */
-    left: 325px; /* Distance from the left of the screen */
+    left: 60px; /* Distance from the left of the screen */
     z-index: 10;
     background-color: white;
     border-radius: 5px;
@@ -31,5 +31,9 @@
   }
   
   .user-location-button:hover {
-    background-color: #e3e3e3; /* Change color on hover */
+    background-color: #eeeeee; /* Change color on hover */
+  }
+
+  .user-location-container:hover { /* A quick, pretty ugly fix on making the whole "button" grey when hovering */
+    background-color: #eeeeee; /* Change color on hover */
   }
