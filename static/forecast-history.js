@@ -101,28 +101,38 @@ function getTimeAndPollutionForGraph(timePollutionArray) {
     let allValues = Array.from(componentsMap.values());
 
     let valuesCO = [];
-    allValues.forEach((element) => valuesCO.push(Object.values(element)[0]));
+    allValues.forEach((element) => 
+        valuesCO.push(cleanNegativeValues(Object.values(element)[0])));
 
     let valuesNH3 = [];
-    allValues.forEach((element) => valuesNH3.push(Object.values(element)[1]));
-
+    allValues.forEach((element) => 
+        valuesNH3.push(cleanNegativeValues(Object.values(element)[1])));
+    
     let valuesNO = [];
-    allValues.forEach((element) => valuesNO.push(Object.values(element)[2]));
+    allValues.forEach((element) => 
+        valuesNO.push(cleanNegativeValues(Object.values(element)[2])));
 
     let valuesNO2 = [];
-    allValues.forEach((element) => valuesNO2.push(Object.values(element)[3]));
+    allValues.forEach((element) => 
+        valuesNO2.push(cleanNegativeValues(Object.values(element)[3])));
 
     let valuesO3 = [];
-    allValues.forEach((element) => valuesO3.push(Object.values(element)[3]));
+    allValues.forEach((element) => 
+        valuesO3.push(cleanNegativeValues(Object.values(element)[4])));
 
     let valuesPM10 = [];
-    allValues.forEach((element) => valuesPM10.push(Object.values(element)[5]));
+    allValues.forEach((element) => {
+        valuesPM10.push(cleanNegativeValues(Object.values(element)[5]))
+        }
+    );
 
     let valuesPM2_5 = [];
-    allValues.forEach((element) => valuesPM2_5.push(Object.values(element)[6]));
+    allValues.forEach((element) => 
+        valuesPM2_5.push(cleanNegativeValues(Object.values(element)[6])));
 
     let valuesSO2 = [];
-    allValues.forEach((element) => valuesSO2.push(Object.values(element)[7]));
+    allValues.forEach((element) => 
+        valuesSO2.push(cleanNegativeValues(Object.values(element)[7])));
 
     var traceCO = {
         x: keys,
@@ -238,4 +248,11 @@ function closeforeCastHistoryWindow() {
     forecastWindow.removeChild(closeForecastButtonFrame);
     forecastWindow.removeChild(chooseGraphMode);
     countForecastHistoryButton = 0;
+}
+
+function cleanNegativeValues(value){
+    if(value < 0){
+        value = 0;
+    }
+    return value;
 }
