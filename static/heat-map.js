@@ -2,7 +2,8 @@
 
 let heatMap;
 let filterListShowing = false;
-var threshold = 0;
+var thresholdValue = 0;
+let currentType;
 
 const threshold_pm25 = [0, 9, 35.4, 54, 125.4, 225.4, 275.1];
 const threshold_pm10 = [0, 54, 154, 254, 354, 424, 504];
@@ -23,11 +24,12 @@ async function fetchAirQualityData() {
     }
 }
 
-async function addHeatMap(type, threshold, layer=false) {
+async function addHeatMap() {
     resetButtons();
-    console.log(type)
-
-    setActiveButtonColor(type);
+    console.log(currentType)
+    typeArray = getCurrentThreshold();
+    thresholdHigh = typeArray[thresholdValue];
+    thresholdLow = typeArray[thresholdValue-1];
 
     displayDisableHeatmapButton();
 
@@ -37,8 +39,8 @@ async function addHeatMap(type, threshold, layer=false) {
     data.forEach(item => {
         if (item.coordinates && item.measurements) {
             for (const measurement of item.measurements) {
-                if (measurement.parameter == type) {
-                    if (measurement.value <= threshold || threshold == undefined) {
+                if (measurement.parameter == currentType) {
+                    if (measurement.value <= thresholdHigh && measurement.value >= thresholdLow || thresholdValue == 0) {
                         heatPoints.push([
                             item.coordinates.latitude,
                             item.coordinates.longitude,
@@ -55,11 +57,17 @@ async function addHeatMap(type, threshold, layer=false) {
         removeHeatMap();
     //}
     
-    if (threshold > 0) {
+    if (thresholdValue > 0) {
         // If threshold is provided, create monochrome heat map
         heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
-            '0': 'Yellow',
-            '1': 'Yellow'
+            '0': 'Navy',
+            '0.25': 'Navy',
+            '0.26': 'Green',
+            '0.5': 'Green',
+            '0.51': 'Yellow',
+            '0.75': 'Yellow',
+            '0.76': 'Red',
+            '1': 'Red'
         }}).addTo(map);
     } else {
         // If threshold is 0, create normal heat map with gradient
@@ -89,19 +97,22 @@ function removeHeatMapAndResetButtons() {
     hideDisableHeatmapButton();
     }
 
-function setActiveButtonColor(type) {
+function addFilter(type) {
+    currentType = type;
     switch (type) {
         case 'pm25':
             document.getElementById('button-pm25').style.backgroundColor = '#B3E5FC';
-            return;
+            
         case 'pm10':
             document.getElementById('button-pm10').style.backgroundColor = '#B3E5FC';
-            return;
+            
         case 'no2':
             document.getElementById('button-no2').style.backgroundColor = '#B3E5FC';
-            return;
-        }
+            
     }
+    
+    addHeatMap()
+}
 
 function resetButtons() {
     document.getElementById('button-pm25').style.backgroundColor = '#ffffff';
@@ -146,15 +157,9 @@ items.forEach(item => {
         });
 
         item.classList.add("checked");
-        const thresholdValue = item.getAttribute("value");
+        thresholdValue = item.getAttribute("value");
 
-        removeHeatMap();
-        //addHeatMap("no2", threshold_no2[thresholdValue], true);
-        //addHeatMap("pm10", threshold_pm10[thresholdValue], true);
-        addHeatMap("pm25", threshold_pm25[thresholdValue], true);
-        //addHeatMap("o3", threshold_o3[thresholdValue], true);
-        //addHeatMap("co2", threshold_co[thresholdValue], true);
-        //addHeatMap("so2", threshold_so2[thresholdValue], true);
+        addHeatMap();
 
         const selectedOptionText = item.querySelector(".option-text").innerText;
 
@@ -164,3 +169,14 @@ items.forEach(item => {
         selectBtn.classList.remove("open");
     });
 })
+
+function getCurrentThreshold() {
+    switch(currentType) {
+        case "pm25":
+            return threshold_pm25;
+        case "pm10":
+            return threshold_pm10;
+        case "no2":
+            return threshold_no2;
+    }
+}
