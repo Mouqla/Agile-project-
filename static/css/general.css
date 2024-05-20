@@ -83,3 +83,6 @@ small{
   font-size: 0.9rem;
 }
 
+.leaflet-heatmap-layer {
+  opacity: 1;
+  }
