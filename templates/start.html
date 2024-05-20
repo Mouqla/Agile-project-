@@ -1,6 +1,7 @@
-<html>
+<html data-theme="light">
     <head>
         <title>Air Quality Map</title>
+        <link rel="stylesheet" href="/static/css/colors.css" />
         <link rel="stylesheet" href="/static/css/general.css" />
         <link rel="stylesheet" href="/static/css/slider.css" />
         <link rel="stylesheet" href="/static/css/search.css" />
@@ -9,7 +10,9 @@
         <link rel="stylesheet" href="/static/css/forecast-history.css" />
         <link rel="stylesheet" href="/static/css/filter.css" />
         <link rel="stylesheet" href="/static/css/threshold.css" />
-
+        <link rel="stylesheet" href="/static/css/heatmap.css" />
+        <link rel="stylesheet" href="/static/css/nightmode.css">
+      
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://kit.fontawesome.com/4302a23631.js" crossorigin="anonymous"></script>
@@ -38,52 +41,73 @@
                 </div>
 
             </div>
-            
-            <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> &nbspHistory & Forecast</button>
 
-        <div class="select-menu">
-            <div class="select-btn">
-                <span class="sBtn-text">All</span>
-                <i class="bx bx-chevron-down"></i>
-            </div>
-            <ul class="options">
-                <li class="option" value="0">
-                    <span class="checkbox"></span>
-                    <span class="option-text">All</span>
-                </li>
-                <li class="option" value="1">
-                    <span class="checkbox"></span>
-                    <i class="bx bxs-happy"></i>
-                    <span class="option-text">Good</span>
-                </li>
-                <li class="option" value="2">
-                    <i class="bx bxs-smile"></i>
-                    <span class="option-text">Fair</span>
-                    <span class="checkbox"></span>
-                </li>
-                <li class="option" value="3">
-                    <i class="bx bxs-meh"></i>
-                    <span class="option-text">Moderate</span>
-                    <span class="checkbox"></span>
-                </li>
-                <li class="option" value="4">
-                    <i class="bx bxs-sad"></i>
-                    <span class="option-text">Poor</span>
-                    <span class="checkbox"></span>
-                </li>
-                <li class="option" value="5">
-                    <i class="bx bxs-dizzy"></i>
-                    <span class="option-text">Very Poor</span>
-                    <span class="checkbox"></span>
-                </li>
-                <li class="option" value="6">
-                    <i class="bx bxs-skull"></i>
-                    <span class="option-text">Hazardous</span>
-                    <span class="checkbox"></span>
-                </li>
-            </ul>
+            <div class="heatmap-quality-forecast-container">
+                <!--<button class="heatmap-button"><i class="fa-solid fa-map"></i> &nbspHeatmap old</button>
+                
+                <div class="filter-area">
+                    <button class="filter-button" onclick="triggerFilterList()"><i class="fa-solid fa-map"></i> &nbspHeatmap</button>
+                    <div class="filter-options" id="filter-options">
+                        <button class="filter-option" id="button-remove-heatmap" onclick="removeHeatMapAndResetButtons()">Disable Heatmap</button>
+                        <button class="filter-option" id="button-pm25" onclick="addHeatMap('pm25')">PM2.5</button>
+                        <button class="filter-option" id="button-pm10" onclick="addHeatMap('pm10')">PM10</button>
+                        <button class="filter-option" id="button-no2" onclick="addHeatMap('no2')">NO₂</button>
+                    </div> 
+                    
+                </div>
+                -->
+
+                
+                <div class="select-menu">
+                    <div class="select-btn">
+                        <span class="sBtn-text">Air Quality</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                    <ul class="options">
+                        <li class="option" value="0">
+                            <span class="checkbox"></span>
+                            <span class="option-text">All</span>
+                        </li>
+                        <li class="option" value="1">
+                            <span class="checkbox"></span>
+                            <i class="bx bxs-happy"></i>
+                            <span class="option-text">Good</span>
+                        </li>
+                        <li class="option" value="2">
+                            <i class="bx bxs-smile"></i>
+                            <span class="option-text">Fair</span>
+                            <span class="checkbox"></span>
+                        </li>
+                        <li class="option" value="3">
+                            <i class="bx bxs-meh"></i>
+                            <span class="option-text">Moderate</span>
+                            <span class="checkbox"></span>
+                        </li>
+                        <li class="option" value="4">
+                            <i class="bx bxs-sad"></i>
+                            <span class="option-text">Poor</span>
+                            <span class="checkbox"></span>
+                        </li>
+                        <li class="option" value="5">
+                            <i class="bx bxs-dizzy"></i>
+                            <span class="option-text">Very Poor</span>
+                            <span class="checkbox"></span>
+                        </li>
+                        <li class="option" value="6">
+                            <i class="bx bxs-skull"></i>
+                            <span class="option-text">Hazardous</span>
+                            <span class="checkbox"></span>
+                        </li>
+                    </ul>
+                </div>
+                <!--  <button class="heatmap-button"><i class="fa-solid fa-ranking-star"></i> &nbspAir Quality </button> -->
+
+                <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> &nbspHistory & Forecast</button> 
+                <button class="nightButton" onclick="toggle()" id="nightswitch">Switch to dark</button>
         </div>
         </nav>
+    
+        
         <div class="filter-area">
             <div class="filter-options" id="filter-options">
                 <button class="filter-option" id="button-remove-heatmap" onclick="removeHeatMapAndResetButtons()">Disable Heatmap</button>
@@ -118,6 +142,7 @@
         <script src="/static/forecast-history.js"></script>
         <script src="/static/marker.js"></script>
         <script src="/static/location.js"></script>
+        <script src="/static/nightmode.js"></script>
 
         <script type="module" src="/static/forecast-history.js"></script>
 

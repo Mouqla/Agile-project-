@@ -4,29 +4,7 @@
 ////// User Interaction: Click on map
 async function onMapClick(e) {
     openNav(); 
-    const lat = e.latlng["lat"];
-    const long = e.latlng["lng"];
-    const radius = 5000; //if using OpenAQ
-
-    try {
-
-        new Location(lat, long, compareMode);
-
-    } catch (error) {
-        console.log(error);
-        if (error instanceof TypeError) {
-            let popup = L.popup()
-            .setLatLng(e.latlng)
-            .setContent(`No results within ${radius} meters`)
-            .openOn(map);
-        }
-        else {
-            let popup = L.popup()
-            .setLatLng(e.latlng)
-            .setContent(`Unknown error fetching API data`)
-            .openOn(map);
-        }
-    }
+    new Location(e, compareMode);
 }
 
 map.on('click', onMapClick);

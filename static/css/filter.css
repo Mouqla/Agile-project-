@@ -17,40 +17,42 @@
   .filter-button {
     width:65px;
     height: 65px;
-    background-color: white;
+    background-color: var(--background);
     border-radius: 10px;
     border: none;
     padding: 0;
     pointer-events: auto;
     cursor: pointer;
     transition: 50ms ease-in-out;
+    color: var(--text);
   }
   
   .filter-button:hover {
     width: 80px;
     height: 80px;
-    background-color: #eeeeee;
+    background-color: var(--secondary);
   }
   
   .filter-option {
     width: 60px;
     height: 60px;
-    background-color: white;
+    background-color: var(--background);
     border-radius: 10px;
     border: none;
     padding: 0;
     pointer-events: auto;
     cursor: pointer;
     transition: 500ms ease-in-out;
+    color: var(--text);
   }
   
   .filter-option:active {
-    background-color: rgb(197, 197, 197);
+    background-color: var(--accent);
   }
   
   .filter-option:hover {
     width: 65px;
-    background-color: #eeeeee;
+    background-color: var(--secondary);
   }
   
   .filter-options {

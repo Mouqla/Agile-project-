@@ -137,23 +137,19 @@ function addFilter(type) {
     currentType = type;
     switch (type) {
         case 'pm25':
-            document.getElementById('button-pm25').style.backgroundColor = '#B3E5FC';
-            
+            document.getElementById('button-pm25').style.backgroundColor = 'var(--secondary)';
         case 'pm10':
-            document.getElementById('button-pm10').style.backgroundColor = '#B3E5FC';
-            
+            document.getElementById('button-pm10').style.backgroundColor = 'var(--secondary)';
         case 'no2':
-            document.getElementById('button-no2').style.backgroundColor = '#B3E5FC';
-            
-    }
-    
+            document.getElementById('button-no2').style.backgroundColor = 'var(--secondary)';
+        }
     addHeatMap()
-}
+    }
 
 function resetButtons() {
-    document.getElementById('button-pm25').style.backgroundColor = '#ffffff';
-    document.getElementById('button-pm10').style.backgroundColor = '#ffffff';
-    document.getElementById('button-no2').style.backgroundColor = '#ffffff';
+    document.getElementById('button-pm25').style.backgroundColor = 'var(--background)';
+    document.getElementById('button-pm10').style.backgroundColor = 'var(--background)';
+    document.getElementById('button-no2').style.backgroundColor = 'var(--background)';
 }
 
 function displayDisableHeatmapButton(){
@@ -167,13 +163,16 @@ function hideDisableHeatmapButton() {
 }
 
 function triggerFilterList() {
+    const filterButton = document.querySelector(".filter-button"); // Hitta knappen för klassen "filter-button"
     const filterOptions = document.getElementById("filter-options");
 
     if (!filterListShowing) {
         filterOptions.style.display = "flex";
         hideDisableHeatmapButton();
+
     } else {
         filterOptions.style.display = "none";
+        
     }
 
     filterListShowing = !filterListShowing;

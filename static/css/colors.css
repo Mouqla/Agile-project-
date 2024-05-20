@@ -1,0 +1,28 @@
+[data-theme="light"] {
+    --background: #fff;
+    --background-button :#eeeeee;
+    --secondary: #eeeeee;
+    --secondary-button: #fff;
+    --accent: #ccc;
+    --text: #1e1e1e;
+    --icon: invert(0);
+
+}
+  
+[data-theme="dark"] {
+    --background: #1e1e1e;
+    --secondary: #313131;
+    --accent: #878787;
+    --text: #ccc;
+    --icon: invert(90%);
+}
+
+.leaflet-bar a {
+    background-color: var(--background) !important;
+    color: var(--text) !important;
+}
+
+.leaflet-touch .leaflet-bar {
+    border: 2px solid var(--background) !important;
+}
+

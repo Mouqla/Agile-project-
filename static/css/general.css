@@ -9,7 +9,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: var(--background);
   position: absolute;
   width: 100%;
   margin: 0px;
@@ -23,6 +23,11 @@
   justify-content: left;
 }
 
+.heatmap-quality-forecast-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
 
 #header-message{
   background-color: transparent;
@@ -34,7 +39,6 @@ body{
   overflow: hidden;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
 }
 
 #main { /* endast för debugging */

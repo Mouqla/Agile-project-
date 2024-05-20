@@ -1,0 +1,31 @@
+  .heatmap-button {
+    margin: 29px 10px 20px 0px;
+    border-radius: 10px;
+    align-items: center;
+    background: var(--background-button);
+    border-width: thin;
+    font-size: medium;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: 50ms ease-in-out;
+    color: var(--text);
+  }
+
+  .heatmap-button:hover {
+    background-color: var(--secondary-button);
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  
+
+
+  .heatmap-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    gap: 5px;
+    z-index: 20;
+  }

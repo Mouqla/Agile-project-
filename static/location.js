@@ -1,9 +1,10 @@
 class Location {
-    constructor(lat, long) {
-        this.lat = lat;
-        this.long = long;
+    constructor(e) {
+        this.e = e;
+        this.lat = e.latlng["lat"];
+        this.long = e.latlng["lng"];
 
-        this.marker = new Marker([lat, long]);
+        this.marker = new Marker([this.lat, this.long]);
 
         this.initialize();
     }
@@ -32,7 +33,21 @@ class Location {
             createAndAppendFrame(locationData, this);
 
         } catch (error) {
-            console.error("Error during location initialization:", error);
+            const radius = 5000; //if using OpenAQ
+            console.log(error);
+            if (error instanceof TypeError) {
+                let popup = L.popup()
+                .setLatLng(this.e.latlng)
+                .setContent(`No results within ${radius} meters`)
+                .openOn(map);
+            }
+            else {
+                let popup = L.popup()
+                .setLatLng(this.e.latlng)
+                .setContent(`Unknown error fetching API data`)
+                .openOn(map);
+            }
+            this.close();
         }
     }
 

@@ -5,23 +5,29 @@
     padding: 10px;
   }
 
-.search-container {
-    background-color: transparent;
-  }
-  
 #search{
     width: 240px;
     padding: 12px;
     margin-top: 25px;
     margin-left: 25px;
     border-radius: 10px;
+    /*border: 2px solid var(--accent);*/
     border-width: thin;
     font-size: small;
+    /* background-color: transparent;*/
+    background: var(--background-button);
+    color: var(--text);
   }
 
 #search:hover{ 
-    background-color: #eeeeee;
-}
+  background: var(--secondary-button);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+#search:focus{
+  outline: none;
+  border: 2px solid #2196F3;
+  }
 
 datalist{
     padding: 30px;

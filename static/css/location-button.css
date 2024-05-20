@@ -6,7 +6,7 @@
     bottom: 7px; /* Distance from the bottom of the screen */
     left: 60px; /* Distance from the left of the screen */
     z-index: 10;
-    background-color: white;
+    background-color: var(--background);
     border-radius: 5px;
     padding: 4px 8px 4px 6px;
   }
@@ -18,7 +18,7 @@
     justify-content: center; /* Center content vertically */
     height: 53px; /* Set a specific height for the square button */
     width: 30px;  /* Set a specific width for the square button */
-    background-color: white;
+    background-color: var(--background);
     border: none; /* No border */
     border-radius: 10px; /* Rounded corners */
     cursor: pointer; /* Cursor changes to pointer on hover */
@@ -28,12 +28,13 @@
   .button-image {
     height: 100%; /* Image takes half the button's height */
     width: auto; /* Maintain aspect ratio */
+    filter: var(--icon)
   }
   
   .user-location-button:hover {
-    background-color: #eeeeee; /* Change color on hover */
+    background-color: var(--secondary); /* Change color on hover */
   }
 
   .user-location-container:hover { /* A quick, pretty ugly fix on making the whole "button" grey when hovering */
-    background-color: #eeeeee; /* Change color on hover */
+    background-color: var(--secondary); /* Change color on hover */
   }
