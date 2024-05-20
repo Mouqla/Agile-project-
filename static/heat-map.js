@@ -58,7 +58,7 @@ async function addHeatMap() {
     //}
     switch (thresholdValue) {
         case "0":
-            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+            heatMap = L.heatLayer(heatPoints, {max: 4, blur: 0, radius: 15, gradient: {
                 '0': 'Navy',
                 '0.25': 'Navy',
                 '0.26': 'Green',
