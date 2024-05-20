@@ -1,9 +1,12 @@
 [data-theme="light"] {
     --background: #fff;
-    --secondary: #e0e0e0;
+    --background-button :#eeeeee;
+    --secondary: #eeeeee;
+    --secondary-button: #fff;
     --accent: #ccc;
     --text: #1e1e1e;
     --icon: invert(0);
+
 }
   
 [data-theme="dark"] {

@@ -11,14 +11,16 @@
     margin-top: 25px;
     margin-left: 25px;
     border-radius: 10px;
-    border: 2px solid var(--accent);
+    /*border: 2px solid var(--accent);*/
+    border-width: thin;
     font-size: small;
-    background-color: transparent;
+    /* background-color: transparent;*/
+    background: var(--background-button);
     color: var(--text);
   }
 
 #search:hover{ 
-  background-color: var(--secondary);
+  background: var(--secondary-button);
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   }
 

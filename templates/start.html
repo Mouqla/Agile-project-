@@ -43,7 +43,21 @@
             </div>
 
             <div class="heatmap-quality-forecast-container">
-                <button class="heatmap-button"><i class="fa-solid fa-map"></i> &nbspHeatmap</button>
+                <!--<button class="heatmap-button"><i class="fa-solid fa-map"></i> &nbspHeatmap old</button>
+                
+                <div class="filter-area">
+                    <button class="filter-button" onclick="triggerFilterList()"><i class="fa-solid fa-map"></i> &nbspHeatmap</button>
+                    <div class="filter-options" id="filter-options">
+                        <button class="filter-option" id="button-remove-heatmap" onclick="removeHeatMapAndResetButtons()">Disable Heatmap</button>
+                        <button class="filter-option" id="button-pm25" onclick="addHeatMap('pm25')">PM2.5</button>
+                        <button class="filter-option" id="button-pm10" onclick="addHeatMap('pm10')">PM10</button>
+                        <button class="filter-option" id="button-no2" onclick="addHeatMap('no2')">NO₂</button>
+                    </div> 
+                    
+                </div>
+                -->
+
+                
                 <div class="select-menu">
                     <div class="select-btn">
                         <span class="sBtn-text">Air Quality</span>
@@ -90,10 +104,10 @@
 
                 <button class="forecast-history-button"  onClick="clickForecastHistory()"><i class="fa-solid fa-clock"></i> &nbspHistory & Forecast</button> 
                 <button class="nightButton" onclick="toggle()" id="nightswitch">Switch to dark</button>
-            </div>
+        </div>
         </nav>
     
-
+        
         <div class="filter-area">
             <div class="filter-options" id="filter-options">
                 <button class="filter-option" id="button-remove-heatmap" onclick="removeHeatMapAndResetButtons()">Disable Heatmap</button>
