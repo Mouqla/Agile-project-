@@ -56,31 +56,67 @@ async function addHeatMap() {
     //if (!layer) {
         removeHeatMap();
     //}
-    
-    if (thresholdValue > 0) {
-        // If threshold is provided, create monochrome heat map
-        heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
-            '0': 'Navy',
-            '0.25': 'Navy',
-            '0.26': 'Green',
-            '0.5': 'Green',
-            '0.51': 'Yellow',
-            '0.75': 'Yellow',
-            '0.76': 'Red',
-            '1': 'Red'
-        }}).addTo(map);
-    } else {
-        // If threshold is 0, create normal heat map with gradient
-        heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
-            '0': 'Navy',
-            '0.25': 'Navy',
-            '0.26': 'Green',
-            '0.5': 'Green',
-            '0.51': 'Yellow',
-            '0.75': 'Yellow',
-            '0.76': 'Red',
-            '1': 'Red'
-        }}).addTo(map);
+    switch (thresholdValue) {
+        case "0":
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Navy',
+                '0.25': 'Navy',
+                '0.26': 'Green',
+                '0.5': 'Green',
+                '0.51': 'Yellow',
+                '0.75': 'Yellow',
+                '0.76': 'Red',
+                '1': 'Red'
+            }}).addTo(map);
+            break;
+        case "1":
+                // If threshold is 0, create normal heat map with gradient
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Green',
+                '1': 'Green'
+            }}).addTo(map);
+            break;
+        case "2":
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'GreenYellow',
+                '1': 'GreenYellow'
+            }}).addTo(map);
+            break;
+        case "3":
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Yellow',
+                '1': 'Yellow'
+            }}).addTo(map);
+            break;
+        case "4":
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Orange',
+                '1': 'Orange'
+            }}).addTo(map);
+            break;
+        case "5":
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Red',
+                '1': 'Red'
+            }}).addTo(map);
+            break;
+        case "6":
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Black',
+                '1': 'Black'
+            }}).addTo(map);
+            break;
+        default:
+            heatMap = L.heatLayer(heatPoints, {max: 3, blur: 0, radius: 15, gradient: {
+                '0': 'Navy',
+                '0.25': 'Navy',
+                '0.26': 'Green',
+                '0.5': 'Green',
+                '0.51': 'Yellow',
+                '0.75': 'Yellow',
+                '0.76': 'Red',
+                '1': 'Red'
+            }}).addTo(map);
     }
 }
 
